@@ -82,7 +82,11 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
-        "POST": '3306'
+        "POST": '3306',
+        #use for unix-like system
+        # 'OPTIONS': {
+        #     "unix_socket": "/tmp/mysql.sock",
+        # },
     }
 }
 
