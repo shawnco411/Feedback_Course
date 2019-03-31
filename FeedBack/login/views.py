@@ -4,8 +4,8 @@ from .forms import UserForm
 from .forms import RegisterForm
 # Create your views here.
 def index(request):
-    pass
-    return render(request,'login/index.html')
+    course_list=models.course.objects.all()
+    return render(request,'login/index.html',{"course_list":course_list})
 
 
 def login(request):
