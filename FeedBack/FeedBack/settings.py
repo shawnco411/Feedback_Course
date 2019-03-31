@@ -80,13 +80,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysql',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'zz990429',
         'HOST': '127.0.0.1',
         "POST": '3306',
         #use for unix-like system
-        'OPTIONS': {
-            "unix_socket": "/tmp/mysql.sock",
-        },
+        #'OPTIONS': {
+            #"unix_socket": "/tmp/mysql.sock",
+       # },#
     }
 }
 
