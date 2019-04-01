@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'login',
+    'boards',
 ]
 
 MIDDLEWARE = [
@@ -83,10 +85,7 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         "POST": '3306',
-        #use for unix-like system
-        #'OPTIONS': {
-            #"unix_socket": "/tmp/mysql.sock",
-        #},
+
     }
 }
 

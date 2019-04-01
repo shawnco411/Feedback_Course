@@ -32,6 +32,10 @@ class User(models.Model):
 class course(models.Model):
     course_name = models.CharField(max_length=128,unique=True)
     teacher_name = models.CharField(max_length=128)
+    course_time = models.CharField(max_length=128)
+    course_locus = models.CharField(max_length=128)
+    course_credit = models.CharField(max_length=128)
+    course_intorduction = models.CharField(max_length=128)
             
     class Meta:
         #ordering = ['c_time']
