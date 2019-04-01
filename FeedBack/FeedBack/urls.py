@@ -18,10 +18,10 @@ from django.urls import path
 from login import views
 from boards import views as boards_views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('index/',views.index),
-    path('login/',views.login),
-    path('register/',views.register),
-    path('logout/',views.logout),
-    path('boards/',boards_views.home),
+    path('admin/', admin.site.urls,name = 'admin'),
+    path('index/',views.index,name = 'index'),
+    path('login/',views.login, name = 'login'),
+    path('register/',views.register, name = 'views_register'),
+    path('logout/',views.logout,name = 'logout'),
+    path('boards/',boards_views.home,name = 'boards_home'),
 ]
