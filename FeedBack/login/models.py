@@ -1,6 +1,21 @@
 from django.db import models
 
 # Create your models here.
+class course(models.Model):
+    course_name = models.CharField(max_length=128, unique=True)
+    teacher_name = models.CharField(max_length=128)
+    course_time = models.CharField(max_length=128)
+    course_locus = models.CharField(max_length=128)
+    course_credit = models.CharField(max_length=128)
+    course_introduction = models.CharField(max_length=128)
+
+    # roster = models.ManyToManyField(User)
+
+    class Meta:
+        # ordering = ['c_time']
+        verbose_name = '课程'
+        verbose_name_plural = '课程'
+
 class User(models.Model):
     '''用户表'''
 
@@ -20,6 +35,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     identity = models.CharField(max_length=32,choices = idens,default='学生')
     c_time = models.DateTimeField(auto_now_add = True)
+    courses = models.ManyToManyField(course)
 
     def _str_(self):
         return self.name
@@ -29,15 +45,4 @@ class User(models.Model):
         verbose_name = '用户'
         verbose_name_plural = '用户'
 
-class course(models.Model):
-    course_name = models.CharField(max_length=128,unique=True)
-    teacher_name = models.CharField(max_length=128)
-    course_time = models.CharField(max_length=128)
-    course_locus = models.CharField(max_length=128)
-    course_credit = models.CharField(max_length=128)
-    course_intorduction = models.CharField(max_length=128)
-            
-    class Meta:
-        #ordering = ['c_time']
-        verbose_name = '课程'
-        verbose_name_plural = '课程'
+

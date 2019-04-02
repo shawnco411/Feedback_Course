@@ -17,3 +17,11 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
     identity = forms.ChoiceField(label='身份', choices=idens)
     #captcha = CaptchaField(label='验证码')
+
+class CreateCourseForm(forms.Form):
+    course_name = forms.CharField(label="课程名称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    course_time = forms.CharField(label="开课时间",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))

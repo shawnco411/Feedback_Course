@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from login import models
 from .forms import UserForm
 from .forms import RegisterForm
+from .forms import CreateCourseForm
 # Create your views here.
 def index(request):
     course_list=models.course.objects.all()
@@ -78,3 +79,27 @@ def logout(request):
         return redirect("/index/")
     request.session.flush()
     return redirect("/index/")
+
+def CreateCourse(request):
+    if request.method=="POST":
+        CreateCourse_form = CreateCourseForm(request.POST)
+        if CreateCourse_form.is_valid():
+            course_name = CreateCourse_form.cleaned_data['course_name']
+            teacher_name = CreateCourse_form.cleaned_data['teacher_name']
+            course_time = CreateCourse_form.cleaned_data['course_time']
+            course_locus = CreateCourse_form.cleaned_data['course_locus']
+            course_credit = CreateCourse_form.cleaned_data['course_credit']
+            course_introduction = CreateCourse_form.cleaned_data['course_introduction']
+
+            new_course = models.course.objects.create()
+            new_course.course_name = course_name
+            new_course.teacher_name = teacher_name
+            new_course.course_time = course_time
+            new_course.course_locus = course_locus
+            new_course.course_credit = course_credit
+            new_course.course_introduction = course_introduction
+            new_course.save()
+            return redirect('/index/')
+
+    CreateCourse_form = CreateCourseForm()
+    return render(request, 'login/create_course.html', locals())
