@@ -31,7 +31,7 @@ def new_topic(request, pk):
 		subject = request.POST['subject']
 		message = request.POST['message']
 
-		user = User.objects.first()#临时使⽤⼀个账号作为登录⽤户
+		user = User.objects.first()#临时使⽤⼀个账号作为登录⽤户,可更改为admin定义的
 
 		topic = Topic.objects.create(
 			subject=subject,
