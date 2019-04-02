@@ -26,4 +26,5 @@ urlpatterns = [
     path('boards/',boards_views.home,name = 'boards_home'),
     path('create_course/',views.CreateCourse,name = 'create_course'),
     re_path('^boards/(?P<pk>\d+)/$',boards_views.board_topics, name = 'board_topics'),
+    re_path('^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
 ]
