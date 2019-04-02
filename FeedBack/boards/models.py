@@ -12,8 +12,8 @@ class Board(models.Model):
 
 	class Meta:
 		#ordering = ['c_time']
-		verbose_name = '板块'
-		verbose_name_plural = '板块'
+		verbose_name = '反馈区'
+		verbose_name_plural = '反馈区'
 
 class Topic(models.Model):
 	subject = models.CharField(max_length=255)

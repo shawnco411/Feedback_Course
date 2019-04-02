@@ -82,20 +82,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysql',
         'USER': 'root',
-#<<<<<<< #HEAD
-        'PASSWORD': '123456',
+        'PASSWORD': '123456',#your local mysql password
         'HOST': '127.0.0.1',
         "POST": '3306',
-
-#=======
-#         #'PASSWORD': '123456',#your local mysql password
-#         #'HOST': '127.0.0.1',
-#         #"POST": '3306',
-#         #use for unix-like system,annote it when using windows
-#         'OPTIONS': {
-#             "unix_socket": "/tmp/mysql.sock",
-#         },
-# >>>>>>> c6b126fee088186f4ccecbc9c494415ddcdeed63
+        #use for unix-like system,annote it when using windows
+        'OPTIONS': {
+            "unix_socket": "/tmp/mysql.sock",
+        },
     }
 }
 
