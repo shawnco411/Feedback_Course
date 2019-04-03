@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+
+from django.conf.urls import url
+
 from login import views
 from boards import views as boards_views
 urlpatterns = [
@@ -25,6 +28,6 @@ urlpatterns = [
     path('logout/',views.logout,name = 'logout'),
     path('boards/',boards_views.home,name = 'boards_home'),
     path('create_course/',views.CreateCourse,name = 'create_course'),
-    re_path('^boards/(?P<pk>\d+)/$',boards_views.board_topics, name = 'board_topics'),
-    re_path('^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
+    re_path(r'^boards/(?P<pk>\d+)/$', boards_views.board_topics, name='board_topics'),
+    re_path(r'^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
 ]

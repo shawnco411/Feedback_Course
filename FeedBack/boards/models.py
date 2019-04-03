@@ -23,6 +23,14 @@ class Topic(models.Model):
 	board = models.ForeignKey(Board, related_name='topics',on_delete=models.CASCADE)
 	starter = models.ForeignKey(User, related_name='topics',on_delete=models.CASCADE)
 
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		#ordering = ['c_time']
+		verbose_name = '课程反馈区'
+		verbose_name_plural = '课程反馈区'
+
 class Post(models.Model):
 	message = models.TextField(max_length=4000)
 	topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE)
@@ -31,3 +39,11 @@ class Post(models.Model):
 	created_by = models.ForeignKey(User, related_name='posts',on_delete=models.CASCADE)
 	#no reverse needed
 	updated_by = models.ForeignKey(User, null=True, related_name='+',on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		#ordering = ['c_time']
+		verbose_name = '帖子'
+		verbose_name_plural = '帖子'

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'login', #login area
     'boards',#feedback area
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
