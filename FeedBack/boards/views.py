@@ -18,9 +18,13 @@ def board_topics(request, pk):
 	return render(request, 'boards/topics.html', {'board': board})
 
 def new_topic(request, pk):
+	print(request.session.items())
+
+	if  request.session.get('is_login')!=True:
+		return redirect('/login')
 
 	board = get_object_or_404(Board, pk=pk)
-	user = User.objects.first()#临时使⽤⼀个账号作为登录⽤户,可更改为admin定义的
+	user = User.objects.get(name=request.session.get('user_name'))
 	if request.method == 'POST':
 		form = NewTopicForm(request.POST)
 		if form.is_valid():
