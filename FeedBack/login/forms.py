@@ -25,3 +25,10 @@ class CreateCourseForm(forms.Form):
     course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+class UpdateForm(forms.Form):
+    name = forms.CharField(label='Name', max_length=50, required=False)
+    number = forms.CharField(label='Number', max_length=50, required=False)
+    tel = forms.CharField(label='Tel', max_length=50, required=False)
+    email = forms.CharField(label='Email', max_length=50, required=False)
+    addr = forms.CharField(label='Addr', max_length=50, required=False)

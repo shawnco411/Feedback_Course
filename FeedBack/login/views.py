@@ -3,6 +3,9 @@ from login.models import course,User
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
+from .forms import UpdateForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 def index(request):
     course_list=course.objects.all()
@@ -107,3 +110,36 @@ def CreateCourse(request):
 def Course(request,pk):
     course_pk = get_object_or_404(course, pk=pk)
     return render(request, 'login/courses.html', {'course': course_pk})
+
+#def PersonalCenter(request):
+#    user = User.objects.get(name=request.session.get('user_name'))
+#    return render(request,'login/personal_center.html',{'user':user})
+
+def PersonalCenter(request,pk):
+    user = get_object_or_404(User,pk=pk)
+    return render(request, 'login/personal_center.html', {'user': user})
+
+def Update(request,pk):
+    user = get_object_or_404(User, pk=pk)
+
+    if request.method == "POST":
+        form = UpdateForm(request.POST)
+
+        if form.is_valid():
+            user.name = form.cleaned_data['name']
+            user.number = form.cleaned_data['number']
+            user.tel = form.cleaned_data['tel']
+            user.email = form.cleaned_data['email']
+            user.addr = form.cleaned_data['addr']
+            user.save()
+
+            return HttpResponseRedirect(reverse('personal_center', args=[user.id]))
+    else:
+        default_data = {'name': user.name, 'number': user.number,'tel': user.tel, 'email': user.email,'addr':user.addr,}
+        form = UpdateForm(default_data)
+
+    return render(request, 'login/update.html', {'form':form, 'user': user})
+
+
+
+

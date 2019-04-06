@@ -36,6 +36,9 @@ class User(models.Model):
     identity = models.CharField(max_length=32,choices = idens,default='学生')
     c_time = models.DateTimeField(auto_now_add = True)
     courses = models.ManyToManyField(course)
+    tel = models.CharField(max_length=128)
+    addr = models.CharField(max_length=128)
+    number = models.CharField(max_length=128)
 
     def _str_(self):
         return self.name
