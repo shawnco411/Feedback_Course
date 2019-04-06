@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     
     'login', #login area
     'boards',#feedback area
-   'widget_tweaks'
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -83,13 +83,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysql',
         'USER': 'root',
-        'PASSWORD': 'zz990429',#your local mysql password
+        'PASSWORD': '123456',#your local mysql password
         'HOST': '127.0.0.1',
         "POST": '3306',
         #use for unix-like system,annote it when using windows
-        # 'OPTIONS': {
-        #     "unix_socket": "/tmp/mysql.sock",
-        # },
+        'OPTIONS': {
+            "unix_socket": "/tmp/mysql.sock",
+        },
     }
 }
 
