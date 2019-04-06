@@ -5,31 +5,26 @@
 {% block content %}
     {% if request.session.is_login %}
     <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
-
+        <li><a href="/create_course/">创建课程</a></li>
     <!-- Added by Jin Zehui-->
-    <section class="wrapper">
-        <div class="inner">
-            <header class="special">
-                <h2>课程列表</h2>
-                <p>显示所有课程的信息</p>
-            </header>
+    <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Courses</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in course_list %}
+        <tr>
+          <td>
+            <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>
+               <li><a href="{% url 'choose_course' course.pk %}">选课</a></li>
+          </td>
+        </tr>
+      {% endfor %}
 
-            <div class="highlights">
-                {% for line in course_list %}
-                <section>
-                    <div class="content">
-                        <header>
-                            <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-                            <h3>{{line.course_name}}</h3>
-                        </header>
-                        <p>{{line.teacher_name}}</p>
-                    </div>
-                </section>
-                {% endfor %}
-
-            </div>
-        </div>
-    </section>
+    </tbody>
+  </table>
 
 
     {% else %}

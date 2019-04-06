@@ -1,0 +1,26 @@
+{% block content %}
+	<table class="table">
+		<thead class="thead-inverse">
+			<tr>
+				<th>Name</th>
+				<th>Teacher</th>
+				<th>Time</th>
+				<th>Locus</th>
+				<th>Credit</th>
+                <th>Introduction</th>
+			</tr>
+		</thead>
+		<tbody>
+
+				<tr>
+					<td>{{ course.course_name }}</td>
+					<td>{{ course.teacher_name }}</td>
+					<td>{{ course.course_time }}</td>
+					<td>{{ course.course_locus }}</td>
+					<td>{{ course.course_credit }}</td>
+                    <td>{{ course.course_introduction }}</td>
+				</tr>
+
+		</tbody>
+	</table>
+{% endblock %}
