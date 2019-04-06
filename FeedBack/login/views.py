@@ -3,9 +3,12 @@ from login.models import course,User
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
+from login import models
+from django.contrib import messages
 # Create your views here.
 def index(request):
     course_list=course.objects.all()
+
     return render(request,'login/index.html',{"course_list":course_list})
 
 
@@ -99,6 +102,8 @@ def CreateCourse(request):
             new_course.course_credit = course_credit
             new_course.course_introduction = course_introduction
             new_course.save()
+            user = User.objects.get(name=request.session.get('user_name'))
+            user.courses.add(new_course)
             return redirect('/index/')
 
     CreateCourse_form = CreateCourseForm()
@@ -107,3 +112,11 @@ def CreateCourse(request):
 def Course(request,pk):
     course_pk = get_object_or_404(course, pk=pk)
     return render(request, 'login/courses.html', {'course': course_pk})
+def choose_course(request,pk):
+    new_course= get_object_or_404(course, pk=pk)
+    user = User.objects.get(name=request.session.get('user_name'))
+    user.courses.add(new_course)
+    course_list = course.objects.all()
+    choose_courses=user.courses.all()
+    print(choose_courses)
+    return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
