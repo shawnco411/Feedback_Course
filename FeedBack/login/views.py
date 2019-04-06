@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect
-from login import models
+from django.shortcuts import render,get_object_or_404,redirect
+from login.models import course,User
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
 # Create your views here.
 def index(request):
-    course_list=models.course.objects.all()
+    course_list=course.objects.all()
     return render(request,'login/index.html',{"course_list":course_list})
 
 
@@ -103,3 +103,7 @@ def CreateCourse(request):
 
     CreateCourse_form = CreateCourseForm()
     return render(request, 'login/create_course.html', locals())
+
+def Course(request,pk):
+    course_pk = get_object_or_404(course, pk=pk)
+    return render(request, 'login/courses.html', {'course': course_pk})
