@@ -28,9 +28,13 @@ urlpatterns = [
     path('logout/',views.logout,name = 'logout'),
     path('boards/',boards_views.home,name = 'boards_home'),
     path('create_course/',views.CreateCourse,name = 'create_course'),
-    re_path(r'^personal_center/(?P<pk>\d+)/$',views.PersonalCenter,name = 'personal_center'),
-    re_path(r'^update/(?P<pk>\d+)/$',views.Update,name = 'update'),
+    path('personal_center/',views.PersonalCenter,name = 'personal_center'),
+    path('update/',views.Update,name = 'update'),
+    re_path(r'^index/choose/(?P<pk>\d+)/$',views.choose_course,name = 'choose_course'),
     re_path(r'^index/(?P<pk>\d+)/$',views.Course,name = 'course'),
     re_path(r'^boards/(?P<pk>\d+)/$', boards_views.board_topics, name='board_topics'),
     re_path(r'^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
+    re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', boards_views.topic_posts, name='topic_posts'),
+    re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$',boards_views.reply_topic, name='reply_topic'),
+
 ]

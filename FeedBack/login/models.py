@@ -10,6 +10,8 @@ class course(models.Model):
     course_introduction = models.CharField(max_length=128)
 
     # roster = models.ManyToManyField(User)
+    def _str_(self):
+        return self.course_name
 
     class Meta:
         # ordering = ['c_time']

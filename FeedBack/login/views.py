@@ -6,9 +6,12 @@ from .forms import CreateCourseForm
 from .forms import UpdateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from login import models
+from django.contrib import messages
 # Create your views here.
 def index(request):
     course_list=course.objects.all()
+
     return render(request,'login/index.html',{"course_list":course_list})
 
 
@@ -102,6 +105,8 @@ def CreateCourse(request):
             new_course.course_credit = course_credit
             new_course.course_introduction = course_introduction
             new_course.save()
+            user = User.objects.get(name=request.session.get('user_name'))
+            user.courses.add(new_course)
             return redirect('/index/')
 
     CreateCourse_form = CreateCourseForm()
@@ -111,16 +116,18 @@ def Course(request,pk):
     course_pk = get_object_or_404(course, pk=pk)
     return render(request, 'login/courses.html', {'course': course_pk})
 
+
 #def PersonalCenter(request):
 #    user = User.objects.get(name=request.session.get('user_name'))
 #    return render(request,'login/personal_center.html',{'user':user})
 
-def PersonalCenter(request,pk):
-    user = get_object_or_404(User,pk=pk)
+def PersonalCenter(request):
+    user = User.objects.get(name=request.session.get('user_name'))
+
     return render(request, 'login/personal_center.html', {'user': user})
 
-def Update(request,pk):
-    user = get_object_or_404(User, pk=pk)
+def Update(request):
+    user = User.objects.get(name=request.session.get('user_name'))
 
     if request.method == "POST":
         form = UpdateForm(request.POST)
@@ -133,7 +140,7 @@ def Update(request,pk):
             user.addr = form.cleaned_data['addr']
             user.save()
 
-            return HttpResponseRedirect(reverse('personal_center', args=[user.id]))
+            return HttpResponseRedirect(reverse('personal_center'))
     else:
         default_data = {'name': user.name, 'number': user.number,'tel': user.tel, 'email': user.email,'addr':user.addr,}
         form = UpdateForm(default_data)
@@ -142,4 +149,14 @@ def Update(request,pk):
 
 
 
+
+
+def choose_course(request,pk):
+    new_course= get_object_or_404(course, pk=pk)
+    user = User.objects.get(name=request.session.get('user_name'))
+    user.courses.add(new_course)
+    course_list = course.objects.all()
+    choose_courses=user.courses.all()
+    print(choose_courses)
+    return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
 

@@ -5,7 +5,8 @@
 {% block content %}
     {% if request.session.is_login %}
     <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
-
+        <li><a href="/create_course/">创建课程</a></li>
+        <li><a href="/personal_center/">个人中心</a></li>
     <!-- Added by Jin Zehui-->
     <table class="table">
     <thead class="thead-inverse">
@@ -18,9 +19,12 @@
         <tr>
           <td>
             <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>
+               <li><a href="{% url 'choose_course' course.pk %}">选课</a></li>
+
           </td>
         </tr>
       {% endfor %}
+
     </tbody>
   </table>
 
