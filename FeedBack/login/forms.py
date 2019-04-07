@@ -19,12 +19,13 @@ class RegisterForm(forms.Form):
     #captcha = CaptchaField(label='验证码')
 
 class CreateCourseForm(forms.Form):
-    course_name = forms.CharField(label="课程名称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    course_time = forms.CharField(label="开课时间",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    course_name = forms.CharField(label="课程名称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '课程名称...'}))
+    teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课教师...'}))
+    course_time = forms.CharField(label="开课时间",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课时间...'}))
+    course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课地点...'}))
+    course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '学分...'}))
+    course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': '简介...'}))
+    #edited by Zhou Haici
 
 class UpdateForm(forms.Form):
     name = forms.CharField(label='Name', max_length=50, required=False)
