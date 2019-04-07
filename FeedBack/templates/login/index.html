@@ -26,7 +26,7 @@
                                     <h3 class="title">{{line.teacher_name}}</h3>
                                     <ul class="icon">
                                         <li><a href="#"><i class="fa fa-twitch"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-link"></i></a></li>
+                                        <li> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
                                     </ul>
                                 </div>
                                 <center><h3 >{{line.course_name}}</h3></center>
