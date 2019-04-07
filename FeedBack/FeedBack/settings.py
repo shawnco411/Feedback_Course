@@ -88,7 +88,7 @@ DATABASES = {
         "POST": '3306',
         # use for unix-like system,annote it when using windows
         'OPTIONS': {
-           # "unix_socket": "/tmp/mysql.sock",
+            #"unix_socket": "/tmp/mysql.sock",
         },
     }
 }
