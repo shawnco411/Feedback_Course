@@ -28,8 +28,8 @@ class CreateCourseForm(forms.Form):
     #edited by Zhou Haici
 
 class UpdateForm(forms.Form):
-    name = forms.CharField(label='Name', max_length=50, required=False)
-    number = forms.CharField(label='Number', max_length=50, required=False)
-    tel = forms.CharField(label='Tel', max_length=50, required=False)
-    email = forms.CharField(label='Email', max_length=50, required=False)
-    addr = forms.CharField(label='Addr', max_length=50, required=False)
+    name = forms.CharField(label='姓名', max_length=50, required=False)
+    number = forms.CharField(label='学号', max_length=50, required=False)
+    tel = forms.CharField(label='电话', max_length=50, required=False)
+    email = forms.CharField(label='邮箱', max_length=50, required=False)
+    addr = forms.CharField(label='地址', max_length=50, required=False)
