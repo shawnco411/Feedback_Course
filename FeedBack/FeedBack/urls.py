@@ -36,5 +36,6 @@ urlpatterns = [
     re_path(r'^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
     re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', boards_views.topic_posts, name='topic_posts'),
     re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$',boards_views.reply_topic, name='reply_topic'),
-
+    re_path(r'^course/(?P<pk>\d+)/homeword/$',views.Homework,name = 'homework'),
+    re_path(r'^course/(?P<pk>\d+)/homeword/new/$',views.Homework,name = 'new_homework'),
 ]
