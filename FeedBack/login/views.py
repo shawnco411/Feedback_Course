@@ -7,6 +7,7 @@ from .forms import UpdateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from login import models
+from boards import models as boards_models
 from django.contrib import messages
 # Create your views here.
 def index(request):
@@ -105,6 +106,12 @@ def CreateCourse(request):
             new_course.course_credit = course_credit
             new_course.course_introduction = course_introduction
             new_course.save()
+
+            new_course_board = boards_models.Board.objects.create()
+            new_course_board.name = course_name
+            new_course_board.description = course_introduction
+            new_course_board.save()
+
             user = User.objects.get(name=request.session.get('user_name'))
             user.courses.add(new_course)
             return redirect('/index/')
