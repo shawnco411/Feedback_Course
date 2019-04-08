@@ -33,3 +33,24 @@ class UpdateForm(forms.Form):
     tel = forms.CharField(label='电话', max_length=50, required=False)
     email = forms.CharField(label='邮箱', max_length=50, required=False)
     addr = forms.CharField(label='地址', max_length=50, required=False)
+
+
+class AssignForm(forms.Form):
+    name = forms.CharField(
+        label="作业标题",max_length = 64,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control','placeholder': '作业标题'}
+            ),
+        )
+    content = forms.CharField(
+        label="作业详细内容",max_length = 1024,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control','placeholder': '作业题目与要求'}
+            ),
+        )
+    deadline = forms.CharField(
+        label="截止日期",
+        widget=forms.DateTimeInput(
+            attrs={'class': 'form-control','placeholder': '作业题目与要求'}
+            ),
+        )
