@@ -1,27 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}课程详情{% endblock %}
 {% block content %}
-	<table class="table">
-		<thead class="thead-inverse">
-			<tr>
-				<th>Name</th>
-				<th>Teacher</th>
-				<th>Time</th>
-				<th>Locus</th>
-				<th>Credit</th>
-                <th>Introduction</th>
-			</tr>
-		</thead>
-		<tbody>
-
-				<tr>
-					<td>{{ course.course_name }}</td>
-					<td>{{ course.teacher_name }}</td>
-					<td>{{ course.course_time }}</td>
-					<td>{{ course.course_locus }}</td>
-					<td>{{ course.course_credit }}</td>
-                    <td>{{ course.course_introduction }}</td>
-				</tr>
-
-		</tbody>
-	</table>
+<div class=" card-cont">   
+  <div class="row" id="card-2">
+      <div class="col-lg-12 col-sm-12">
+        <div class="card hovercard ">
+          <div class="cardheader"></div>
+          <div class="info">
+            <div class="title">{{ course.course_name }}</div>
+            <div class="desc">{{ course.teacher_name }}</div>
+            <hr>
+          </div>
+           
+                 <div class="form-group">
+                    <strong class="mr-5"><i class="fa fa-clock-o">上课时间: </i></strong>{{ course.course_time }}
+                </div>
+                  <div class="form-group">
+                    <strong class="mr-5"><i class="fa fa-map-marker"> 上课地点: </i></strong>{{ course.course_locus }}
+                  </div>
+                  <div class="form-group">
+                    <strong class="mr-5"><i class="fa fa-calendar"> 学分: </i></strong>{{ course.course_credit }}
+                  </div>
+                  <div class="form-group">
+                    <strong class="mr-5"><i class="fa fa-archive"> 课程介绍: </i></strong>{{ course.course_introduction }}
+                  </div>
+        </div>
+      </div>
+    </div>
+   </div>
 
 {% endblock %}
