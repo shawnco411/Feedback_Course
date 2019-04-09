@@ -21,9 +21,10 @@ class course(models.Model):
 class Homework(models.Model):
     name = models.CharField(max_length=64)
     content = models.CharField(max_length = 512)
-    deadline = models.DateTimeField()
-    submit = models.CharField(max_length = 1000)
-    submit_time = models.DateTimeField(auto_now = True)
+    course = models.ForeignKey(course,related_name='homework',on_delete=models.CASCADE)
+    # deadline = models.DateTimeField()
+    # submit = models.CharField(max_length = 1000)
+    # submit_time = models.DateTimeField(auto_now = True)
 
 
 class User(models.Model):

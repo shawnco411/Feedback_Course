@@ -3,7 +3,7 @@ from login.models import course,User
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
-from .forms import UpdateForm
+from .forms import UpdateForm,AssignForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from login import models
@@ -166,4 +166,33 @@ def choose_course(request,pk):
     choose_courses=user.courses.all()
     print(choose_courses)
     return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+
+
+def Assign(request,pk):
+    homework_course = get_object_or_404(course, pk=pk)
+    user = User.objects.get(name=request.session.get('user_name'))
+
+    if request.method == "POST":
+        form = AssignForm(request.POST)
+        if form.is_valid():
+            # name = assign_form.cleaned_data['name']
+            # content = assign_form.cleaned_data['content']
+            # # deadline = assign_form.cleaned_data['deadline']
+
+            # new_homework = models.Homework.objects.create()
+            # new_homework.name = name
+            # new_homework.content = content
+            # new_homework.course = homework_course
+            # # new_homework.deadline = deadline
+            # new_homework.save()
+            homework=form.save(commit=False)
+            homework.course = homework_course
+            homework.save()
+            print("xxx")
+            return redirect('course',pk=pk)
+    else:
+        print("ttt")
+        assign_form = AssignForm()
+    print(models.Homework.objects.all())
+    return render(request,'login/assign.html',locals())
 

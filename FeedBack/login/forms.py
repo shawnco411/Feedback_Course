@@ -1,4 +1,5 @@
 from django import forms
+from login.models import Homework
 
 
 class UserForm(forms.Form):
@@ -35,7 +36,7 @@ class UpdateForm(forms.Form):
     addr = forms.CharField(label='地址', max_length=50, required=False)
 
 
-class AssignForm(forms.Form):
+class AssignForm(forms.ModelForm):
     name = forms.CharField(
         label="作业标题",max_length = 64,
         widget=forms.TextInput(
@@ -44,13 +45,17 @@ class AssignForm(forms.Form):
         )
     content = forms.CharField(
         label="作业详细内容",max_length = 1024,
-        widget=forms.TextInput(
-            attrs={'class': 'form-control','placeholder': '作业题目与要求'}
+        widget=forms.Textarea(
+            attrs={'rows': 5,'placeholder': '作业详细内容'}
             ),
         )
-    deadline = forms.CharField(
-        label="截止日期",
-        widget=forms.DateTimeInput(
-            attrs={'class': 'form-control','placeholder': '作业题目与要求'}
-            ),
-        )
+    # deadline = forms.CharField(
+    #     label="截止日期",
+    #     widget=forms.DateTimeInput(
+    #         attrs={'class': 'form-control','placeholder': '作业题目与要求'}
+    #         ),
+    #     )
+
+    class Meta:
+        model = Homework
+        fields = ['name', 'content', ]
