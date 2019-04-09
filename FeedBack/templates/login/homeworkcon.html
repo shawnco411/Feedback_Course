@@ -1,0 +1,21 @@
+{#login/templates/login/index.html#}
+
+{% extends 'base.html' %}
+{% block title %}作业详情{% endblock %}
+{% block content %}
+    
+
+
+    <tbody>
+      {% for homework in h_course.homework.all %}
+        <tr>
+          <td>
+            <a href=" 'homework_content' homework.course.pk homework.pk %}">{{ homework.name }}</a >
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+
+  
+{% endblock %}

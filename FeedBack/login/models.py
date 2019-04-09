@@ -25,6 +25,8 @@ class Homework(models.Model):
     # deadline = models.DateTimeField()
     # submit = models.CharField(max_length = 1000)
     # submit_time = models.DateTimeField(auto_now = True)
+    def _str_(self):
+        return self.name
 
 
 class User(models.Model):
