@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from login.models import course,User
+from login.models import course,User,Homework
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
