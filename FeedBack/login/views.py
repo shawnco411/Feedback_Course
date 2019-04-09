@@ -175,18 +175,18 @@ def Assign(request,pk):
     if request.method == "POST":
         form = AssignForm(request.POST)
         if form.is_valid():
-            # name = assign_form.cleaned_data['name']
-            # content = assign_form.cleaned_data['content']
+            #name = assign_form.cleaned_data['name']
+            #content = assign_form.cleaned_data['content']
             # # deadline = assign_form.cleaned_data['deadline']
 
-            # new_homework = models.Homework.objects.create()
+            #new_homework = models.Homework.objects.create()
             # new_homework.name = name
             # new_homework.content = content
             # new_homework.course = homework_course
             # # new_homework.deadline = deadline
             # new_homework.save()
             homework=form.save(commit=False)
-            homework.course = homework_course
+            homework.Course = homework_course
             homework.save()
             print("xxx")
             return redirect('course',pk=pk)
