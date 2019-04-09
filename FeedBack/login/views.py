@@ -188,11 +188,21 @@ def Assign(request,pk):
             homework=form.save(commit=False)
             homework.course = homework_course
             homework.save()
-            print("xxx")
-            return redirect('course',pk=pk)
+            # print("xxx")
+            return redirect('homework_list',pk=pk)
     else:
-        print("ttt")
+        # print("ttt")
         assign_form = AssignForm()
     print(models.Homework.objects.all())
     return render(request,'login/assign.html',locals())
 
+def HomeworkList(request, pk):
+    h_course = get_object_or_404(course, pk=pk)
+    homework = h_course.homework.all()
+    print(dir(homework))
+    return render(request, 'login/homeworklist.html',{'h_course':h_course})
+
+def HomeworkContent(request, pk, homework_pk):
+    homework = get_object_or_404(Homework, pk=homework_pk)
+    print(homework.content)
+    return render(request, 'login/homeworkcon.html', {'homework':homework})
