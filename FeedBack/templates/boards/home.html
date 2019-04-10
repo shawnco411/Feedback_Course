@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+ {% block extracss %}
+ <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/style.default.css' %}" id="theme-stylesheet"/>
+ {% endblock %}
 
-{% block breadcrumb %}
+<!--{% block breadcrumb %}
   <li class="breadcrumb-item active">Boards</li>
-{% endblock %}
+{% endblock %}-->
+{% block title %}讨论区{% endblock %}
 
 {% block content %}
-  <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Board</th>
-        <th>Posts</th>
-        <th>Topics</th>
-        <th>Last Post</th>
-      </tr>
-    </thead>
+</br> 
+  <table class="table table-hover">
     <tbody>
+       <tr  class="text-white bg-info">
+        <td>课程</td>
+        <td>回复数</td>
+        <td>主题数</td>
+        <td>最后回复</td>
+      </tr>
       {% for board in boards %}
         <tr>
           <td>
