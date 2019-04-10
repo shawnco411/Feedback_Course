@@ -49,13 +49,13 @@ class AssignForm(forms.ModelForm):
             attrs={'rows': 5,'placeholder': '作业详细内容'}
             ),
         )
-    # deadline = forms.CharField(
-    #     label="截止日期",
-    #     widget=forms.DateTimeInput(
-    #         attrs={'class': 'form-control','placeholder': '作业题目与要求'}
-    #         ),
-    #     )
+    deadline = forms.CharField(
+         label="截止日期",
+         widget=forms.DateTimeInput(
+            attrs={'class': 'form-control','placeholder': '作业截止日期'}
+            ),
+     )
 
     class Meta:
         model = Homework
-        fields = ['name', 'content', ]
+        fields = ['name', 'content','deadline' ]
