@@ -171,7 +171,7 @@ def choose_course(request,pk):
 def Assign(request,pk):
     homework_course = get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
-
+    print(homework_course.course_name)
     if request.method == "POST":
         print("343434")
         form = AssignForm(request.POST)
@@ -186,7 +186,7 @@ def Assign(request,pk):
             # # new_homework.deadline = deadline
             # new_homework.save()
             homework=form.save(commit=False)
-            homework.Course = homework_course
+            homework.course = homework_course
             homework.save()
             # print("xxx")
             return redirect('homework_list',pk=pk)
