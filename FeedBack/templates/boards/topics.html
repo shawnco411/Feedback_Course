@@ -1,30 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ board.name }} - {{ block.super }}
+  {{ board.name }} 
 {% endblock %}
-
-{% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item active">{{ board.name }}</li>
-{% endblock %}
+<!--- {{ block.super }}-->
 
 {% block content %}
-  <div class="mb-4">
-    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
-  </div>
-
+  </br>
   <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Topic</th>
-        <th>Starter</th>
-        <th>Replies</th>
-        <th>Views</th>
-        <th>Last Update</th>
-      </tr>
-    </thead>
     <tbody>
+      <tr  class="text-white bg-info">
+        <td>主题</td>
+        <td>发起人</td>
+        <td>回复数</td>
+        <td>浏览数</td>
+        <td>最后回复时间</td>
+      </tr>
       {% for topic in topics %}
         <tr>
           <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
@@ -36,4 +27,11 @@
       {% endfor %}
     </tbody>
   </table>
+   <div class="mb-4">
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">发起讨论</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/boards/" class="btn btn-primary">返回讨论区主页</a>
+  </div>
+
+  
 {% endblock %}
