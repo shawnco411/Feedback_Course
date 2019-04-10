@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.User)
 admin.site.register(models.course)
 admin.site.register(models.Homework)
+admin.site.register(models.SubmitWork)

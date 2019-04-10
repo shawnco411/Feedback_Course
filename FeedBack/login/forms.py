@@ -1,5 +1,5 @@
 from django import forms
-from login.models import Homework
+from login.models import Homework,SubmitWork
 
 
 class UserForm(forms.Form):
@@ -26,7 +26,7 @@ class CreateCourseForm(forms.Form):
     course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课地点...'}))
     course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '学分...'}))
     course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': '简介...'}))
-    #edited by Zhou Haici
+    
 
 class UpdateForm(forms.Form):
     name = forms.CharField(label='姓名', max_length=50, required=False)
@@ -49,13 +49,27 @@ class AssignForm(forms.ModelForm):
             attrs={'rows': 5,'placeholder': '作业详细内容'}
             ),
         )
-    # deadline = forms.CharField(
-    #     label="截止日期",
-    #     widget=forms.DateTimeInput(
-    #         attrs={'class': 'form-control','placeholder': '作业题目与要求'}
-    #         ),
-    #     )
+    deadline = forms.CharField(
+         label="截止日期",
+         widget=forms.DateTimeInput(
+            attrs={'class': 'form-control','placeholder': '作业截止日期'}
+            ),
+     )
 
     class Meta:
         model = Homework
-        fields = ['name', 'content', ]
+        fields = ['name', 'content','deadline' ]
+
+class SubmitForm(forms.ModelForm):
+    submit = forms.CharField(
+        label="提交内容",max_length=1024,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control','placeholder': '输入提交内容'}
+            )
+
+        )
+    class Meta:
+        model = SubmitWork
+        fields = ['submit' ]
+
+

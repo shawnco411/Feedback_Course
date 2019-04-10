@@ -19,17 +19,6 @@ class course(models.Model):
         verbose_name_plural = '课程'
 
 
-class Homework(models.Model):
-    name = models.CharField(max_length=64)
-    content = models.CharField(max_length = 512)
-    Course = models.ForeignKey(course,related_name='homework',on_delete=models.CASCADE)
-    # deadline = models.DateTimeField()
-    # submit = models.CharField(max_length = 1000)
-    # submit_time = models.DateTimeField(auto_now = True)
-    def _str_(self):
-        return self.name
-
-
 
 class User(models.Model):
     '''用户表'''
@@ -50,7 +39,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     identity = models.CharField(max_length=32,choices = idens,default='学生')
     c_time = models.DateTimeField(auto_now_add = True)
-    courses = models.ManyToManyField(course)
+    courses = models.ManyToManyField(course,related_name='users')
     tel = models.CharField(max_length=128)
     addr = models.CharField(max_length=128)
     number = models.CharField(max_length=128)
@@ -62,5 +51,24 @@ class User(models.Model):
         ordering = ['c_time']
         verbose_name = '用户'
         verbose_name_plural = '用户'
+
+
+class Homework(models.Model):
+    name = models.CharField(max_length=64)
+    content = models.CharField(max_length = 512)
+    course = models.ForeignKey(course,related_name='homework',on_delete=models.CASCADE)
+    deadline = models.DateTimeField()
+    # submit = models.CharField(max_length = 1000,null=True)
+    # submit_time = models.DateTimeField(auto_now = True,null=True)
+    # student = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE,null=True)
+    def _str_(self):
+        return self.name
+
+class SubmitWork(models.Model):
+    submit = models.CharField(max_length = 1000)
+    submit_time = models.DateTimeField(auto_now = True,null=True)
+    homework = models.ForeignKey(Homework,related_name = 'submit',on_delete=models.CASCADE)
+    author = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE)
+
 
 

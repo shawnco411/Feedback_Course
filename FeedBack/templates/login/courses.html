@@ -29,5 +29,13 @@
       </div>
     </div>
    </div>
-
+<a href="{% url 'homework_list' course.pk %}">作业</a>
+    <a>选择该课程的学生：</a>
+    {% for user in course.users.all %}
+                      <tr>
+                        <td>
+                        <a>{{user.name}}</a>
+                        </td>
+                      </tr>
+                   {% endfor %}
 {% endblock %}

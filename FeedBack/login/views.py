@@ -3,7 +3,7 @@ from login.models import course,User,Homework
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
-from .forms import UpdateForm,AssignForm
+from .forms import UpdateForm,AssignForm,SubmitForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from login import models
@@ -173,10 +173,10 @@ def Assign(request,pk):
     user = User.objects.get(name=request.session.get('user_name'))
 
     if request.method == "POST":
+        print("343434")
         form = AssignForm(request.POST)
         if form.is_valid():
-            #name = assign_form.cleaned_data['name']
-            #content = assign_form.cleaned_data['content']
+
             # # deadline = assign_form.cleaned_data['deadline']
 
             #new_homework = models.Homework.objects.create()
@@ -199,10 +199,35 @@ def Assign(request,pk):
 def HomeworkList(request, pk):
     h_course = get_object_or_404(course, pk=pk)
     homework = h_course.homework.all()
-    print(dir(homework))
+    # print(dir(homework))
     return render(request, 'login/homeworklist.html',{'h_course':h_course})
 
 def HomeworkContent(request, pk, homework_pk):
     homework = get_object_or_404(Homework, pk=homework_pk)
-    print(homework.content)
+    homework.save()
+    # print(homework.content)
     return render(request, 'login/homeworkcon.html', {'homework':homework})
+
+
+
+def HomeworkSubmit(request, pk, homework_pk):
+    homework = get_object_or_404(Homework, pk=homework_pk)
+    user = User.objects.get(name=request.session.get('user_name'))
+    print('12121212')
+    if request.method == "POST":
+        print("343434")
+        form = SubmitForm(request.POST)
+        if form.is_valid():
+            sub = form.save(commit=False)
+            sub.homework = homework
+            sub.author = user
+            sub.save()
+            print("xxx")
+            return redirect('homework_list',pk=pk)
+        print("zzz")
+    else:
+        sub_form = SubmitForm()
+        print("yyy")
+
+    return render(request, 'login/submit.html',locals())
+
