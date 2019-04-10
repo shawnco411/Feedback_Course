@@ -186,7 +186,7 @@ def Assign(request,pk):
             # # new_homework.deadline = deadline
             # new_homework.save()
             homework=form.save(commit=False)
-            homework.Course = homework_course
+            homework.course = homework_course
             homework.save()
             # print("xxx")
             return redirect('homework_list',pk=pk)
