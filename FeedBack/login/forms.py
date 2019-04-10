@@ -1,5 +1,5 @@
 from django import forms
-from login.models import Homework
+from login.models import Homework,SubmitWork
 
 
 class UserForm(forms.Form):
@@ -59,3 +59,17 @@ class AssignForm(forms.ModelForm):
     class Meta:
         model = Homework
         fields = ['name', 'content','deadline' ]
+
+class SubmitForm(forms.ModelForm):
+    submit = forms.CharField(
+        label="提交内容",max_length=1024,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control','placeholder': '输入提交内容'}
+            )
+
+        )
+    class Meta:
+        model = SubmitWork
+        fields = ['submit' ]
+
+

@@ -39,5 +39,6 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/homework/$',views.HomeworkList,name = 'homework_list'),
     re_path(r'^course/(?P<pk>\d+)/homework/new/$',views.Assign,name = 'new_homework'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/$',views.HomeworkContent,name = 'homework_content'),
+    re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submit/$',views.HomeworkSubmit,name = 'homework_submit'),
 
 ]

@@ -57,11 +57,17 @@ class Homework(models.Model):
     content = models.CharField(max_length = 512)
     course = models.ForeignKey(course,related_name='homework',on_delete=models.CASCADE)
     deadline = models.DateTimeField()
-    submit = models.CharField(max_length = 1000,null=True)
-    submit_time = models.DateTimeField(auto_now = True,null=True)
-    student = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE,null=True)
+    # submit = models.CharField(max_length = 1000,null=True)
+    # submit_time = models.DateTimeField(auto_now = True,null=True)
+    # student = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE,null=True)
     def _str_(self):
         return self.name
+
+class SubmitWork(models.Model):
+    submit = models.CharField(max_length = 1000)
+    submit_time = models.DateTimeField(auto_now = True,null=True)
+    homework = models.ForeignKey(Homework,related_name = 'submit',on_delete=models.CASCADE)
+    author = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE)
 
 
 
