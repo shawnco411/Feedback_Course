@@ -4,7 +4,7 @@
 {% block title %}作业列表{% endblock %}
 {% block content %}
     
-
+    <a href="{% url 'new_homework' h_course.pk %}">发布作业</a >
 
     <tbody>
       {% for homework in h_course.homework.all %}
