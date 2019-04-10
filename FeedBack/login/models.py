@@ -18,6 +18,7 @@ class course(models.Model):
         verbose_name = '课程'
         verbose_name_plural = '课程'
 
+
 class Homework(models.Model):
     name = models.CharField(max_length=64)
     content = models.CharField(max_length = 512)
@@ -25,6 +26,9 @@ class Homework(models.Model):
     # deadline = models.DateTimeField()
     # submit = models.CharField(max_length = 1000)
     # submit_time = models.DateTimeField(auto_now = True)
+    def _str_(self):
+        return self.name
+
 
 
 class User(models.Model):
