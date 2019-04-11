@@ -35,6 +35,7 @@
                       <tr>
                         <td>
                         <a>{{user.name}}</a>
+                            <li> <a href="{% url 'delete_student' course.pk user.pk %}"><i class="fa fa-link"></i>移除</a></li>
                         </td>
                       </tr>
                    {% endfor %}

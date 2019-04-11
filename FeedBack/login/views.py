@@ -166,6 +166,12 @@ def choose_course(request,pk):
     choose_courses=user.courses.all()
     print(choose_courses)
     return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+def delete_student(request,course_pk,user_pk):
+    course_now= get_object_or_404(course, pk=course_pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses.remove(course_now)
+
+    return render(request, 'login/courses.html',{'course':course_now})
 
 
 def Assign(request,pk):
