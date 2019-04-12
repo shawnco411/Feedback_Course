@@ -9,6 +9,8 @@ from django.urls import reverse
 from login import models
 from boards import models as boards_models
 from django.contrib import messages
+#from django.core.mail import send_mail
+#from FeedBack.settings import EMAIL_FROM
 # Create your views here.
 def index(request):
     course_list=course.objects.all()
@@ -172,6 +174,11 @@ def Assign(request,pk):
     homework_course = get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
     print(homework_course.course_name)
+    #email_title = 'test'
+    #email_body = '你该交作业啦！'
+    #email = '1770822995@qq.com'  # 对方的邮箱
+
+    #send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
     if request.method == "POST":
         print("343434")
         form = AssignForm(request.POST)
