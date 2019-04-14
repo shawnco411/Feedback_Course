@@ -25,18 +25,37 @@
                   <div class="form-group">
                     <strong class="mr-5"><i class="fa fa-archive"> 课程介绍: </i></strong>{{ course.course_introduction }}
                   </div>
+                  <div class="form-group">
+   					 
+   				
+                  </div>
         </div>
       </div>
     </div>
    </div>
-<a href="{% url 'homework_list' course.pk %}">作业</a>
-    <a>选择该课程的学生：</a>
-    {% for user in course.users.all %}
-                      <tr>
-                        <td>
-                        <a>{{user.name}}</a>
-                            <li> <a href="{% url 'delete_student' course.pk user.pk %}"><i class="fa fa-link"></i>移除</a></li>
-                        </td>
-                      </tr>
-                   {% endfor %}
+   <table class="table">
+					    <tbody>
+					      <tr  class="text-white table-info">
+					        <td>学号</td>
+					        <td>姓名</td>
+					        <td>操作</td>
+					      </tr>
+					       {% for user in course.users.all %}
+					        <tr>
+                                {% if request.session.user_identity == 'teacher' %}
+
+                                        {% if user.identity == 'student' %}
+
+					                        <td>{{user.number}}</td>
+					                        <td>{{user.name}}</td>
+					                        <td><a href="{% url 'delete_student' course.pk user.pk %}">移除</a></td>
+                                        {% endif %}
+
+                                {% endif %}
+					        </tr>
+					      {% endfor %}
+					    </tbody>
+					  </table>
+<button type="button" class="btn btn-primary" onclick="location.href='{% url 'homework_list' course.pk %}'">作业</button>
+
 {% endblock %}

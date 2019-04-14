@@ -28,7 +28,12 @@
                     <strong class="mr-5"><i class="fa fa-map-marker"> 住址: </i></strong>{{ user.addr }}
                   </div>
                   <div class="form-group">
-                    <strong class="mr-5"><i class="fa fa-stack-overflow"> 已选课程: </i></strong>    
+                    {% if request.session.user_identity == 'student' %}
+                    <strong class="mr-5"><i class="fa fa-stack-overflow"> 已选课程: </i></strong>
+                    {% endif %}
+                    {% if request.session.user_identity == 'teacher' %}
+                    <strong class="mr-5"><i class="fa fa-stack-overflow"> 教授课程: </i></strong>
+                    {% endif %}
                     {% for course in user.courses.all %}
                       <tr>
                         <td>
