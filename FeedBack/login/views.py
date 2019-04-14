@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from login.models import course,User,Homework
+from login.models import course,User,Homework,SubmitWork
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
@@ -246,4 +246,8 @@ def HomeworkSubmit(request, pk, homework_pk):
         print("yyy")
 
     return render(request, 'login/submit.html',locals())
+
+def SubmitCon(request,pk,homework_pk,sub_pk):
+    sub =  get_object_or_404(SubmitWork,pk = sub_pk)
+    return render(request,'login/subcon.html',{'sub':sub})
 
