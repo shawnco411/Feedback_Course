@@ -222,7 +222,8 @@ def HomeworkContent(request, pk, homework_pk):
     homework = get_object_or_404(Homework, pk=homework_pk)
     homework.save()
     # print(homework.content)
-    return render(request, 'login/homeworkcon.html', {'homework':homework})
+    submit_list = SubmitWork.objects.all()
+    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list})
 
 
 

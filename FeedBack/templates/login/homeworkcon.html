@@ -27,8 +27,18 @@
                                         </div>
                                         
                                     </div>
-                                 
-                            </div> 
+
+                            </div>
+
+                            {% for submit in submit_list %}
+
+                                {% if submit.homework.name == homework.name %}
+
+                                    {% if submit.author.name == request.session.user_name %}
+                                        <li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">{{submit.submit_time}}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
                             <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button> 
                         </form>
                     </div>
