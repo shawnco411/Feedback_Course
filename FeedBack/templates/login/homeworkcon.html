@@ -12,33 +12,30 @@
                     <!--***** BASIC FORM *****-->
                     <div class="card form" id="form1">
                         <div class="card-header">
-                            <h3>{{ homework.name }}</h3>
+                            <h3>{{ homework.name }} 作业详情</h3>
                         </div>
                         <br>
                         <form>
-                            <div class="row">
-                                
-                                
-                                    <div class="col-md-6">
-                                        
-                                        <div class="form-group" >
-                                            <h5>作业详情</h5>
-                                            <p>{{ homework.content }}</p>
-                                        </div>
-                                        
-                                    </div>
+                            <p>{{ homework.content }}</p>
+                            <table class="table">
+                                <tbody>
+                                  <tr class="text-white table-info">
+                                    <td>提交时间</td>
+                                    <td>操作</td>
+                                  </tr>
+                                   {% for submit in submit_list %}
+                                    <tr>
+                                        {% if submit.homework.name == homework.name %}
+                                            {% if submit.author.name == request.session.user_name %}
+                                                <td>{{submit.submit_time}}</td>
+                                                <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                                            {% endif %}
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
 
-                            </div>
-
-                            {% for submit in submit_list %}
-
-                                {% if submit.homework.name == homework.name %}
-
-                                    {% if submit.author.name == request.session.user_name %}
-                                        <li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">{{submit.submit_time}}</a></li>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
                             <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button> 
                         </form>
                     </div>
