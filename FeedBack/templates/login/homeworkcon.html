@@ -20,6 +20,10 @@
                             <table class="table">
                                 <tbody>
                                   <tr class="text-white table-info">
+                                    {% if request.session.user_identity == 'teacher' %}
+                                        <td>学生学号</td>
+                                        <td>学生姓名</td>
+                                    {% endif %}
                                     <td>提交时间</td>
                                     <td>操作</td>
                                   </tr>
@@ -33,6 +37,8 @@
                                                 {% endif %}
                                             {% endif %}
                                              {% if request.session.user_identity == 'teacher' %}
+                                                <td>{{submit.author.number}}</td>
+                                                <td>{{submit.author.name}}</td>
                                                  <td>{{submit.submit_time}}</td>
                                                  <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
                                              {% endif %}
