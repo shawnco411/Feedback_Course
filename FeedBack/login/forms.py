@@ -52,7 +52,7 @@ class AssignForm(forms.ModelForm):
     deadline = forms.CharField(
          label="截止日期",
          widget=forms.DateTimeInput(
-            attrs={'class': 'form-control','placeholder': '作业截止日期'}
+            attrs={'class': 'form-control','placeholder': '作业截止日期 格式如：2019-04-12 15:15:15'}
             ),
      )
 
