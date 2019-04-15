@@ -26,11 +26,18 @@
                                    {% for submit in submit_list %}
                                     <tr>
                                         {% if submit.homework.name == homework.name %}
-                                            {% if submit.author.name == request.session.user_name %}
-                                                <td>{{submit.submit_time}}</td>
-                                                <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                                            {% if request.session.user_identity == 'student' %}
+                                                {% if submit.author.name == request.session.user_name %}
+                                                    <td>{{submit.submit_time}}</td>
+                                                    <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                                                {% endif %}
                                             {% endif %}
+                                             {% if request.session.user_identity == 'teacher' %}
+                                                 <td>{{submit.submit_time}}</td>
+                                                 <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                                             {% endif %}
                                         {% endif %}
+
                                     </tr>
                                     {% endfor %}
                                 </tbody>
