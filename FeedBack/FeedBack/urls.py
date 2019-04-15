@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
+from django.conf import settings
 from django.conf.urls import url
-
+from django.conf.urls.static import static
 from login import views
 from boards import views as boards_views
 urlpatterns = [
@@ -43,4 +44,5 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submit/$',views.HomeworkSubmit,name = 'homework_submit'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submitcon/(?P<sub_pk>\d+)$',views.SubmitCon,name = 'subcon'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

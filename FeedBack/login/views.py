@@ -233,7 +233,7 @@ def HomeworkSubmit(request, pk, homework_pk):
     print('12121212')
     if request.method == "POST":
         print("343434")
-        form = SubmitForm(request.POST)
+        form = SubmitForm(request.POST,request.FILES)
         if form.is_valid():
             sub = form.save(commit=False)
             sub.homework = homework

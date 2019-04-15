@@ -66,6 +66,7 @@ class Homework(models.Model):
 
 class SubmitWork(models.Model):
     submit = models.CharField(max_length = 1000)
+    myfile = models.FileField(upload_to="%Y/%m/%d/")
     submit_time = models.DateTimeField(auto_now = True,null=True)
     homework = models.ForeignKey(Homework,related_name = 'submit',on_delete=models.CASCADE)
     author = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE)

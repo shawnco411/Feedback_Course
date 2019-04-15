@@ -68,8 +68,14 @@ class SubmitForm(forms.ModelForm):
             )
 
         )
+    myfile = forms.FileField(
+        label="上传文件",
+        widget=forms.FileInput(
+            attrs={'class': 'form-control', 'placeholder': '上传文件'}
+        )
+    )
     class Meta:
         model = SubmitWork
-        fields = ['submit' ]
+        fields = ['submit' ,'myfile']
 
 
