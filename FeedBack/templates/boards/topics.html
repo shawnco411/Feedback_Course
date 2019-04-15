@@ -28,9 +28,9 @@
     </tbody>
   </table>
    <div class="mb-4">
-    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">发起讨论</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/boards/" class="btn btn-primary">返回讨论区主页</a>
+      <button type="button" onclick="location.href='{% url 'new_topic' board.pk %}'"  class="btn btn-primary">发起讨论</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" onclick="location.href='/boards/'"  class="btn btn-primary">返回讨论区主页</button>
   </div>
 
   

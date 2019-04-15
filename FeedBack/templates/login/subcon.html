@@ -20,17 +20,15 @@
                             <p>{{ sub.myfile }}</p>
                             <br/>
      						<p>提交于： {{sub.submit_time}}</p>
+                            <button type="button" onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'"  class="btn btn-primary">返回</button>
                         </form>
+                        <br/>
                     </div>
-
-
-
+                    
                 </div>
             </div>
         </div>
     </div>
-
-
 
   
 {% endblock %}

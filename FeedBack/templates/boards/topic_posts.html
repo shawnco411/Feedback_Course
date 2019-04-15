@@ -43,9 +43,10 @@
     </div>
   {% endfor %}
    <div class="mb-4">
-    <a href="{% url 'reply_topic' topic.board.pk topic.pk %}" class="btn btn-primary" role="button">回复</a>
+    <button type="button" onclick="location.href='{% url 'reply_topic' topic.board.pk topic.pk %}'"  class="btn btn-primary">回复</button>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{% url 'board_topics' topic.board.pk %}" class="btn btn-primary" role="button">返回</a>
+    <button type="button" onclick="location.href='{% url 'board_topics' topic.board.pk %}'"  class="btn btn-primary">返回</button>
+
   </div>
 
 {% endblock %}

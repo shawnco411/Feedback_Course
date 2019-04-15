@@ -31,8 +31,8 @@
 
 
               <button type="submit" class="btn btn-default pull-right">提交</button> 
-              <button type="reset" class="btn btn-primary pull-left">取消</button>
-
+              <button type="button" onclick="location.href='{% url 'homework_content' homework.course.pk homework.pk %}'"  class="btn btn-default pull-left">返回</button>
+              
           </form>
         </div>
     </div> <!-- /container -->
