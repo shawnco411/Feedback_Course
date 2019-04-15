@@ -33,6 +33,8 @@
       </div>
     </div>
    </div>
+
+   <h2>选课学生列表</h2>
    <table class="table">
 					    <tbody>
 					      <tr  class="text-white table-info">
@@ -56,6 +58,7 @@
 					      {% endfor %}
 					    </tbody>
 					  </table>
-<button type="button" class="btn btn-primary" onclick="location.href='{% url 'homework_list' course.pk %}'">作业</button>
+
+<button type="button" class="btn btn-primary" onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>
 
 {% endblock %}

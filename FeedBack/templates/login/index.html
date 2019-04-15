@@ -39,24 +39,25 @@
                 
                
                 {% endfor %}
+                {% if request.session.user_identity == 'teacher' %}
                 <section>
                             <div class="box-4">
                                 <a href="#" >
                                     <img src="{% static "img/add.png" %} ">
                                 </a>
                                 <div class="box-4-content">
-                                   {% if request.session.user_identity == 'teacher' %}
+                                   
 
                                     <h3 class="title">添加课程</h3>
                                     <ul class="icon">
                                         <li><a href="/create_course/"><i class="fa fa-plus"></i></a></li>
                                     </ul>
-                                    {% endif %}
+                                    
                                 </div>
                                 <center><h3 >【添加课程】</h3></center>
                             </div>
                 </section>
-
+                {% endif %}
             </div>
         </div>
     </section>
@@ -64,6 +65,7 @@
 
 
     {% else %}
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <h1>你尚未登录，只能访问公开内容！</h1>
     {% endif %}
 {% endblock %}
