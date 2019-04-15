@@ -42,13 +42,17 @@
               <p class="text-left"> give students more joy now! </p>
                 <a href="{% url 'new_homework' h_course.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">发布新作业<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
                 {% endif %}
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <small class="text-bl"> <b>By: teacher here</b> </small> <span> ddl here such as: March 20,2019 </span> </div>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <small class="text-bl"> <b>By: teacher here</b> </small> <span> ddl here such as: 2019-04-12 15:15:15 </span> </div>
           </div>
           <br>
           </br>
         </div></td>
     </tr>
   </div>
+  <button type="button" class="btn btn-primary" onclick="location.href='{% url 'course' h_course.pk %}'">返回课程详情</button>
 </div>
 </tbody>
+
+
+<br/><br/>
 {% endblock %}

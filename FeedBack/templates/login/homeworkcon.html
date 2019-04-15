@@ -43,7 +43,10 @@
                                 </tbody>
                               </table>
 
-                            <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button> 
+                            <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_list'  homework.course.pk %}'">返回作业列表</button>
+                            <br/><br/> 
                         </form>
                     </div>
 

@@ -5,8 +5,13 @@
 </br></br></br></br></br></br></br></br></br></br>
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
+<<<<<<< HEAD
+          <form class='form-assign' action="{% url 'homework_submit' pk homework.pk%}" method="Post">
+              <h2>请输入提交内容</h2>
+=======
           <form class='form-assign' action="{% url 'homework_submit' pk homework.pk%}" method="Post" enctype="multipart/form-data">
  
+>>>>>>> 79118ece8867f0f8e2deeedac1fbfb6c96480473
               {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
               {% endif %}
@@ -15,7 +20,7 @@
  
 
               <div class="form-group">
-                  {{ sub_form.submit.label_tag }}
+                 <!-- {{ sub_form.submit.label_tag }}-->
                   {{ sub_form.submit}}
               </div>
 
@@ -25,8 +30,8 @@
               </div>
 
 
-              <button type="submit" class="btn btn-general btn-blue mr-2">提交</button>  
-              <button type="reset" class="btn btn-general btn-white">取消</button>
+              <button type="submit" class="btn btn-default pull-right">提交</button> 
+              <button type="reset" class="btn btn-primary pull-left">取消</button>
           </form>
         </div>
     </div> <!-- /container -->
