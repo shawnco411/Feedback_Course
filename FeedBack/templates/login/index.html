@@ -11,7 +11,14 @@
         <div class="inner">
             <header class="special">
             	
-                <h1>你好,{{ request.session.user_name }}{{ request.session.user_identity}}！欢迎回来！</h1>
+                <h1>你好,{{ request.session.user_name }}
+                	{% if request.session.user_identity == 'teacher' %}
+                		老师
+                	{% elif request.session.user_identity == 'student' %}
+                		同学
+                	{% endif %}
+                	！欢迎回来！
+            	</h1>
                 <h2>课程列表</h2>
                 <p>显示所有课程的信息</p>
             </header>
