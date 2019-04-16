@@ -34,7 +34,7 @@
       </div>
     </div>
    </div>
-
+   {% if request.session.user_identity == 'teacher' %}
    <h2>选课学生列表</h2>
    <table class="table">
 					    <tbody>
@@ -59,6 +59,7 @@
 					      {% endfor %}
 					    </tbody>
 	</table>
+  {% endif %}
 
 <button type="button" class="btn btn-primary" onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>
 <br/>
