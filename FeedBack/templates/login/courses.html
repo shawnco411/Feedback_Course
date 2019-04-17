@@ -143,7 +143,10 @@
                 </tr>
               </tbody>
           </table>
-
+          <div class="button-wrapper submit">
+            <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
+          </div>
+          <br/>
         </div>
       </div>
     </div>
@@ -175,7 +178,6 @@
 	</table>
   {% endif %}
 
-<button type="button" class="btn btn-primary" onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>
 <br/>
 <br/>
 {% endblock %}
