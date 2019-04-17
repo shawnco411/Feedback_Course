@@ -1,42 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
  
 {% block title %}布置作业{% endblock %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'create/css/bbg.css' %}"/>
+    <link rel="stylesheet" href="{% static 'create/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'create/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'create/css/form-elements.css' %}"/>
+    <link rel="stylesheet" href="{% static 'create/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'create/css/bbg.css' %}"/>
 {% endblock %}
 {% block content %}
 <!--edited by Zhou Haici-->
-<div class="top-content">
-  <div class="inner-bg">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5 form-box">
-          <div class="form-top">
-            <div class="form-top-left">
-              <h1>布置作业</h1>
+<section class="hero-area">
+  <div class="overlay"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 form-box">
+                <div class="form-top">
+                  <div class="form-top-left">
+                    <h1>布置作业</h1>
+                  </div>
+                  <div class="form-top-right"> <i class="fa fa-book"></i> </div>
+                </div>
+                <div class="form-bottom">
+                  <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}" method="post">
+                    {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}
+                    
+                    {% csrf_token %}
+                    
+                      <div class="form-group"> {{ assign_form.name}} </div>
+                      <div class="form-group"> {{ assign_form.deadline}} </div>
+                      <div class="form-group"> {{ assign_form.content}} </div>
+                      <button type="submit" class="btn btn-default pull-right">布置</button>
+                      <button type="submit" class="btn btn-primary pull-left"  onclick="location.href='{% url 'homework_list'  homework_course.pk %}'">返回</button>
+                      <br/><br/>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="form-top-right"> <i class="fa fa-book"></i> </div>
-          </div>
-          <div class="form-bottom">
-            <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}" method="post">
-              {% if message %}
-              <div class="alert alert-warning">{{ message }}</div>
-              {% endif %}
-              
-              {% csrf_token %}
-              
-                <div class="form-group"> {{ assign_form.name}} </div>
-                <div class="form-group"> {{ assign_form.deadline}} </div>
-                <div class="form-group"> {{ assign_form.content}} </div>
-                <button type="submit" class="btn btn-default pull-right">布置</button>
-                <button type="submit" class="btn btn-primary pull-left"  onclick="location.href='{% url 'homework_list'  homework_course.pk %}'">返回</button>
-                <br/><br/>
-            </form>
-          </div>
-        </div>
       </div>
-    </div>
-  </div>
-</div>
+</section>
 {% endblock %}
