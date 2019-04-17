@@ -9,7 +9,7 @@
         <div class="col-md-12 ">
           <div class="contact-h-cont">
             <form class='form-assign' action="{% url 'homework_submit' pk homework.pk%}" method="Post" enctype="multipart/form-data">
-                <center><h2>提交作业</h2><center>
+                <center><h2>提交作业</h2></center>
                 {% if message %}
                     <div class="alert alert-warning">{{ message }}</div>
                 {% endif %}
