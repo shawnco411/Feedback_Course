@@ -4,10 +4,8 @@
 {% block title %}作业详情{% endblock %}
 {% block content %}
 </br></br>
-<div class="page-content ">
-        <div id="my-div-shell">
-            <div id="my-div-center">
-                <div class="col-md-12">
+
+
 
                     <!--***** BASIC FORM *****-->
                     <div class="card form" id="form1">
@@ -17,53 +15,49 @@
                         <br>
                         <form>
                             <p>{{ homework.content }}</p>
-                            <table class="table">
-                                <tbody>
-                                  <tr class="text-white table-info">
-                                    {% if request.session.user_identity == 'teacher' %}
-                                        <td>学生学号</td>
-                                        <td>学生姓名</td>
-                                    {% endif %}
-                                    <td>提交时间</td>
-                                    <td>操作</td>
-                                  </tr>
-                                   {% for submit in submit_list %}
-                                    <tr>
-                                        {% if submit.homework.name == homework.name %}
-                                            {% if request.session.user_identity == 'student' %}
-                                                {% if submit.author.name == request.session.user_name %}
-                                                    <td>{{submit.submit_time}}</td>
-                                                    <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
-                                                {% endif %}
-                                            {% endif %}
-                                             {% if request.session.user_identity == 'teacher' %}
-                                                <td>{{submit.author.number}}</td>
-                                                <td>{{submit.author.name}}</td>
-                                                 <td>{{submit.submit_time}}</td>
-                                                 <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
-                                             {% endif %}
-                                        {% endif %}
-
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                              </table>
-                            {% if request.session.user_identity == 'student' %}
-                            <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button>
-                            {% endif %}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                             <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_list'  homework.course.pk %}'">返回作业列表</button>
-                            <br/><br/> 
+                            
                         </form>
                     </div>
 
+<br/>
+<h3>作业提交记录</h3>
+<table class="table">
+    <tbody>
+      <tr class="text-white table-info">
+        {% if request.session.user_identity == 'teacher' %}
+            <td>学生学号</td>
+            <td>学生姓名</td>
+        {% endif %}
+        <td>提交时间</td>
+        <td>操作</td>
+      </tr>
+       {% for submit in submit_list %}
+        <tr>
+            {% if submit.homework.name == homework.name %}
+                {% if request.session.user_identity == 'student' %}
+                    {% if submit.author.name == request.session.user_name %}
+                        <td>{{submit.submit_time}}</td>
+                        <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                    {% endif %}
+                {% endif %}
+                 {% if request.session.user_identity == 'teacher' %}
+                    <td>{{submit.author.number}}</td>
+                    <td>{{submit.author.name}}</td>
+                     <td>{{submit.submit_time}}</td>
+                     <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                 {% endif %}
+            {% endif %}
 
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if request.session.user_identity == 'student' %}
+<button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button>
+{% endif %}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_list'  homework.course.pk %}'">返回作业列表</button>
+<br/><br/> 
 
   
 {% endblock %}
