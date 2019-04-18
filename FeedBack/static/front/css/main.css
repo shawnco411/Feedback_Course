@@ -2208,9 +2208,10 @@ ul.icons {
 #footer {
   background-color: #111111;
   color: rgba(255, 255, 255, 0.5);
-  height: 40px;
-  line-height: 40px;
-  position: absolute;
+  height:auto !important
+  line-height:40px;
+  bottom: 0;
+  position: auto;
   width: 100%;}
   #footer input, #footer select, #footer textarea {
     color: #ffffff; }

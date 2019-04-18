@@ -15,8 +15,8 @@
       <div class="card hovercard ">
         <div class="cardheader"></div>
         <div class="info">
-          <div class="title">{{ course.course_name }}</div>
-          <div class="desc">{{ course.teacher_name }}</div>
+          <div class="title bg-info text-warning font-weight-bold">{{ course.course_name }}</div>
+          <div class="desc text-info font-weight-bold">{{ course.teacher_name }}</div>
         </div>
         <table class="table">
           <tbody>
@@ -135,7 +135,7 @@
           </tbody>
         </table>
         {% if request.session.user_identity == 'teacher' %}
-        <h3>选课学生列表</h3>
+        <h3 class ="glyphicon-glass" align="center"> &nbsp;&nbsp;&nbsp;&nbsp;选课学生列表</h3>
         <table class="table">
           <tbody>
             <tr  class="text-black table-info">

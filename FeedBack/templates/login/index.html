@@ -10,19 +10,21 @@
 <section class="wrapper">
   <div class="inner">
     <header class="special">
-      <h1>你好,{{ request.session.user_name }}
+      <h2 class = "font-weight-bold">{{ request.session.user_name }}
         {% if request.session.user_identity == 'teacher' %}
         老师
         {% elif request.session.user_identity == 'student' %}
         同学
-        {% endif %}
-        ！欢迎回来！ </h1>
-      <h2>课程列表</h2>
-      
+        {% endif %}您好&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统 </h2>
+      <br>
+      <br>
+	  <br>
+      <br>
+      <h2 class = "glyphicon-glass" align="left">课程列表</h2>
     </header>
-    <div class="highlights"> {% for line in course_list %}
+    <div class="highlights col-xs-10"> {% for line in course_list %}
       <section>
-        <div class="box-4"> <a href="#" > <img src="{% static "img/jygc.png" %} " > </a>
+        <div class="box-4"> <a href="#"> <img src="{% static "img/jygc.png" %} "> </a>
           <div class="box-4-content">
             <h3 class="title">{{line.teacher_name}}</h3>
             <ul class="icon">
@@ -66,6 +68,6 @@
 <br/>
 <br/>
 <br/>
-<h1>你尚未登录，只能访问公开内容！</h1>
+<h1 class="mark">你尚未登录，只能访问公开内容！</h1>
 {% endif %}
 {% endblock %}
