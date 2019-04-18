@@ -25,7 +25,7 @@
             <div class="card-body">
               <p class="text-left">作业内容：{{ homework.content }}</p>
               <a href="{% url 'homework_content' homework.course.pk homework.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">作业详情<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> 截止日期: {{homework.deadline}} </span> </div>
           </div>
           <br>
           </br>
@@ -42,7 +42,7 @@
             </div>
             <div class="card-body">
               <p class="text-left"> 用空闲时间好好复习当天功课吧！! </p>
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> enjoy your study </span> </div>
           </div>
           <br>
           </br>
@@ -63,7 +63,7 @@
               <p class="text-left"> give students more joy now! </p>
                 <a href="{% url 'new_homework' h_course.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">发布新作业<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
                 {% endif %}
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> go go go </span> </div>
           </div>
           <br>
           </br>
