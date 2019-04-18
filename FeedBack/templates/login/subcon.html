@@ -1,9 +1,13 @@
 {#login/templates/login/index.html#}
 
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}提交详情{% endblock %}
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/login.css' %}"/>
+{% endblock %}
 {% block content %}
-
+<div class="overlay"></div>
 <div class="page-content ">
         <div id="my-div-shell">
             <div id="my-div-center">
@@ -20,7 +24,9 @@
                             <p>{{ sub.myfile }}</p>
                             <br/>
      						<p>提交于： {{sub.submit_time}}</p>
-                            <button type="button" onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'"  class="btn btn-primary">返回</button>
+     						<div class="button-wrapper submit">
+				                <input type="button"  value="返回"  onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'" />
+				            </div>
                         </form>
                         <br/>
                     </div>
