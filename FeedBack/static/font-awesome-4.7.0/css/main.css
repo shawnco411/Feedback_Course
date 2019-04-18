@@ -55,6 +55,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
+footer{
+  height: 10px;
+}
+
 body {
   line-height: 1; }
 

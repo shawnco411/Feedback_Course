@@ -4,76 +4,68 @@
 {% load staticfiles %}
 {% block title %}主页{% endblock %}
 {% block content %}
-    {% if request.session.is_login %}
-    <!-- Added by Hu Xiao-->
+    {% if request.session.is_login %} 
+<!-- Added by Hu Xiao-->
 
-    <section class="wrapper">
-        <div class="inner">
-            <header class="special">
-            	
-                <h1>你好,{{ request.session.user_name }}
-                	{% if request.session.user_identity == 'teacher' %}
-                		老师
-                	{% elif request.session.user_identity == 'student' %}
-                		同学
-                	{% endif %}
-                	！欢迎回来！
-            	</h1>
-                <h2>课程列表</h2>
-                <p>显示所有课程的信息</p>
-            </header>
-
-            <div class="highlights">
-                {% for line in course_list %}
-                <section>
-                            <div class="box-4">
-                                <a href="#" >
-                                    <img src="{% static "img/jygc.png" %} " >
-                                </a>
-                                <div class="box-4-content">
-                                    <h3 class="title">{{line.teacher_name}}</h3>
-                                    <ul class="icon">
-                                        {% if request.session.user_identity == 'student' %}
-                                        <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
-                                        {% endif %}
-                                        <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li> 
-
-                                        <li title="课程详情"> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
-                                    </ul>
-                                </div>
-                                <center><h3 >{{line.course_name}}</h3></center>
-                            </div>
-                </section>
-                
-               
-                {% endfor %}
-                {% if request.session.user_identity == 'teacher' %}
-                <section>
-                            <div class="box-4">
-                                <a href="#" >
-                                    <img src="{% static "img/add.png" %} ">
-                                </a>
-                                <div class="box-4-content">
-                                   
-
-                                    <h3 class="title">添加课程</h3>
-                                    <ul class="icon">
-                                        <li title="添加课程"><a href="/create_course/"><i class="fa fa-plus"></i></a></li>
-                                    </ul>
-                                    
-                                </div>
-                                <center><h3 >【添加课程】</h3></center>
-                            </div>
-                </section>
-                {% endif %}
-            </div>
+<section class="wrapper">
+  <div class="inner">
+    <header class="special">
+      <h1>你好,{{ request.session.user_name }}
+        {% if request.session.user_identity == 'teacher' %}
+        老师
+        {% elif request.session.user_identity == 'student' %}
+        同学
+        {% endif %}
+        ！欢迎回来！ </h1>
+      <h2>课程列表</h2>
+      
+    </header>
+    <div class="highlights"> {% for line in course_list %}
+      <section>
+        <div class="box-4"> <a href="#" > <img src="{% static "img/jygc.png" %} " > </a>
+          <div class="box-4-content">
+            <h3 class="title">{{line.teacher_name}}</h3>
+            <ul class="icon">
+              {% if request.session.user_identity == 'student' %}
+              <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
+              {% endif %}
+              <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
+              <li title="课程详情"> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
+            </ul>
+          </div>
+          <center>
+            <h3 >{{line.course_name}}</h3>
+          </center>
         </div>
-    </section>
-
-
-
-    {% else %}
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <h1>你尚未登录，只能访问公开内容！</h1>
-    {% endif %}
+      </section>
+      {% endfor %}
+      {% if request.session.user_identity == 'teacher' %}
+      <section>
+        <div class="box-4"> <a href="#" > <img src="{% static "img/add.png" %} "> </a>
+          <div class="box-4-content">
+            <h3 class="title">添加课程</h3>
+            <ul class="icon">
+              <li title="添加课程"><a href="/create_course/"><i class="fa fa-plus"></i></a></li>
+            </ul>
+          </div>
+          <center>
+            <h3 >【添加课程】</h3>
+          </center>
+        </div>
+      </section>
+      {% endif %} </div>
+  </div>
+</section>
+{% else %} <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>你尚未登录，只能访问公开内容！</h1>
+{% endif %}
 {% endblock %}

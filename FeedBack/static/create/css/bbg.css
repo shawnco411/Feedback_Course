@@ -181,20 +181,7 @@ nav ul li {
 }
 
 /* Styling the links */
-nav a {
-    color: #000;
-    text-transform: capitalize;
-    font-weight: 400;
-    font-size: 16px;
-    margin: 0 12px;
-    letter-spacing: 2px;
-    display: inline-block;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
+
 
 /* Background color change on Hover */
 nav a:hover {
@@ -242,7 +229,7 @@ nav ul ul li a {
     display: block;
     font-size: 14px;
     margin: 10px 0;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
 }
 
 /* Second, Third and more Tiers	
@@ -265,7 +252,7 @@ li>a:only-child:after {
 --------------------------------------------- */
 @media(max-width: 1280px) {
     nav a {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
