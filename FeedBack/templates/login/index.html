@@ -6,10 +6,10 @@
 {% block content %}
     {% if request.session.is_login %} 
 <!-- Added by Hu Xiao-->
-<section class="wrapper">
+<section class="wrapper" style = "background-image: url(../../static/img/timg.jpg)">
   <div class="inner">
     <header class="special">
-      <h1 class = "font-weight-bold">{{ request.session.user_name }}
+      <h1 style = "color: white" class = "font-weight-bold">{{ request.session.user_name }}
         {% if request.session.user_identity == 'teacher' %}
         老师
         {% elif request.session.user_identity == 'student' %}
