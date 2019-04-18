@@ -15,8 +15,8 @@
       <div class="card hovercard ">
         <div class="cardheader"></div>
         <div class="info">
-          <div class="title bg-info text-warning font-weight-bold">{{ course.course_name }}</div>
-          <div class="desc text-info font-weight-bold">{{ course.teacher_name }}</div>
+          <div style = "color:lightslategray;font-size:30px;line-height:50px" class="title font-weight-bold">{{ course.course_name }}</div>
+          <div style = "color:teal;font-size:18px;line-height: 30px;" class="font-weight-normal">{{ course.teacher_name }}</div>
         </div>
         <table class="table">
           <tbody>
@@ -33,7 +33,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><strong class="mr-5"><i class="fa fa-clock-o">上课时间: </i></strong></td>
+              <td><strong class="mr-5" ><i class="fa fa-clock-o">上课时间: </i></strong></td>
               <td> {{ course.course_time }} </td>
               <td></td>
               <td></td>
@@ -135,7 +135,7 @@
           </tbody>
         </table>
         {% if request.session.user_identity == 'teacher' %}
-        <h3 class ="glyphicon-glass" align="center"> &nbsp;&nbsp;&nbsp;&nbsp;选课学生列表</h3>
+		 <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">选课学生列表</h3>
         <table class="table">
           <tbody>
             <tr  class="text-black table-info">
