@@ -42,11 +42,11 @@
       </div>
     </div>
   {% endfor %}
-   <div class="mb-4">
-    <button type="button" onclick="location.href='{% url 'reply_topic' topic.board.pk topic.pk %}'"  class="btn btn-primary">回复</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" onclick="location.href='{% url 'board_topics' topic.board.pk %}'"  class="btn btn-primary">返回</button>
+  <div class="button-wrapper submit">
+        <input type="button"  value="回复" onclick="location.href='{% url 'reply_topic' topic.board.pk topic.pk %}'"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button"  value="返回"  onclick="location.href='{% url 'board_topics' topic.board.pk %}'" />
+    </div>
 
-  </div>
 
 {% endblock %}
