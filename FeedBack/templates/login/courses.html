@@ -1,183 +1,164 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
 {% block title %}课程详情{% endblock %}
 {% block content %}
-<div class=" card-cont">   
+<div class=" card-cont">
   <div class="row" id="card-2">
-      <div class="col-lg-12 col-sm-12">
-        <div class="card hovercard ">
-          <div class="cardheader"></div>
-          <div class="info">
-            <div class="title">{{ course.course_name }}</div>
-            <div class="desc">{{ course.teacher_name }}</div>
-          </div>
-          <table class="table">
-              <tbody>
-                <tr  class="text-black table-light table-unborded">
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td> 
-                    <strong class="mr-5"><i class="fa fa-clock-o">上课时间: </i></strong>
-                  </td>
-                  <td>
-                    {{ course.course_time }}
-                  </td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                </tr>
-                <tr  class="text-black table-light table-unborded">
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td> 
-                    <strong class="mr-5"><i class="fa fa-map-marker"> 上课地点: </i></strong>
-                  </td>
-                  <td>
-                    {{ course.course_locus }}
-                  </td>
-                  <td></td> 
-                  <td></td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                  <td></td> 
-                  <td></td>  
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                </tr>
-                <tr  class="text-black table-light table-unborded">
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td> 
-                    <strong class="mr-5"><i class="fa fa-calendar"> 学分: </i></strong>
-                  </td>
-                  <td>
-                    {{ course.course_credit }}
-                  </td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                </tr>
-                <tr  class="text-black table-light table-unborded">
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td> 
-                    <strong class="mr-5"><i class="fa fa-archive"> 课程介绍: </i></strong>
-                  </td>
-                  <td>
-                    {{ course.course_introduction }}
-                  </td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
-                </tr>
-              </tbody>
-          </table>
-          <div class="button-wrapper submit">
-            <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
-          </div>
-          <br/>
+    <div class="col-lg-12 col-sm-12">
+      <div class="card hovercard ">
+        <div class="cardheader"></div>
+        <div class="info">
+          <div class="title">{{ course.course_name }}</div>
+          <div class="desc">{{ course.teacher_name }}</div>
         </div>
+        <table class="table">
+          <tbody>
+            <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-clock-o">上课时间: </i></strong></td>
+              <td> {{ course.course_time }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-map-marker"> 上课地点: </i></strong></td>
+              <td> {{ course.course_locus }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-calendar"> 学分: </i></strong></td>
+              <td> {{ course.course_credit }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-archive"> 课程介绍: </i></strong></td>
+              <td> {{ course.course_introduction }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="button-wrapper submit">
+          <input type="button" class="button" value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
+        </div>
+        <br/>
       </div>
     </div>
-   </div>
-   {% if request.session.user_identity == 'teacher' %}
-   <h3>选课学生列表</h3>
-   <table class="table">
-					    <tbody>
-					      <tr  class="text-black table-info">
-					        <td>学号</td>
-					        <td>姓名</td>
-					        <td>操作</td>
-					      </tr>
-					       {% for user in course.users.all %}
-					        <tr>
-                                {% if request.session.user_identity == 'teacher' %}
-
-                                        {% if user.identity == 'student' %}
-
-					                        <td>{{user.number}}</td>
-					                        <td>{{user.name}}</td>
-					                        <td><a href="{% url 'delete_student' course.pk user.pk %}">移除</a></td>
-                                        {% endif %}
-
-                                {% endif %}
-					        </tr>
-					      {% endfor %}
-					    </tbody>
-	</table>
-  {% endif %}
-
-<br/>
+  </div>
+</div>
+{% if request.session.user_identity == 'teacher' %}
+<h3>选课学生列表</h3>
+<table class="table">
+  <tbody>
+    <tr  class="text-black table-info">
+      <td>学号</td>
+      <td>姓名</td>
+      <td>操作</td>
+    </tr>
+  {% for user in course.users.all %}
+  <tr> {% if request.session.user_identity == 'teacher' %}
+    
+    {% if user.identity == 'student' %}
+    <td>{{user.number}}</td>
+    <td>{{user.name}}</td>
+    <td><a href="{% url 'delete_student' course.pk user.pk %}">移除</a></td>
+    {% endif %}
+    
+    {% endif %} </tr>
+  {% endfor %}
+    </tbody>
+  
+</table>
+{% endif %} <br/>
 <br/>
 {% endblock %}
