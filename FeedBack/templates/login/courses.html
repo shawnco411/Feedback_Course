@@ -6,8 +6,8 @@
 {% endblock %}
 {% block content %}
 <div class="overlay"></div>
-</br>
-</br>
+<br>
+<br>
 <div class=" card-cont">
   <div class="row" id="card-2">
     <div class="col-lg-3 col-sm-3"></div>
@@ -161,7 +161,8 @@
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
         </div>
-        <br/>
+		<!--<button type="submit" class="button button-glow button-border button-rounded button-primary"  onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>-->
+        <br>
       </div>
     </div>
     <div class="col-lg-3 col-sm-3"></div>

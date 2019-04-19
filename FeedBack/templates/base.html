@@ -19,6 +19,9 @@
 <link rel="stylesheet" href="{% static 'create/css/form-elements.css' %}"/>
 <link rel="stylesheet" href="{% static 'create/css/style.css' %}"/>
 <link rel="stylesheet" href="{% static 'create/css/button.css' %}"/>
+	
+	<!-- Core stylesheets -->
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/login.css' %}"/>
 {% block extracss %}{% endblock %}
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>{% block title %}base{% endblock %}</title>
@@ -36,7 +39,7 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" href="{% static 'front/css/main.css' %}" />
-</head><body class="is-preload">
+</head><body class="is-preload" background="../static/img/timg.jpg">
 <header id="header"> <a class="logo" href="/index/">主页</a>
   <nav> {% if request.session.is_login %} <a href="/boards/">讨论区</a> <a href="/personal_center/">个人中心</a> <a href="#">当前在线：{{request.session.user_name}}</a> <a href="/logout/">登出</a> {% else %} <a href="/login/">登录</a> <a href="/register/">注册</a> {% endif %} </nav>
 </header>
