@@ -3,8 +3,8 @@
 {% block title %}创建课程{% endblock %}
 {% load static %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'create/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'create/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'create/css/bootstrap.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'create/css/font-awesome.min.css'%}"/>
     <link rel="stylesheet" href="{% static 'create/css/form-elements.css' %}"/>
     <link rel="stylesheet" href="{% static 'create/css/style.css' %}"/>
 {% endblock %}
@@ -51,7 +51,9 @@
                     <!--<textarea name="form-course-info" placeholder="简介..." 
     			                        				class="form-course-info form-control" id="form-course-info"></textarea>--> 
                     {{ CreateCourse_form.course_introduction}} </div>
-                  <button type="submit" class="btn">完成创建!</button>
+                   <button type="submit" class="btn btn-primary pull-left"  onclick="location.href='/index/'">返回</button>
+                  <button type="submit" class="btn  btn-primary pull-right">完成创建!</button>
+                  <br/><br/>
                 </form>
               </div>
             </div>

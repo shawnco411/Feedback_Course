@@ -10,8 +10,15 @@
     <section class="wrapper">
         <div class="inner">
             <header class="special">
-            	<br/><br/>
-                <h1>你好,{{ request.session.user_name }}{{ request.session.user_identity}}！欢迎回来！</h1>
+            	
+                <h1>你好,{{ request.session.user_name }}
+                	{% if request.session.user_identity == 'teacher' %}
+                		老师
+                	{% elif request.session.user_identity == 'student' %}
+                		同学
+                	{% endif %}
+                	！欢迎回来！
+            	</h1>
                 <h2>课程列表</h2>
                 <p>显示所有课程的信息</p>
             </header>
@@ -27,11 +34,11 @@
                                     <h3 class="title">{{line.teacher_name}}</h3>
                                     <ul class="icon">
                                         {% if request.session.user_identity == 'student' %}
-                                        <li><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
+                                        <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
                                         {% endif %}
-                                        <li><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li> 
+                                        <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li> 
 
-                                        <li> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
+                                        <li title="课程详情"> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
                                     </ul>
                                 </div>
                                 <center><h3 >{{line.course_name}}</h3></center>
@@ -51,7 +58,7 @@
 
                                     <h3 class="title">添加课程</h3>
                                     <ul class="icon">
-                                        <li><a href="/create_course/"><i class="fa fa-plus"></i></a></li>
+                                        <li title="添加课程"><a href="/create_course/"><i class="fa fa-plus"></i></a></li>
                                     </ul>
                                     
                                 </div>
