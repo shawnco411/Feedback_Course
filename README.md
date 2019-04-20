@@ -14,3 +14,4 @@ A course-feedback system for soft engineering courses.
 `pip install django-widget-tweaks`
 * Before you push something, use `git pull` first
 * If you have any other attentions, please add here
+* 1
