@@ -3,6 +3,7 @@
 {% block title %}创建课程{% endblock %}
 {% load static %}
 {% block css %}
+
     <link rel="stylesheet" href="{% static 'create/css/bootstrap.min.css'%}"/>
     <link rel="stylesheet" href="{% static 'create/css/font-awesome.min.css'%}"/>
     <link rel="stylesheet" href="{% static 'create/css/form-elements.css' %}"/>
@@ -10,13 +11,12 @@
 {% endblock %}
 {% block content %} 
 
-
+<div class="overlay"></div>
 <!--edited by Zhou Haici-->
 <section class="hero-area">
-    <div class="overlay"></div>
+    
 
-        <div class="container">
-          <div class="row">
+
             <div class="col-sm-5 form-box">
               <div class="form-top">
                 <div class="form-top-left">
@@ -29,7 +29,7 @@
                   {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
                   {% endif %}
-                  
+
                   {% csrf_token %}
                   <div class="form-group">
                     <label class="sr-only" form="form-course-name"> 课程名称 </label>
@@ -51,14 +51,13 @@
                     <!--<textarea name="form-course-info" placeholder="简介..." 
     			                        				class="form-course-info form-control" id="form-course-info"></textarea>--> 
                     {{ CreateCourse_form.course_introduction}} </div>
-                   <button type="submit" class="btn btn-primary pull-left"  onclick="location.href='/index/'">返回</button>
-                  <button type="submit" class="btn  btn-primary pull-right">完成创建!</button>
+					
+                   <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-left"  onclick="location.href='/index/'">返回</button>
+                  <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-right">完成创建!</button>
                   <br/><br/>
                 </form>
               </div>
             </div>
-          </div>
 
-    </div>
 </section>
 {% endblock %}

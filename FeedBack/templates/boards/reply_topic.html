@@ -16,9 +16,11 @@
   <form method="post" class="mb-4" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
-    <button type="submit" class="btn btn-success">回复</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-     <button type="button" onclick="location.href='{% url 'topic_posts' topic.board.pk topic.pk %}'"  class="btn btn-primary">返回</button>
+     <div class="button-wrapper submit">
+        <input type="submit"  value="回复"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button"  value="返回"  onclick="location.href='{% url 'topic_posts' topic.board.pk topic.pk %}'" />
+    </div>
   </form>
 
   <!--{% for post in topic.posts.all %}

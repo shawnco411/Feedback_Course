@@ -1,68 +1,77 @@
 {#login/templates/login/index.html#}
 
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}作业详情{% endblock %}
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/login.css' %}"/>
+{% endblock %}
 {% block content %}
-</br></br>
-<div class="page-content ">
-        <div id="my-div-shell">
-            <div id="my-div-center">
-                <div class="col-md-12">
 
-                    <!--***** BASIC FORM *****-->
-                    <div class="card form" id="form1">
-                        <div class="card-header">
-                            <h3>{{ homework.name }} 作业详情</h3>
-                        </div>
-                        <br>
-                        <form>
-                            <p>{{ homework.content }}</p>
-                            <table class="table">
-                                <tbody>
-                                  <tr class="text-white table-info">
-                                    {% if request.session.user_identity == 'teacher' %}
-                                        <td>学生学号</td>
-                                        <td>学生姓名</td>
-                                    {% endif %}
-                                    <td>提交时间</td>
-                                    <td>操作</td>
-                                  </tr>
-                                   {% for submit in submit_list %}
-                                    <tr>
-                                        {% if submit.homework.name == homework.name %}
-                                            {% if request.session.user_identity == 'student' %}
-                                                {% if submit.author.name == request.session.user_name %}
-                                                    <td>{{submit.submit_time}}</td>
-                                                    <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
-                                                {% endif %}
-                                            {% endif %}
-                                             {% if request.session.user_identity == 'teacher' %}
-                                                <td>{{submit.author.number}}</td>
-                                                <td>{{submit.author.name}}</td>
-                                                 <td>{{submit.submit_time}}</td>
-                                                 <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
-                                             {% endif %}
-                                        {% endif %}
-
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                              </table>
+<div class="overlay"></div>
+ <div class=" card-cont">   
+  <div class="row" id="card-2">
+      <div class="col-lg-3 col-sm-3"></div>
+      <div class="col-lg-6 col-sm-6">
+        <div class="card hovercard ">
+          <div class="cardheader"></div>
+          <div class="info">
+            <div class="title">{{ homework.name }} 作业详情</div>
+            <hr>
+          </div>
+          <form>
+                <p>{{ homework.content }}</p>      
+          </form>
+          <hr>
+          <h2>作业提交记录</h2>
+            <table class="table">
+                <tbody>
+                  <tr class="text-white table-info">
+                    {% if request.session.user_identity == 'teacher' %}
+                        <td>学生学号</td>
+                        <td>学生姓名</td>
+                    {% endif %}
+                    <td>提交时间</td>
+                    <td>操作</td>
+                  </tr>
+                   {% for submit in submit_list %}
+                    <tr>
+                        {% if submit.homework.name == homework.name %}
                             {% if request.session.user_identity == 'student' %}
-                            <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'">提交作业</button>
+                                {% if submit.author.name == request.session.user_name %}
+                                    <td>{{submit.submit_time}}</td>
+                                    <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                                {% endif %}
                             {% endif %}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                             <button type="button" class="btn btn-general btn-blue mr-2" onclick="location.href='{% url 'homework_list'  homework.course.pk %}'">返回作业列表</button>
-                            <br/><br/> 
-                        </form>
-                    </div>
+                             {% if request.session.user_identity == 'teacher' %}
+                                <td>{{submit.author.number}}</td>
+                                <td>{{submit.author.name}}</td>
+                                 <td>{{submit.submit_time}}</td>
+                                 <td><li><a href="{% url 'subcon' homework.course.pk homework.pk submit.pk%}">查看内容</a></li></td>
+                             {% endif %}
+                        {% endif %}
 
-
-
-                </div>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+           
+            <div class="button-wrapper submit">
+                 {% if request.session.user_identity == 'student' %}
+                <input type="button"  value="提交作业"  onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
+                 {% endif %}
+                <input type="button"  value="返回作业列表"  onclick="location.href='{% url 'homework_list'  homework.course.pk %}'" />
             </div>
-        </div>
-    </div>
+           
+
+            <br/>
+          </div>
+      </div>
+      <div class="col-lg-3 col-sm-3"></div>
+  </div>
+</div>
+
 
 
   

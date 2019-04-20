@@ -13,8 +13,7 @@
 <!--edited by Zhou Haici-->
 <section class="hero-area">
   <div class="overlay"></div>
-          <div class="container">
-            <div class="row">
+
               <div class="col-sm-5 form-box">
                 <div class="form-top">
                   <div class="form-top-left">
@@ -33,13 +32,12 @@
                       <div class="form-group"> {{ assign_form.name}} </div>
                       <div class="form-group"> {{ assign_form.deadline}} </div>
                       <div class="form-group"> {{ assign_form.content}} </div>
-                      <button type="submit" class="btn btn-default pull-right">布置</button>
-                      <button type="submit" class="btn btn-primary pull-left"  onclick="location.href='{% url 'homework_list'  homework_course.pk %}'">返回</button>
+                      <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-right">布置</button>
+                      <button class="button button-glow button-rounded button-raised button-primary pull-left"  onclick="location.href='{% url 'homework_list'  homework_course.pk %}'">返回</button>
                       <br/><br/>
                   </form>
                 </div>
               </div>
-            </div>
-      </div>
+
 </section>
 {% endblock %}

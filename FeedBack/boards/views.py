@@ -4,7 +4,8 @@ from django.db.models import Count
 from .models import Board, Topic, Post
 from login.models import User
 from .forms import NewTopicForm,PostForm
-
+from django.core.mail import send_mail
+from FeedBack.settings import EMAIL_FROM
 # Create your views here.
 def home(request):
 
@@ -67,6 +68,10 @@ def reply_topic(request, pk, topic_pk):
 			post.topic = topic
 			post.created_by = user
 			post.save()
+			email_title = '讨论区'
+			email_body = '你有新回复啦！'
+			email = post.topic.starter.email  # 对方的邮箱
+			send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
 			return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
 	else:
 		form = PostForm()

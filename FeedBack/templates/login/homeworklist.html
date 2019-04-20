@@ -5,15 +5,23 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'create/css/bbg.css' %}"/>
+<link rel="stylesheet" href="{% static 'create/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="{% static 'create/css/form-elements.css' %}"/>
+<link rel="stylesheet" href="{% static 'create/css/style.css' %}"/>
 {% endblock %}
-{% block content %} <br>
-</br>
+{% block content %}
+<div class = "overlay"></div>
 <br>
-</br>
+<br>
+<br>
+<br>
 <!--edited by Zhou Haici-->
-<h3 class="title-w3 mb-5 text-center font-weight-bold">作 业 列 表</h3>
 <tbody>
-<div class="container py-xl-5 py-lg-3">
+<div class="container py-xl-5 py-lg-3" style="background-color: aliceblue;background-size: cover">
+  <h2 style = "font-weight:bold;font-family: Microsoft YaHei;color:chocolate;" align="left"><i class="fa fa-book"></i> 作业列表
+    <button title = "返回课程详情" type="button" class="button button-large button-plain button-border button-circle pull-right" onclick="location.href='{% url 'course' h_course.pk %}'"><i class="fa fa-reply"></i></button>
+  </h2>
+  <br>
   {% if h_course.homework.all %}
   <div class="row mt-4"> {% for homework in h_course.homework.all %}
     <tr>
@@ -25,7 +33,7 @@
             <div class="card-body">
               <p class="text-left">作业内容：{{ homework.content }}</p>
               <a href="{% url 'homework_content' homework.course.pk homework.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">作业详情<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> 截止日期: {{homework.deadline}} </span> </div>
           </div>
           <br>
           </br>
@@ -36,13 +44,13 @@
     {% if request.session.user_identity == 'student' %}
     <tr>
       <td><div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
-          <div class="card">
-            <div class="card-header m-0">
-              <h5 class="blog-title card-title m-0"> <a>暂无更多作业</a> </h5>
-            </div>
-            <div class="card-body">
-              <p class="text-left"> 用空闲时间好好复习当天功课吧！! </p>
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+        <div class="card">
+          <div class="card-header m-0">
+            <h5 class="blog-title card-title m-0"> <a>暂无更多作业</a> </h5>
+          </div>
+          <div class="card-body">
+            <p class="text-left"> 用空闲时间好好复习当天功课吧！! </p>
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> enjoy your study </span> </div>
           </div>
           <br>
           </br>
@@ -50,32 +58,30 @@
     </tr>
     {% endif %}
     {% endif %}
-
+    
     {% if request.session.user_identity == 'teacher' %}
-     <tr>
+    <tr>
       <td><div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
           <div class="card">
             <div class="card-header m-0">
               <h5 class="blog-title card-title m-0"> <a>【发布作业】</a> </h5>
             </div>
-            <div class="card-body">
-                {% if request.session.user_identity == 'teacher' %}
+            <div class="card-body"> {% if request.session.user_identity == 'teacher' %}
               <p class="text-left"> give students more joy now! </p>
-                <a href="{% url 'new_homework' h_course.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">发布新作业<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
-                {% endif %}
-            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between">  <span> 截止日期格式: 2019-04-12 15:15:15 </span> </div>
+              <a href="{% url 'new_homework' h_course.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">发布新作业<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
+            {% endif %}
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> go go go </span> </div>
           </div>
           <br>
           </br>
         </div></td>
     </tr>
-    {% endif %}
-  </div>
-  
+    {% endif %} </div>
+  <br>
+  <br>
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='{% url 'course' h_course.pk %}'">返回课程详情</button>
+<br>
 </tbody>
-
-
-<br/><br/>
+<br/>
+<br/>
 {% endblock %}
