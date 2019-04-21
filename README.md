@@ -14,3 +14,4 @@ A course-feedback system for soft engineering courses.
 `pip install django-widget-tweaks`
 * Before you push something, use `git pull` first
 * If you have any other attentions, please add here
+* 发送邮件目前默认发件人是1262539334@qq.com，如需修改在settings.py末尾设置，需要获取邮箱的授权密码；注册用户的邮箱必须是真实QQ邮箱，否则会报错。
