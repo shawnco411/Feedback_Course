@@ -11,11 +11,48 @@ from boards import models as boards_models
 from django.contrib import messages
 from django.core.mail import send_mail
 from FeedBack.settings import EMAIL_FROM
+import datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
+from django_apscheduler.jobstores import DjangoJobStore,register_events,register_job
 # Create your views here.
 def index(request):
     course_list=course.objects.all()
     #user = request.se
     #print(request.session['identity'])
+    '''
+    try:
+
+        scheduler = BackgroundScheduler()
+        scheduler.add_jobstore(DjangoJobStore(), "default")
+        scheduler.add_job(test_job,'cron', day_of_week='mon-sun', hour='16', minute='27', second='10')
+        #@register_job(scheduler,"interval",seconds=1)
+        def test_job():
+            t_now = time.localtime()
+            print("0000")
+            print(t_now)
+
+
+        register_events(scheduler)
+
+        scheduler.start()
+
+    except Exception as e:
+        print(e)
+        # 报错则调度器停止执行
+        #scheduler.shutdown()
+   
+    
+    sched = BlockingScheduler()
+
+    @sched.scheduled_job('interval', seconds=3)
+    def timed_job():
+        print('This job is run every three minutes.')
+
+    print('before the start funciton')
+    sched.start()
+    print("let us figure out the situation")
+    '''
     return render(request,'login/index.html',{"course_list":course_list})
 
 
@@ -193,8 +230,8 @@ def Assign(request,pk):
         form = AssignForm(request.POST)
         if form.is_valid():
 
-            # # deadline = assign_form.cleaned_data['deadline']
-
+            deadline = form.cleaned_data['deadline']
+            name = form.cleaned_data['name']
             #new_homework = models.Homework.objects.create()
             # new_homework.name = name
             # new_homework.content = content
@@ -204,7 +241,28 @@ def Assign(request,pk):
             homework=form.save(commit=False)
             homework.course = homework_course
             homework.save()
-            # print("xxx")
+            try:
+                sched = BackgroundScheduler()
+                @sched.scheduled_job('interval', seconds=1)
+                def timed_job():
+                    a=datetime.datetime.now()
+                    b=datetime.datetime.strptime(deadline,"%Y-%m-%d %H:%M:%S")
+                    for user in homework.course.users.all():
+                        flag = 0
+                        for submit in homework.submit.all():
+                            if submit.author.name == user.name:
+                                flag = 1
+                        if flag == 0:
+                            if (b-a).seconds == 0:
+                                email_title = '作业提醒'
+                                email_body = '请赶快提交作业'
+                                email = user.email  # 对方的邮箱
+                                send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+                sched.start()
+            except Exception as e:
+                print(e)
+                sched.shutdown()
+
             return redirect('homework_list',pk=pk)
     else:
         # print("ttt")
