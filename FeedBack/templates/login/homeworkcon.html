@@ -61,6 +61,9 @@
                 <input type="button"  value="提交作业"  onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
                  {% endif %}
+                {% if request.session.user_identity == 'teacher' %}
+                <a href="{% url 'delete_homework' homework.course.pk homework.pk %}">删除作业</a>
+                {% endif %}
                 <input type="button"  value="返回作业列表"  onclick="location.href='{% url 'homework_list'  homework.course.pk %}'" />
             </div>
            

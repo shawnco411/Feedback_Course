@@ -36,6 +36,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)/$', views.Download, name='download'),
     re_path(r'^course/(?P<course_pk>\d+)/delete/(?P<user_pk>\d+)$',views.delete_student,name = 'delete_student'),
     re_path(r'^personal_center/(?P<course_pk>\d+)/delete/(?P<user_pk>\d+)$',views.drop_course,name = 'drop_course'),
+
     re_path(r'^personal_center/(?P<course_pk>\d+)/delete_teacher/(?P<user_pk>\d+)$',views.delete_course,name = 'delete_course'),
     re_path(r'^boards/(?P<pk>\d+)/$', boards_views.board_topics, name='board_topics'),
     re_path(r'^boards/(?P<pk>\d+)/new/$', boards_views.new_topic, name='new_topic'),
@@ -44,6 +45,7 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/homework/$',views.HomeworkList,name = 'homework_list'),
     re_path(r'^course/(?P<pk>\d+)/homework/new/$',views.Assign,name = 'new_homework'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/$',views.HomeworkContent,name = 'homework_content'),
+    re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/delete/$',views.delete_homework,name = 'delete_homework'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submit/$',views.HomeworkSubmit,name = 'homework_submit'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submitcon/(?P<sub_pk>\d+)$',views.SubmitCon,name = 'subcon'),
 

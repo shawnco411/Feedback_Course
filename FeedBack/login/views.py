@@ -231,6 +231,10 @@ def delete_course(request, course_pk,user_pk):
     models.course.objects.get(pk=course_pk).delete()
     return render(request, 'login/personal_center.html', {'user': user_now})
 
+def delete_homework(request, pk,homework_pk):
+    models.Homework.objects.get(pk=homework_pk).delete()
+    return redirect('homework_list', pk=pk)
+
 def Assign(request,pk):
     homework_course = get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
