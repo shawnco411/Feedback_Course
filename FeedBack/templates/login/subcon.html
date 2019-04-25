@@ -21,7 +21,7 @@
                         <br>
                         <form>
                             <p>{{ sub.submit }}</p>
-                            <p>{{ sub.myfile }}</p>
+                            <a href="{% url 'download' sub.myfile %}">{{ sub.myfile }}</a>
                             <br/>
      						<p>提交于： {{sub.submit_time}}</p>
      						<div class="button-wrapper submit">
