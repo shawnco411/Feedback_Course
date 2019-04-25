@@ -181,9 +181,14 @@
                     
                   <td>
                      {% for course in user.courses.all %}
-
+                         {% if request.session.user_identity == 'student' %}
                           <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>&nbsp;&nbsp;
-
+                          <a href="{% url 'drop_course' course.pk user.pk %}">退课</a></td>
+                         {% endif %}
+                         {% if request.session.user_identity == 'teacher' %}
+                          <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>&nbsp;&nbsp;
+                          <a href="{% url 'delete_course' course.pk user.pk%}">删除课程</a></td>
+                         {% endif %}
                    {% endfor %}
                   </td>
                   <td></td> 

@@ -26,7 +26,6 @@ class CreateCourseForm(forms.Form):
     course_locus = forms.CharField(label="开课地点",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课地点...'}))
     course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '学分...'}))
     course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': '简介...'}))
-    
 
 class UpdateForm(forms.Form):
     name = forms.CharField(label='姓名', max_length=50, required=False)

@@ -135,6 +135,8 @@
           </tbody>
         </table>
         {% if request.session.user_identity == 'teacher' %}
+            {% for user in course.users.all %}
+                {% if user.name == request.session.user_name %}
 		 <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">选课学生列表</h3>
         <table class="table">
           <tbody>
@@ -157,10 +159,16 @@
             </tbody>
           
         </table>
+                    {% endif %}
+            {% endfor %}
         {% endif %}
+      {% for user in course.users.all %}
+        {% if user.name == request.session.user_name %}
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
         </div>
+        {% endif %}
+       {% endfor %}
 		<!--<button type="submit" class="button button-glow button-border button-rounded button-primary"  onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>-->
         <br>
       </div>

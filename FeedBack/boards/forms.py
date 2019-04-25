@@ -1,7 +1,13 @@
 from django import forms
 
-from .models import Topic,Post
+from .models import Topic,Post,Board
 
+class NewBoardForm(forms.ModelForm):
+    name = forms.CharField(label='姓名', max_length=30, required=False)
+    description = forms.CharField(label='学号', max_length=50, required=False)
+    class Meta:
+        model = Board
+        fields = ['name', 'description']
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(

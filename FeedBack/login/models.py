@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class course(models.Model):
-    course_name = models.CharField(max_length=128, unique=True)
+    course_name = models.CharField(max_length=128)
     teacher_name = models.CharField(max_length=128)
     course_time = models.CharField(max_length=128)
     course_locus = models.CharField(max_length=128)

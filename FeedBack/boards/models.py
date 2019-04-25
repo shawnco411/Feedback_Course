@@ -1,12 +1,12 @@
 from django.db import models
 
 # Create your models here.
-from login.models import User
+from login.models import User,course
 
 class Board(models.Model):
 	name = models.CharField(max_length=30, unique=True)
 	description = models.CharField(max_length=100)
-
+	course = models.ForeignKey(course, related_name='board', on_delete=models.CASCADE)
 	def __str__(self):
 		return self.name
 

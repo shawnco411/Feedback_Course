@@ -4,6 +4,7 @@ from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
 from .forms import UpdateForm,AssignForm,SubmitForm
+from boards.models import Board
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from login import models
@@ -149,10 +150,11 @@ def CreateCourse(request):
             new_course.course_introduction = course_introduction
             new_course.save()
 
-            new_course_board = boards_models.Board.objects.create()
-            new_course_board.name = course_name
-            new_course_board.description = course_introduction
-            new_course_board.save()
+            board = Board.objects.create(
+                name=course_name,
+                description=course_introduction,
+                course=new_course
+            )
 
             user = User.objects.get(name=request.session.get('user_name'))
             user.courses.add(new_course)
@@ -215,6 +217,17 @@ def delete_student(request,course_pk,user_pk):
 
     return render(request, 'login/courses.html',{'course':course_now})
 
+def drop_course(request,course_pk,user_pk):
+    course_now = get_object_or_404(course, pk=course_pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    user_now.courses.remove(course_now)
+    return render(request, 'login/personal_center.html', {'user': user_now})
+
+def delete_course(request, course_pk,user_pk):
+    course_now = get_object_or_404(course, pk=course_pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    models.course.objects.get(pk=course_pk).delete()
+    return render(request, 'login/personal_center.html', {'user': user_now})
 
 def Assign(request,pk):
     homework_course = get_object_or_404(course, pk=pk)
