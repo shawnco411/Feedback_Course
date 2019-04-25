@@ -33,6 +33,7 @@ urlpatterns = [
     path('update/',views.Update,name = 'update'),
     re_path(r'^index/choose/(?P<pk>\d+)/$',views.choose_course,name = 'choose_course'),
     re_path(r'^course/(?P<pk>\d+)/$',views.Course,name = 'course'),
+    re_path(r'^media/(?P<path>.*)/$', views.Download, name='download'),
     re_path(r'^course/(?P<course_pk>\d+)/delete/(?P<user_pk>\d+)$',views.delete_student,name = 'delete_student'),
     re_path(r'^personal_center/(?P<course_pk>\d+)/delete/(?P<user_pk>\d+)$',views.drop_course,name = 'drop_course'),
     re_path(r'^personal_center/(?P<course_pk>\d+)/delete_teacher/(?P<user_pk>\d+)$',views.delete_course,name = 'delete_course'),

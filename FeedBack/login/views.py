@@ -130,6 +130,8 @@ def logout(request):
     request.session.flush()
     return redirect("/index/")
 
+def Download(request,path):
+    return redirect("/media/"+path)
 def CreateCourse(request):
     if request.method=="POST":
         CreateCourse_form = CreateCourseForm(request.POST)
