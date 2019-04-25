@@ -20,6 +20,8 @@
         <td>最后回复</td>
       </tr>
       {% for board in boards %}
+          {% for course in user.courses.all %}
+              {% if board.name == course.course_name %}
         <tr>
           <td>
             <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
@@ -47,6 +49,8 @@
             {% endwith %}
           </td>
         </tr>
+              {% endif %}
+         {% endfor %}
       {% endfor %}
     </tbody>
   </table>

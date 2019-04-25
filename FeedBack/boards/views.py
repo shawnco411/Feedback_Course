@@ -10,7 +10,8 @@ from FeedBack.settings import EMAIL_FROM
 def home(request):
 
 	boards = Board.objects.all()
-	return render(request, 'boards/home.html', {'boards': boards})
+	user = User.objects.get(name=request.session.get('user_name'))
+	return render(request, 'boards/home.html', {'boards': boards,'user':user})
 
 
 

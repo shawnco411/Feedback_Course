@@ -33,9 +33,6 @@
             <div class="box-4-content">
               <h3 class="title">{{line.teacher_name}}</h3>
               <ul class="icon">
-                {% if request.session.user_identity == 'student' %}
-                <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
-                {% endif %}
                 <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
                 <li title="课程详情"> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
               </ul>
@@ -54,10 +51,12 @@
             <div class="box-4-content">
               <h3 class="title">{{line.teacher_name}}</h3>
               <ul class="icon">
-                {% if request.session.user_identity == 'student' %}
-                    <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
-                {% endif %}
-                <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
+                  <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
+                  {% for user in line.users.all%}
+                    {% if user.name == request.session.user_name %}
+                        <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
+                     {% endif %}
+                   {% endfor %}
                 <li title="课程详情"> <a href="{% url 'course' line.pk %}"><i class="fa fa-link"></i></a></li>
               </ul>
             </div>
