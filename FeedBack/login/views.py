@@ -307,8 +307,13 @@ def HomeworkContent(request, pk, homework_pk):
 def HomeworkSubmit(request, pk, homework_pk):
     homework = get_object_or_404(Homework, pk=homework_pk)
     user = User.objects.get(name=request.session.get('user_name'))
-    submit_before=SubmitWork.objects.get(homework=homework,author=user)
-    print(submit_before)
+    flag=1
+    try:
+        submit_before=SubmitWork.objects.get(homework=homework,author=user)
+    except SubmitWork.DoesNotExist:
+        print('error')
+        flag=0
+    #print(submit_before)
     print('12121212')
     if request.method == "POST":
         print("343434")
@@ -318,13 +323,15 @@ def HomeworkSubmit(request, pk, homework_pk):
             sub.homework = homework
             sub.author = user
             #submit_before.submit_time=sub.submit_time
-            submit_before.submit=sub.submit
-            submit_before.myfile=sub.myfile
-            submit_before.submit_time=sub.submit_time
-            submit_before.homework=sub.homework
-            submit_before.author=sub.author
-            submit_before.save()
-            #sub.save()
+            if flag==1:
+                submit_before.submit=sub.submit
+                submit_before.myfile=sub.myfile
+                submit_before.submit_time=sub.submit_time
+                submit_before.homework=sub.homework
+                submit_before.author=sub.author
+                submit_before.save()
+            else:
+                sub.save()
             print("xxx")
             return redirect('homework_list',pk=pk)
         print("zzz")
