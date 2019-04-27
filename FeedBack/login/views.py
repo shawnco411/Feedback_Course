@@ -3,7 +3,7 @@ from login.models import course,User,Homework,SubmitWork
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import CreateCourseForm
-from .forms import UpdateForm,AssignForm,SubmitForm
+from .forms import UpdateForm,AssignForm,SubmitForm,GradeForm
 from boards.models import Board
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -181,10 +181,8 @@ def PersonalCenter(request):
 
 def Update(request):
     user = User.objects.get(name=request.session.get('user_name'))
-
     if request.method == "POST":
         form = UpdateForm(request.POST)
-
         if form.is_valid():
             user.name = form.cleaned_data['name']
             user.number = form.cleaned_data['number']
@@ -192,18 +190,25 @@ def Update(request):
             user.email = form.cleaned_data['email']
             user.addr = form.cleaned_data['addr']
             user.save()
-
             return HttpResponseRedirect(reverse('personal_center'))
     else:
         default_data = {'name': user.name, 'number': user.number,'tel': user.tel, 'email': user.email,'addr':user.addr,}
         form = UpdateForm(default_data)
-
     return render(request, 'login/update.html', {'form':form, 'user': user})
-
-
-
-
-
+def GiveGrade(request,pk,homework_pk,sub_pk):
+    print('22222222')
+    sub=get_object_or_404(SubmitWork, pk=sub_pk)
+    if request.method == 'POST':
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            grade = form.cleaned_data['grade']
+            sub.grade=grade
+            sub.save()
+            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+    else:
+        default_data={'grade':sub.grade}
+        form = GradeForm(default_data)
+    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
 def choose_course(request,pk):
     new_course= get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
@@ -322,6 +327,7 @@ def HomeworkSubmit(request, pk, homework_pk):
             sub = form.save(commit=False)
             sub.homework = homework
             sub.author = user
+            sub.grade='未评阅'
             #submit_before.submit_time=sub.submit_time
             if flag==1:
                 submit_before.submit=sub.submit
@@ -329,6 +335,7 @@ def HomeworkSubmit(request, pk, homework_pk):
                 submit_before.submit_time=sub.submit_time
                 submit_before.homework=sub.homework
                 submit_before.author=sub.author
+                submit_before.grade=sub.grade
                 submit_before.save()
             else:
                 sub.save()
