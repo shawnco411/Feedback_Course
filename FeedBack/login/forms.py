@@ -226,5 +226,5 @@ class SubmitForm(forms.ModelForm):
     class Meta:
         model = SubmitWork
         fields = ['submit' ,'myfile']
-
-
+class GradeForm(forms.Form):
+    grade = forms.CharField(label='请打分', max_length=50)

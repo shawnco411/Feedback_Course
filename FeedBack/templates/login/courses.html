@@ -181,7 +181,9 @@
         {% if user.name == request.session.user_name %}
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
+          {% if  request.session.user_identity == 'teacher'%}
           <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+          {% endif %}
         </div>
         {% endif %}
        {% endfor %}
