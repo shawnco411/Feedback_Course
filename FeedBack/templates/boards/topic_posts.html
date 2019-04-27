@@ -24,7 +24,7 @@
               <div class="timeline-content">
                   <span class="year">发布者：{{topic.starter.name}}</span>
                   <span class="post"></span>
-                  <strong><p class="description">{{ topic.message }}</p></strong>
+                  <strong><h3>{{ topic.message }}</h3></strong>
               </div>
           </div>
           {% for post in topic.posts.all %}
@@ -32,7 +32,7 @@
               <div class="timeline-content">
                   <span class="year">用户：{{ post.created_by.name }}</span>
                   <span class="post"></span>
-                  <strong><p>{{ post.message }}</p></strong>
+                  <strong><h3>{{ post.message }}</h3></strong>
                   <p class="description pull-left">{{ post.created_at }}</p>
                   {% if post.created_by.name == request.session.user_name %}
                     <a class="pull-right" href="{% url 'delete_post' topic.board.pk topic.pk post.pk%}">删除</a>
