@@ -78,7 +78,7 @@ class course(models.Model):
     course_locus = models.CharField(max_length=128,choices = locus,default='(一)101')
     course_credit = models.CharField(max_length=128)
     course_introduction = models.CharField(max_length=128)
-
+    course_deadline = models.DateTimeField(default='2019-04-30 12:00:00')
     # roster = models.ManyToManyField(User)
     def _str_(self):
         return self.course_name

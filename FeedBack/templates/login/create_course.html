@@ -51,7 +51,9 @@
                     <!--<textarea name="form-course-info" placeholder="简介..." 
     			                        				class="form-course-info form-control" id="form-course-info"></textarea>--> 
                     {{ CreateCourse_form.course_introduction}} </div>
-					
+                   <div class="form-group">
+                    <label> 选课截止时间 </label>
+                    {{ CreateCourse_form.course_deadline}} </div>
                    <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-left"  onclick="location.href='/index/'">返回</button>
                   <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-right">完成创建!</button>
                   <br/><br/>

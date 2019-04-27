@@ -131,6 +131,21 @@
               <td></td>
               <td></td>
               <td></td>
+              <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-map-marker"> 选课截止日期: </i></strong></td>
+              <td> {{ course.course_deadline }} </td>
             </tr>
           </tbody>
         </table>
@@ -166,6 +181,7 @@
         {% if user.name == request.session.user_name %}
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
+          <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
         </div>
         {% endif %}
        {% endfor %}
