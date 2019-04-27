@@ -23,6 +23,9 @@
           <td>{{ topic.replies }}</td>
           <td>{{ topic.views }}</td>
           <td>{{ topic.last_updated }}</td>
+          {% if topic.starter.name == request.session.user_name %}
+          <td><a href="{% url 'delete_topic' board.pk topic.pk %}">删除</a></td>
+          {% endif %}
         </tr>
       {% endfor %}
     </tbody>

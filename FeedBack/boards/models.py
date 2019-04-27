@@ -30,7 +30,7 @@ class Topic(models.Model):
 	board = models.ForeignKey(Board, related_name='topics',on_delete=models.CASCADE)
 	starter = models.ForeignKey(User, related_name='topics',on_delete=models.CASCADE)
 	views = models.PositiveIntegerField(default=0)#record page views
-
+	message = models.TextField(max_length=4000)
 	def __str__(self):
 		return self.subject
 

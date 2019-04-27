@@ -18,7 +18,7 @@ def home(request):
 def board_topics(request, pk):
 
 	board = get_object_or_404(Board, pk=pk)
-	topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+	topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts'))
 	return render(request, 'boards/topics.html', {'board': board,'topics': topics})
 
 def new_topic(request, pk):
@@ -36,12 +36,13 @@ def new_topic(request, pk):
 			topic = form.save(commit=False)
 			topic.board = board
 			topic.starter = user
+			topic.message = form.cleaned_data.get('message')
 			topic.save()
-			post = Post.objects.create(
-				message=form.cleaned_data.get('message'),
-				topic=topic,
-				created_by=user
-			)
+			#post = Post.objects.create(
+			#	message=form.cleaned_data.get('message'),
+			#	topic=topic,
+			#	created_by=user
+			#)
 			return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
 	else:
 		form = NewTopicForm()
@@ -77,3 +78,11 @@ def reply_topic(request, pk, topic_pk):
 	else:
 		form = PostForm()
 	return render(request, 'boards/reply_topic.html', {'topic': topic, 'form': form})
+
+def delete_topic(request, pk,topic_pk):
+    Topic.objects.get(pk=topic_pk).delete()
+    return redirect('board_topics', pk=pk)
+
+def delete_post(request,pk,topic_pk,post_pk):
+    Post.objects.get(pk=post_pk).delete()
+    return redirect('topic_posts', pk=pk,topic_pk=topic_pk)
