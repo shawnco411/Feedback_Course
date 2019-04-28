@@ -1,19 +1,20 @@
 {% extends 'base2.html' %}
-{% block title %}修改个人信息{% endblock %}
+{% block title %}修改课程信息{% endblock %}
 {% block content %}
 <!--<h2 class="text-center">Account Info</h2>
 <ul>
-    <li>Username: {{ user.name }} </li>
+    <li>Username: {{course.course_name }} </li>
 
 </ul>-->
 <!--modified by Hu Xiao-->
 <section class="hero-area">
      <div class="overlay"></div>
 	 <div class="container">
+	 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	    <div class="row">
         <div class="col-md-12 ">
         <div class="contact-h-cont">
-			   <center><h2>修改个人资料</h2></center>
+			   <center><h2>修改课程信息</h2></center>
 			   <form  method="post" action="" enctype="multipart/form-data">
 			      {% csrf_token %}
 			      {% for field in form %}
@@ -26,7 +27,7 @@
 			           </div>
 			        {% endfor %}
 			      <div class="button-wrapper submit pull-left">
-                      <input type="button"  value="返回"  onclick="location.href='/personal_center/'" />
+                      <input type="button"  value="返回"  onclick="location.href='{% url 'course' course.pk %}'" />
                   </div>
 			      <div class="button-wrapper submit pull-right">
 			         <input type="submit" value="保存" />
@@ -36,8 +37,8 @@
 			</div>
 		</div>
 		</div>
+		<br/><br/>
 		</div>
-	</div>
 </section>
 
 

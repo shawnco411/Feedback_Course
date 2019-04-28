@@ -2,8 +2,10 @@ from django.shortcuts import render,get_object_or_404,redirect
 from login.models import course,User,Homework,SubmitWork
 from .forms import UserForm
 from .forms import RegisterForm
-from .forms import CreateCourseForm
+
+from .forms import CreateCourseForm,CourseUpdateForm
 from .forms import UpdateForm,AssignForm,SubmitForm,GradeForm
+
 from boards.models import Board
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -21,41 +23,14 @@ def index(request):
     course_list=course.objects.all()
     #user = request.se
     #print(request.session['identity'])
-    '''
-    try:
+    time = datetime.datetime.now()
 
-        scheduler = BackgroundScheduler()
-        scheduler.add_jobstore(DjangoJobStore(), "default")
-        scheduler.add_job(test_job,'cron', day_of_week='mon-sun', hour='16', minute='27', second='10')
-        #@register_job(scheduler,"interval",seconds=1)
-        def test_job():
-            t_now = time.localtime()
-            print("0000")
-            print(t_now)
+    return render(request,'login/index.html',{"course_list":course_list,"time":time})
 
-
-        register_events(scheduler)
-
-        scheduler.start()
-
-    except Exception as e:
-        print(e)
-        # 报错则调度器停止执行
-        #scheduler.shutdown()
-   
-    
-    sched = BlockingScheduler()
-
-    @sched.scheduled_job('interval', seconds=3)
-    def timed_job():
-        print('This job is run every three minutes.')
-
-    print('before the start funciton')
-    sched.start()
-    print("let us figure out the situation")
-    '''
-    return render(request,'login/index.html',{"course_list":course_list})
-
+def assistant(request,pk):
+    user_list=User.objects.all()
+    course_pk = get_object_or_404(course, pk=pk)
+    return render(request, 'login/assistant.html', {"user_list": user_list,"course":course_pk})
 
 def login(request):
     if request.session.get('is_login', None):
@@ -142,6 +117,7 @@ def CreateCourse(request):
             course_locus = CreateCourse_form.cleaned_data['course_locus']
             course_credit = CreateCourse_form.cleaned_data['course_credit']
             course_introduction = CreateCourse_form.cleaned_data['course_introduction']
+            course_deadline = CreateCourse_form.cleaned_data['course_deadline']
 
             new_course = models.course.objects.create()
             new_course.course_name = course_name
@@ -150,6 +126,7 @@ def CreateCourse(request):
             new_course.course_locus = course_locus
             new_course.course_credit = course_credit
             new_course.course_introduction = course_introduction
+            new_course.course_deadline = course_deadline
             new_course.save()
 
             board = Board.objects.create(
@@ -195,6 +172,33 @@ def Update(request):
         default_data = {'name': user.name, 'number': user.number,'tel': user.tel, 'email': user.email,'addr':user.addr,}
         form = UpdateForm(default_data)
     return render(request, 'login/update.html', {'form':form, 'user': user})
+
+
+def course_update(request,pk):
+    course_pk = get_object_or_404(course, pk=pk)
+    if request.method == "POST":
+        form = CourseUpdateForm(request.POST)
+
+        if form.is_valid():
+            course_pk.course_name = form.cleaned_data['course_name']
+            course_pk.teacher_name = form.cleaned_data['teacher_name']
+            course_pk.course_time = form.cleaned_data['course_time']
+            course_pk.course_locus = form.cleaned_data['course_locus']
+            course_pk.course_credit = form.cleaned_data['course_credit']
+            course_pk.course_introduction = form.cleaned_data['course_introduction']
+            course_pk.course_deadline = form.cleaned_data['course_deadline']
+            course_pk.save()
+
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        default_data = {'course_name': course_pk.course_name, 'teacher_name': course_pk.teacher_name,'course_time': course_pk.course_time, 'course_locus': course_pk.course_locus,'course_credit': course_pk.course_credit,'course_introduction': course_pk.course_introduction,'course_deadline': course_pk.course_deadline}
+        form = CourseUpdateForm(default_data)
+
+    return render(request, 'login/course_update.html', {'form':form, 'course': course_pk})
+
+
+
+
 def GiveGrade(request,pk,homework_pk,sub_pk):
     print('22222222')
     sub=get_object_or_404(SubmitWork, pk=sub_pk)
@@ -209,6 +213,7 @@ def GiveGrade(request,pk,homework_pk,sub_pk):
         default_data={'grade':sub.grade}
         form = GradeForm(default_data)
     return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+
 def choose_course(request,pk):
     new_course= get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
@@ -216,11 +221,20 @@ def choose_course(request,pk):
     course_list = course.objects.all()
     choose_courses=user.courses.all()
     print(choose_courses)
-    return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+    #return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+    return redirect('index')
+
 def delete_student(request,course_pk,user_pk):
     course_now= get_object_or_404(course, pk=course_pk)
     user_now=get_object_or_404(User, pk=user_pk)
     user_now.courses.remove(course_now)
+
+    return render(request, 'login/courses.html',{'course':course_now})
+
+def assistant_select(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses.add(course_now)
 
     return render(request, 'login/courses.html',{'course':course_now})
 
@@ -305,7 +319,8 @@ def HomeworkContent(request, pk, homework_pk):
     homework.save()
     # print(homework.content)
     submit_list = SubmitWork.objects.all()
-    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list})
+    time = datetime.datetime.now()
+    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list,'time':time})
 
 
 
