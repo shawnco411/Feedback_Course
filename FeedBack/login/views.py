@@ -276,9 +276,15 @@ def Assign(request,pk):
             # new_homework.course = homework_course
             # # new_homework.deadline = deadline
             # new_homework.save()
-            homework=form.save(commit=False)
-            homework.course = homework_course
-            homework.save()
+            c = datetime.datetime.now()
+            d = datetime.datetime.strptime(deadline, "%Y-%m-%d %H:%M:%S")
+            if d < c:
+                message = "deadline不能设置过去的时间"
+                return redirect('new_homework', pk=pk)
+            else:
+                homework=form.save(commit=False)
+                homework.course = homework_course
+                homework.save()
             try:
                 sched = BackgroundScheduler()
                 @sched.scheduled_job('interval', seconds=1)
