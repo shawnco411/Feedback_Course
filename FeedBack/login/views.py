@@ -398,3 +398,8 @@ def GiveGrade(request,pk,homework_pk,sub_pk):
     else:
         form = GradeForm(default_data)
     return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+
+def ResourceCon(request, pk, resource_pk):
+    resource = get_object_or_404(Resource, pk=resource_pk)
+    # resource.save()
+    return render(request, 'login/ResourceCon.html', {'resource':resource})
