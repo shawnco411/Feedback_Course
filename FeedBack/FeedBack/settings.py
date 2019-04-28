@@ -91,9 +91,9 @@ DATABASES = {
         # use for unix-like system,annote it when using windows
 
 
-       #'OPTIONS': {
-       #  "unix_socket": "/tmp/mysql.sock",
-       #},
+       'OPTIONS': {
+        "unix_socket": "/tmp/mysql.sock",
+       },
 
        # 'OPTIONS': {
         #  "unix_socket": "/tmp/mysql.sock",

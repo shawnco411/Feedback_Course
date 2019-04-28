@@ -196,24 +196,6 @@ def course_update(request,pk):
 
     return render(request, 'login/course_update.html', {'form':form, 'course': course_pk})
 
-
-
-
-def GiveGrade(request,pk,homework_pk,sub_pk):
-    print('22222222')
-    sub=get_object_or_404(SubmitWork, pk=sub_pk)
-    if request.method == 'POST':
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            grade = form.cleaned_data['grade']
-            sub.grade=grade
-            sub.save()
-            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
-    else:
-        default_data={'grade':sub.grade}
-        form = GradeForm(default_data)
-    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
-
 def choose_course(request,pk):
     new_course= get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
@@ -401,3 +383,18 @@ def NewResource(request,pk):
         Resource_form = ResourceForm()
     print(models.Resource.objects.all())
     return render(request,'login/new_resource.html',locals())
+
+
+def GiveGrade(request,pk,homework_pk,sub_pk):
+    print('22222222')
+    sub=get_object_or_404(SubmitWork, pk=sub_pk)
+    if request.method == 'POST':
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            temp_sub = form.save(commit=False)
+            sub.grade=temp_sub.grade
+            sub.save()
+            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+    else:
+        form = GradeForm(default_data)
+    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})

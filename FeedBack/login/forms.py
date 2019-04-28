@@ -245,5 +245,9 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ['name' ,'myfile']
 
-class GradeForm(forms.Form):
+class GradeForm(forms.ModelForm):
     grade = forms.CharField(label='请打分', max_length=50)
+
+    class Meta:
+        model = SubmitWork
+        fields = ['grade' ]
