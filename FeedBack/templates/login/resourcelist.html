@@ -1,0 +1,22 @@
+{#login/templates/login/index.html#}
+
+{% extends 'base.html' %}
+{% block title %}资源列表{% endblock %}
+{% block content %}
+    
+
+
+    <tbody>
+      {% for resource in r_course.resource.all %}
+        <tr>
+          <li>
+            {{resource.name}}
+          </li>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  
+{% endblock %}

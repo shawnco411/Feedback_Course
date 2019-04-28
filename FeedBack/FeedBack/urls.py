@@ -53,5 +53,7 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submit/$',views.HomeworkSubmit,name = 'homework_submit'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submitcon/(?P<sub_pk>\d+)$',views.SubmitCon,name = 'subcon'),
     re_path(r'^course/(?P<pk>\d+)/homework/(?P<homework_pk>\d+)/submitcon_grade/(?P<sub_pk>\d+)$',views.GiveGrade,name = 'give_grade'),
+    re_path(r'^course/(?P<pk>\d+)/resource/$',views.ResourceList,name = 'resource_list'),
+    re_path(r'^course/(?P<pk>\d+)/resource/new/$',views.NewResource,name = 'new_resource'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

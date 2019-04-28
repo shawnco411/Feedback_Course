@@ -142,5 +142,11 @@ class SubmitWork(models.Model):
     homework = models.ForeignKey(Homework,related_name = 'submit',on_delete=models.CASCADE)
     author = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE)
 
+class Resource(models.Model):
+    name = models.CharField(max_length = 100)
+    myfile = models.FileField(upload_to="%Y/%m/%d/")
+    course = models.ForeignKey(course,related_name='resource',on_delete=models.CASCADE)
 
+    def _str_(self):
+        return self.name
 

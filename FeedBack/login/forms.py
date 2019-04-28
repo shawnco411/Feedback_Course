@@ -1,5 +1,5 @@
 from django import forms
-from login.models import Homework,SubmitWork
+from login.models import Homework,SubmitWork,Resource
 
 
 class UserForm(forms.Form):
@@ -226,5 +226,24 @@ class SubmitForm(forms.ModelForm):
     class Meta:
         model = SubmitWork
         fields = ['submit' ,'myfile']
+
+class ResourceForm(forms.ModelForm):
+    name = forms.CharField(
+        label="资源题目",max_length=1024,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control','placeholder': '输入所上传资源的题目'}
+            )
+
+        )
+    myfile = forms.FileField(
+        label="上传文件",
+        widget=forms.FileInput(
+            #attrs={'class': 'form-control', 'placeholder': '上传文件'}
+        )
+    )
+    class Meta:
+        model = Resource
+        fields = ['name' ,'myfile']
+
 class GradeForm(forms.Form):
     grade = forms.CharField(label='请打分', max_length=50)

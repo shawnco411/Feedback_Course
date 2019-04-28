@@ -1,10 +1,10 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from login.models import course,User,Homework,SubmitWork
+from login.models import course,User,Homework,SubmitWork,Resource
 from .forms import UserForm
 from .forms import RegisterForm
 
 from .forms import CreateCourseForm,CourseUpdateForm
-from .forms import UpdateForm,AssignForm,SubmitForm,GradeForm
+from .forms import UpdateForm,AssignForm,SubmitForm,GradeForm,ResourceForm
 
 from boards.models import Board
 from django.http import HttpResponseRedirect
@@ -367,3 +367,31 @@ def SubmitCon(request,pk,homework_pk,sub_pk):
     sub =  get_object_or_404(SubmitWork,pk = sub_pk)
     return render(request,'login/subcon.html',{'sub':sub})
 
+#课程资源列表
+def ResourceList(request, pk):
+    r_course = get_object_or_404(course, pk=pk)
+    resource = r_course.resource.all()
+    # print(dir(homework))
+    return render(request, 'login/resourcelist.html',{'r_course':r_course})
+
+#上传课程资源
+def NewResource(request,pk):
+    resource_course = get_object_or_404(course, pk=pk)
+    user = User.objects.get(name=request.session.get('user_name'))
+    print(resource_course.course_name)
+    if request.method == "POST":
+        print("888")
+        form = ResourceForm(request.POST,request.FILES)
+        if form.is_valid():
+
+            resource=form.save(commit=False)
+            resource.course = resource_course
+            print("999")
+            resource.save()
+            
+            return redirect('resource_list',pk=pk)
+    else:
+        # print("ttt")
+        Resource_form = ResourceForm()
+    print(models.Resource.objects.all())
+    return render(request,'login/new_resource.html',locals())
