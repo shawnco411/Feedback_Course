@@ -51,6 +51,16 @@
                                             <input type="submit" value="打分">
                                         </form>
                                         {% endif %}
+                                    {% if request.session.user_identity == 'assistant' %}
+                                        <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
+                                        {% if message %}
+                                        <div class="alert alert-warning">{{ message }}</div>
+                                        {% endif %}
+                                            {% csrf_token %}
+                                            <input type="text pull-left" name="grade">
+                                            <input type="submit" value="打分">
+                                        </form>
+                                        {% endif %}
 
  						<div class="button-wrapper submit">
 			                <input type="button"  value="返回"  onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'" />
