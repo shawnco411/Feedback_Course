@@ -2,20 +2,21 @@
 
 {% block title %}{{ board.name }}{% endblock %}
 {% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
-  <li class="breadcrumb-item active">New topic</li>
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+<li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+<li class="breadcrumb-item active">New topic</li>
 {% endblock %}
 
-{% block content %}
-</br>
+{% block content %} </br>
+<div style="padding: 20px; background-color:aliceblue;position: absolute;width: 50%;left: 25%;top: 10%;text-align: center">
   <form method="post" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
-    <div class="button-wrapper submit">
-        <input type="submit"  value="发起讨论"  />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="button"  value="返回"  onclick="location.href='{% url 'board_topics' board.pk %}'" />
-    </div>
+    <div class="button-wrapper submit" >
+      <input type="submit"  value="发起讨论"  />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button"  value="返回"  onclick="location.href='{% url 'board_topics' board.pk %}'" />
+    </div>
   </form>
-{% endblock %}
+</div>
+{% endblock %} 
