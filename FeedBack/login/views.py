@@ -217,7 +217,8 @@ def choose_course(request,pk):
     course_list = course.objects.all()
     choose_courses=user.courses.all()
     print(choose_courses)
-    return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+    #return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
+    return redirect('index')
 def delete_student(request,course_pk,user_pk):
     course_now= get_object_or_404(course, pk=course_pk)
     user_now=get_object_or_404(User, pk=user_pk)
@@ -306,7 +307,8 @@ def HomeworkContent(request, pk, homework_pk):
     homework.save()
     # print(homework.content)
     submit_list = SubmitWork.objects.all()
-    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list})
+    time = datetime.datetime.now()
+    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list,'time':time})
 
 
 
