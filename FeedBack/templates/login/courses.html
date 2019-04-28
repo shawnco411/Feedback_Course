@@ -131,6 +131,7 @@
               <td></td>
               <td></td>
               <td></td>
+              </tr>
               <tr  class="text-black table-light table-unborded">
               <td></td>
               <td></td>
@@ -144,8 +145,20 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><strong class="mr-5"><i class="fa fa-map-marker"> 选课截止日期: </i></strong></td>
+              <td><strong class="mr-5"><i class="fa fa-bell-o"> 选课截止日期: </i></strong></td>
               <td> {{ course.course_deadline }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -160,6 +173,17 @@
               <td>姓名</td>
               <td>操作</td>
             </tr>
+           {% for user in course.users.all %}
+          <tr> {% if request.session.user_identity == 'teacher' %}
+
+            {% if user.identity == 'assistant' %}
+            <td>{{user.number}}</td>
+            <td>{{user.name}}</td>
+            <td><a href="{% url 'delete_student' course.pk user.pk %}">移除该助教</a></td>
+            {% endif %}
+
+            {% endif %} </tr>
+          {% endfor %}
           {% for user in course.users.all %}
           <tr> {% if request.session.user_identity == 'teacher' %}
             
@@ -182,7 +206,9 @@
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
           {% if  request.session.user_identity == 'teacher'%}
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+          <input type="button"  value="助教"  onclick="location.href='{% url 'assistant' course.pk %}'" />
           {% endif %}
         </div>
         {% endif %}

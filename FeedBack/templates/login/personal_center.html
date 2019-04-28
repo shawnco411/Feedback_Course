@@ -18,7 +18,7 @@
           <div class="info">
             <div class="title">{{ user.name }}</div>
             <div class="desc">{{ user.email }}</div>
-            <hr>
+
           </div>
             <table class="table">
               <tbody>
@@ -154,60 +154,52 @@
                   <td></td> 
                   <td></td> 
                   <td></td> 
-                  <td></td>
-                </tr>
-                <tr  class="text-black table-light">
-                  <td></td> 
-                  <td></td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
                   <td></td> 
                   <td></td> 
                   <td></td> 
                   <td></td>  
-                  <td>
-                    {% if request.session.user_identity == 'student' %}
-                    <strong class="mr-5"><i class="fa fa-stack-overflow"> 已选课程: </i></strong>
-                    {% endif %}
-                    {% if request.session.user_identity == 'teacher' %}
-                    <strong class="mr-5"><i class="fa fa-stack-overflow"> 教授课程: </i></strong>
-                    {% endif %}
-                  </td>
-                    
-                  <td>
-                     {% for course in user.courses.all %}
-                         {% if request.session.user_identity == 'student' %}
-                          <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>&nbsp;&nbsp;
-                          <a href="{% url 'drop_course' course.pk user.pk %}">退课</a></td>
-                         {% endif %}
-                         {% if request.session.user_identity == 'teacher' %}
-                          <a href="{% url 'course' course.pk %}">{{ course.course_name }}</a>&nbsp;&nbsp;
-                          <a href="{% url 'delete_course' course.pk user.pk%}">删除课程</a></td>
-                         {% endif %}
-                   {% endfor %}
-                  </td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
                   <td></td> 
                   <td></td>
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td> 
-                  <td></td>  
                 </tr>
+               
               </tbody>
             </table>
 
+            {% if request.session.user_identity == 'student' %}
+              <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><i class="fa fa-stack-overflow"> 已选课程: </i></h3>
+            {% endif %}
+            {% if request.session.user_identity == 'teacher' %}
+              <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><i class="fa fa-stack-overflow"> 教授课程: </i></h3>
+            {% endif %}
+            
+            <table class="table">
+              <tbody>
+                <tr  class="text-black table-info">
+                  <td>课程</td>
+                  <td>操作</td>
+                  <td></td>
+                </tr>
+
+                {% for course in user.courses.all %}
+                        <tr  class="text-black table-light">
+                         {% if request.session.user_identity == 'student' %}
+                          <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
+                          <td><a href="{% url 'drop_course' course.pk user.pk %}">退课</a></td>
+                         {% endif %}
+                         {% if request.session.user_identity == 'teacher' %}
+                          <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>                      <td><a href="{% url 'delete_course' course.pk user.pk%}">删除课程</a></td>
+                         {% endif %}
+                         {% if request.session.user_identity == 'assistant' %}
+                          <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
+                         {% endif %}
+                         <td></td>
+                      </tr>
+                   {% endfor %}
+
+              
+                </tbody>
+              
+            </table>
                  
              <div class="button-wrapper submit">
                 <input type="button"  value="编辑"  onclick="location.href='/update/'" />

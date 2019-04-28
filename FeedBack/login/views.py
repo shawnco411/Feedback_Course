@@ -27,6 +27,10 @@ def index(request):
 
     return render(request,'login/index.html',{"course_list":course_list,"time":time})
 
+def assistant(request,pk):
+    user_list=User.objects.all()
+    course_pk = get_object_or_404(course, pk=pk)
+    return render(request, 'login/assistant.html', {"user_list": user_list,"course":course_pk})
 
 def login(request):
     if request.session.get('is_login', None):
@@ -219,10 +223,18 @@ def choose_course(request,pk):
     print(choose_courses)
     #return render(request, 'login/index.html',{'course_list':course_list},{'choose_courses':choose_courses})
     return redirect('index')
+
 def delete_student(request,course_pk,user_pk):
     course_now= get_object_or_404(course, pk=course_pk)
     user_now=get_object_or_404(User, pk=user_pk)
     user_now.courses.remove(course_now)
+
+    return render(request, 'login/courses.html',{'course':course_now})
+
+def assistant_select(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses.add(course_now)
 
     return render(request, 'login/courses.html',{'course':course_now})
 

@@ -19,26 +19,42 @@
                             <h3>{{ homework.name }} 提交详情</h3>
                         </div>
                         <br>
-                        <form>
+
                             <p>{{ sub.submit }}</p>
-                            <a href="{% url 'download' sub.myfile %}">{{ sub.myfile }}</a>
-                            <br/>
-     						<p>提交于： {{sub.submit_time}}</p>
-                            <p>得分:{{ sub.grade }}</p>
-                            {% if request.session.user_identity == 'teacher' %}
-                                <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
-                                {% if message %}
-                                <div class="alert alert-warning">{{ message }}</div>
-                                {% endif %}
-                                    {% csrf_token %}
-                                    <input type="text" name="grade">
-                                    <input type="submit" value="打分">
-                                </form>
-                            {% endif %}
-     						<div class="button-wrapper submit">
-				                <input type="button"  value="返回"  onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'" />
-				            </div>
-                        </form>
+
+                        <table class="table">
+                            <tbody>
+                                <tr  class="text-black table-light">
+                                    <td></td><td></td>
+                                    <td><i class="fa fa-paperclip"></i>下载</td>
+                                    <td><a href="{% url 'download' sub.myfile %}">{{ sub.myfile }}</a></td>
+                                </tr>
+                                <tr class="text-black table-light">
+                                    <td></td><td></td>
+                                    <td><i class="fa fa-clock-o"></i>提交时间</td>    
+             						<td>{{sub.submit_time}}</td>
+                                </tr>
+                                <tr class="text-black table-light">
+                                    <td></td><td></td>
+                                    <td><i class="fa fa-calendar"></i>得分</td>
+                                    <td>{{ sub.grade }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                    {% if request.session.user_identity == 'teacher' %}
+                                        <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
+                                        {% if message %}
+                                        <div class="alert alert-warning">{{ message }}</div>
+                                        {% endif %}
+                                            {% csrf_token %}
+                                            <input type="text pull-left" name="grade">
+                                            <input type="submit" value="打分">
+                                        </form>
+                                        {% endif %}
+
+ 						<div class="button-wrapper submit">
+			                <input type="button"  value="返回"  onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'" />
+			            </div>
                         <br/>
                     </div>
                     

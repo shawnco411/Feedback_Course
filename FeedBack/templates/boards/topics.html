@@ -15,6 +15,7 @@
         <td>回复数</td>
         <td>浏览数</td>
         <td>最后回复时间</td>
+        <td>操作</td>
       </tr>
       {% for topic in topics %}
         <tr>
@@ -25,6 +26,8 @@
           <td>{{ topic.last_updated }}</td>
           {% if topic.starter.name == request.session.user_name %}
           <td><a href="{% url 'delete_topic' board.pk topic.pk %}">删除</a></td>
+          {% else %}
+          <td>非主题创建者，无操作权限</td>
           {% endif %}
         </tr>
       {% endfor %}
