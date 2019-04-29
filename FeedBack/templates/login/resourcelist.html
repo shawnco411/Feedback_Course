@@ -14,17 +14,17 @@
                         <div class="card-header">
                             <h3>资源列表</h3>
                         </div>
-
+                        </br>
                         <table class="table">
                           <tbody>
                              <tr  class="text-black table-info">
                               <td>资源名称</td>
-                              <td>操作</td>
+                              <td>下载</td>
                             </tr>
                             {% for resource in r_course.resource.all %}
                             <tr>
                               <td>{{resource.name}}</td>
-                              <td><a href="{% url 'resource_content' r_course.pk resource.pk %}">查看</a></td>
+                              <td><a href="{% url 'download' resource.myfile %}">{{resource.myfile }}</a></td>
                             </tr>
                             {% endfor %}
                           </tbody>  

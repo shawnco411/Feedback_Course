@@ -71,13 +71,9 @@
                  {% if request.session.user_identity == 'student' %}
 
                      {% if time < homework.deadline %}
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="button"  value="提交作业"  onclick="location.href='{% url 'homework_submit' homework.course.pk homework.pk %}'" />
                        {% endif %}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
-
-
-                   
-
                  {% endif %}
                 {% if request.session.user_identity == 'teacher' %}
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
