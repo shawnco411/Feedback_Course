@@ -33,8 +33,10 @@
 
                   <div class="button-wrapper submit">
                       <input type="button"   value="返回"  onclick="location.href='{% url 'course' r_course.pk %}'" />
+                      {% if  request.session.user_identity == 'teacher'%}
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
+                      {% endif %}
                   </div>
                   <br/>
                     </div>
