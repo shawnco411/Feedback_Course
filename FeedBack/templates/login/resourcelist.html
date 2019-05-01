@@ -25,6 +25,8 @@
                             <tr>
                               <td>{{resource.name}}</td>
                               <td><a href="{% url 'download' resource.myfile %}">{{resource.myfile }}</a></td>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
+                              <input type="button"  value="删除资源"  onclick="location.href='{% url 'resource_delete' r_course.pk resource.pk %}'" />
                             </tr>
                             {% endfor %}
                           </tbody>  

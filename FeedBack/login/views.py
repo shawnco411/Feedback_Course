@@ -403,3 +403,7 @@ def ResourceCon(request, pk, resource_pk):
     resource = get_object_or_404(Resource, pk=resource_pk)
     # resource.save()
     return render(request, 'login/ResourceCon.html', {'resource':resource})
+
+def resource_delete(request, pk,resource_pk):
+    models.Resource.objects.get(pk=resource_pk).delete()
+    return redirect('resource_list', pk=pk)
