@@ -20,13 +20,17 @@
                              <tr  class="text-black table-info">
                               <td>资源名称</td>
                               <td>下载</td>
+                              {% if  request.session.user_identity == 'teacher'%}
+                              <td>操作</td>
+                              {% endif %}
                             </tr>
                             {% for resource in r_course.resource.all %}
                             <tr>
                               <td>{{resource.name}}</td>
                               <td><a href="{% url 'download' resource.myfile %}">{{resource.myfile }}</a></td>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;
-                              <input type="button"  value="删除资源"  onclick="location.href='{% url 'resource_delete' r_course.pk resource.pk %}'" />
+                             {% if  request.session.user_identity == 'teacher'%}
+                              <td><a href="{% url 'resource_delete' r_course.pk resource.pk %}">删除</a></td>
+                              {% endif %}
                             </tr>
                             {% endfor %}
                           </tbody>  
