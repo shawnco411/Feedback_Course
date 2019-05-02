@@ -160,6 +160,34 @@
               <td></td>
               <td></td>
             </tr>
+            <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
+              <td><a href="{% url 'resource_list' course.pk %}">查看</a></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
           </tbody>
         </table>
         {% if request.session.user_identity == 'teacher' %}
@@ -209,6 +237,11 @@
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
           <input type="button"  value="助教"  onclick="location.href='{% url 'assistant' course.pk %}'" />
+          {% endif %}
+          {% if  request.session.user_identity == 'assistant'%}
+              {% if request.session.user_privilege_2 == '1' %}
+              <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+               {% endif %}
           {% endif %}
         </div>
         {% endif %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <td><a href="{% url 'pri_grade' course.pk user.pk %}">评作业</a></td>
+    <td><a href="{% url 'pri_update' course.pk user.pk %}">编辑课程信息</a></td>
+    <td><a href="{% url 'pri_assign' course.pk user.pk %}">发布作业</a></td>
+    <td><a href="{% url 'pri_delete' course.pk user.pk %}">删除作业</a></td>
+    <td><a href="{% url 'pri_resource' course.pk user.pk %}">上传课件</a></td>
+</body>
+</html>

@@ -5,25 +5,27 @@
 {% block title %}添加回复{% endblock %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}</a></li>
-  <li class="breadcrumb-item active">Post a reply</li>
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+<li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a></li>
+<li class="breadcrumb-item"><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}</a></li>
+<li class="breadcrumb-item active">Post a reply</li>
 {% endblock %}
 
-{% block content %}
+{% block content %} 
+<div class = "bg-mountain"></div>
 </br>
+<div style="padding: 20px; background-color:aliceblue;position: absolute;width: 50%;left: 25%;top: 10%;text-align: center">
   <form method="post" class="mb-4" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
-     <div class="button-wrapper submit">
-        <input type="submit"  value="回复"/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="button"  value="返回"  onclick="location.href='{% url 'topic_posts' topic.board.pk topic.pk %}'" />
-    </div>
+    <div class="button-wrapper submit" >
+      <input type="submit"  value="回复"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button"  value="返回"  onclick="location.href='{% url 'topic_posts' topic.board.pk topic.pk %}'" />
+    </div>
   </form>
-
-  <!--{% for post in topic.posts.all %}
+</div>
+<!--{% for post in topic.posts.all %}
     <div class="card mb-2">
       <div class="card-body p-3">
         <div class="row mb-3">
@@ -38,6 +40,6 @@
       </div>
     </div>
   {% endfor %}
--->
+--> 
 
-{% endblock %}
+{% endblock %} 

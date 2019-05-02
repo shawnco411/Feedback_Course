@@ -1,0 +1,46 @@
+{#login/templates/login/index.html#}
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}资源详情{% endblock %}
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/login.css' %}"/>
+{% endblock %}
+{% block content %}
+<div class="overlay"></div>
+<div class="page-content ">
+        <div id="my-div-shell">
+            <div id="my-div-center">
+                <div class="col-md-12">
+
+                    <!--***** BASIC FORM *****-->
+                    <div class="card form" id="form1">
+                        <div class="card-header">
+                            <h3>{{ resource.name }} 资源详情</h3>
+                        </div>
+                        <br/>
+
+                        <table class="table">
+                            <tbody>
+                                <tr  class="text-black table-light">
+                                    <td></td><td></td>
+                                    <td><i class="fa fa-paperclip"></i>下载</td>
+                                    <td><a href="{% url 'download' resource.myfile %}">{{ resource.myfile }}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="button-wrapper submit">
+                            <input type="button"  value="返回"  onclick="location.href='{% url 'resource_list' resource.course.pk %}'" />
+                        </div>
+                        
+                        <br/>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+{% endblock %}

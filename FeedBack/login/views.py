@@ -144,6 +144,9 @@ def CreateCourse(request):
 
 def Course(request,pk):
     course_pk = get_object_or_404(course, pk=pk)
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    request.session['user_privilege_2'] = user.privilege_2
     return render(request, 'login/courses.html', {'course': course_pk})
 
 
@@ -196,24 +199,6 @@ def course_update(request,pk):
 
     return render(request, 'login/course_update.html', {'form':form, 'course': course_pk})
 
-
-
-
-def GiveGrade(request,pk,homework_pk,sub_pk):
-    print('22222222')
-    sub=get_object_or_404(SubmitWork, pk=sub_pk)
-    if request.method == 'POST':
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            grade = form.cleaned_data['grade']
-            sub.grade=grade
-            sub.save()
-            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
-    else:
-        default_data={'grade':sub.grade}
-        form = GradeForm(default_data)
-    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
-
 def choose_course(request,pk):
     new_course= get_object_or_404(course, pk=pk)
     user = User.objects.get(name=request.session.get('user_name'))
@@ -236,7 +221,44 @@ def assistant_select(request,pk,user_pk):
     user_now=get_object_or_404(User, pk=user_pk)
     user_now.courses.add(course_now)
 
-    return render(request, 'login/courses.html',{'course':course_now})
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+
+def pri_grade(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.privilege_1=1
+    user_now.save()
+    print(user_now.name)
+    print(user_now.privilege_1)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+
+def pri_update(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.privilege_2=1
+    user_now.save()
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+
+def pri_assign(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.privilege_3=1
+    user_now.save()
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+
+def pri_delete(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.privilege_4=1
+    user_now.save()
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+
+def pri_resource(request,pk,user_pk):
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.privilege_5=1
+    user_now.save()
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
 
 def drop_course(request,course_pk,user_pk):
     course_now = get_object_or_404(course, pk=course_pk)
@@ -318,6 +340,9 @@ def HomeworkList(request, pk):
     h_course = get_object_or_404(course, pk=pk)
     homework = h_course.homework.all()
     # print(dir(homework))
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    request.session['user_privilege_3'] = user.privilege_3
     return render(request, 'login/homeworklist.html',{'h_course':h_course})
 
 def HomeworkContent(request, pk, homework_pk):
@@ -326,6 +351,9 @@ def HomeworkContent(request, pk, homework_pk):
     # print(homework.content)
     submit_list = SubmitWork.objects.all()
     time = datetime.datetime.now()
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    request.session['user_privilege_4'] = user.privilege_4
     return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list,'time':time})
 
 
@@ -371,6 +399,12 @@ def HomeworkSubmit(request, pk, homework_pk):
 
 def SubmitCon(request,pk,homework_pk,sub_pk):
     sub =  get_object_or_404(SubmitWork,pk = sub_pk)
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    print("111111111110")
+    request.session['user_privilege_1'] = user.privilege_1
+    print("111111111111")
+    print(user.privilege_1)
     return render(request,'login/subcon.html',{'sub':sub})
 
 #课程资源列表
@@ -378,6 +412,9 @@ def ResourceList(request, pk):
     r_course = get_object_or_404(course, pk=pk)
     resource = r_course.resource.all()
     # print(dir(homework))
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    request.session['user_privilege_5'] = user.privilege_5
     return render(request, 'login/resourcelist.html',{'r_course':r_course})
 
 #上传课程资源
@@ -401,3 +438,23 @@ def NewResource(request,pk):
         Resource_form = ResourceForm()
     print(models.Resource.objects.all())
     return render(request,'login/new_resource.html',locals())
+
+
+def GiveGrade(request,pk,homework_pk,sub_pk):
+    print('22222222')
+    sub=get_object_or_404(SubmitWork, pk=sub_pk)
+    if request.method == 'POST':
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            temp_sub = form.save(commit=False)
+            sub.grade=temp_sub.grade
+            sub.save()
+            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+    else:
+        form = GradeForm(default_data)
+    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+
+def ResourceCon(request, pk, resource_pk):
+    resource = get_object_or_404(Resource, pk=resource_pk)
+    # resource.save()
+    return render(request, 'login/ResourceCon.html', {'resource':resource})

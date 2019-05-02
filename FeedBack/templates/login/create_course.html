@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-top-right"> <i class="fa fa-pencil"></i> </div>
               </div>
-              <div class="form-bottom">
+              <div class="form-bottom" style="background-color: white">
                 <form class="form-createcourse" action="/create_course/" method="post">
                   {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
@@ -55,8 +55,8 @@
                    <div class="form-group">
                     <label> 选课截止时间 </label>
                     {{ CreateCourse_form.course_deadline}} </div>
-                   <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-left"  onclick="location.href='/index/'">返回</button>
-                  <button type="submit" class="button button-glow button-rounded button-raised button-primary pull-right">完成创建!</button>
+                   <button type="submit" class="button pull-left"  onclick="location.href='/index/'">返回</button>
+                  <button type="submit" class="button pull-right">完成创建!</button>
                   <br/>
                 </form>
               </div>

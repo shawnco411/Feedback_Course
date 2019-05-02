@@ -3,20 +3,56 @@
 {% extends 'base.html' %}
 {% block title %}资源列表{% endblock %}
 {% block content %}
-    
+<div class="overlay"></div>
+<div class="page-content ">
+        <div id="my-div-shell">
+            <div id="my-div-center">
+                <div class="col-md-12">
 
+                    <!--***** BASIC FORM *****-->
+                    <div class="card form" id="form1">
+                        <div class="card-header">
+                            <h3>资源列表</h3>
+                        </div>
+                        </br>
+                        <table class="table">
+                          <tbody>
+                             <tr  class="text-black table-info">
+                              <td>资源名称</td>
+                              <td>下载</td>
+                            </tr>
+                            {% for resource in r_course.resource.all %}
+                            <tr>
+                              <td>{{resource.name}}</td>
+                              <td><a href="{% url 'download' resource.myfile %}">{{resource.myfile }}</a></td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>  
+                      </table>
+                                   
 
-    <tbody>
-      {% for resource in r_course.resource.all %}
-        <tr>
-          <li>
-            {{resource.name}}
-          </li>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
+                  <div class="button-wrapper submit">
+                      <input type="button"   value="返回"  onclick="location.href='{% url 'course' r_course.pk %}'" />
+                      {% if  request.session.user_identity == 'teacher'%}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
+                      {% endif %}
+                       {% if  request.session.user_identity == 'assistant'%}
+                           {% if request.session.user_privilege_5 == '1' %}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
+                            {% endif %}
+                      {% endif %}
+                  </div>
+                  <br/>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
   
-{% endblock %}
+{% endblock %}    
+
+

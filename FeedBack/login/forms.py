@@ -106,6 +106,8 @@ class UpdateForm(forms.Form):
     email = forms.CharField(label='邮箱', max_length=50, required=False)
     addr = forms.CharField(label='地址', max_length=50, required=False)
 
+
+
 class CourseUpdateForm(forms.Form):
     locus = (
         ('(一)101', '(一）101'),
@@ -245,5 +247,9 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ['name' ,'myfile']
 
-class GradeForm(forms.Form):
+class GradeForm(forms.ModelForm):
     grade = forms.CharField(label='请打分', max_length=50)
+
+    class Meta:
+        model = SubmitWork
+        fields = ['grade' ]

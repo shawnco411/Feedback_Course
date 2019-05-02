@@ -52,6 +52,7 @@
                                         </form>
                                         {% endif %}
                                     {% if request.session.user_identity == 'assistant' %}
+                                        {% if request.session.user_privilege_1 == '1' %}
                                         <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
                                         {% if message %}
                                         <div class="alert alert-warning">{{ message }}</div>
@@ -61,6 +62,7 @@
                                             <input type="submit" value="打分">
                                         </form>
                                         {% endif %}
+                                    {% endif %}
 
  						<div class="button-wrapper submit">
 			                <input type="button"  value="返回"  onclick="location.href='{% url 'homework_content' sub.homework.course.pk sub.homework.pk %}'" />

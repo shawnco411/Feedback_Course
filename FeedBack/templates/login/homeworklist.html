@@ -76,7 +76,28 @@
           </br>
         </div></td>
     </tr>
-    {% endif %} </div>
+    {% endif %}
+    {% if request.session.user_identity == 'assistant' %}
+        {% if  request.session.user_privilege_3 == '1'%}
+    <tr>
+      <td><div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
+          <div class="card">
+            <div class="card-header m-0">
+              <h5 class="blog-title card-title m-0"> <a>【发布作业】</a> </h5>
+            </div>
+            <div class="card-body">
+              <p class="text-left"> give students more joy now! </p>
+              <a href="{% url 'new_homework' h_course.pk %}" class="service-btn mt-xl-5 mt-4 btn" href="#">发布新作业<span class="fa fa-long-arrow-right ml-2"></span></a> </div>
+
+            <div class="card-footer blog_w3icon border-top pt-2 mt-3 d-flex justify-content-between"> <span> go go go </span> </div>
+          </div>
+          <br>
+          </br>
+        </div></td>
+    </tr>
+            {% endif %}
+    {% endif %}
+    </div>
   <br>
   <br>
 </div>

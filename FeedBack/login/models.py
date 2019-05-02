@@ -113,6 +113,11 @@ class User(models.Model):
     tel = models.CharField(max_length=128)
     addr = models.CharField(max_length=128)
     number = models.CharField(max_length=128)
+    privilege_1 = models.CharField(max_length=128,default='0')
+    privilege_2 = models.CharField(max_length=128, default='0')
+    privilege_3 = models.CharField(max_length=128, default='0')
+    privilege_4 = models.CharField(max_length=128, default='0')
+    privilege_5 = models.CharField(max_length=128, default='0')
 
     def _str_(self):
         return self.name
