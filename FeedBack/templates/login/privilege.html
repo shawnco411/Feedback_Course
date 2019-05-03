@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+    <li>{{ request.session.user_name }}老师您好请选择赋予{{ user.name }}助教的权限</li>
     <td><a href="{% url 'pri_grade' course.pk user.pk %}">评作业</a></td>
     <td><a href="{% url 'pri_update' course.pk user.pk %}">编辑课程信息</a></td>
     <td><a href="{% url 'pri_assign' course.pk user.pk %}">发布作业</a></td>
