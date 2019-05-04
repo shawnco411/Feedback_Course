@@ -6,54 +6,52 @@
 {% endblock %}
 {% block content %}
 <div class="overlay"></div>
-<br>
-<br>
-<div class=" card-cont">
-  <div class="row" id="card-2">
-    <div class="col-lg-3 col-sm-3"></div>
-    <div class="col-lg-6 col-sm-6">
-      <div class="card hovercard ">
-        <div class="cardheader"></div>
-        <div class="info">
-          <div style = "color:lightslategray;font-size:30px;line-height:50px" class="title font-weight-bold">{{ course.course_name }}</div>
-          <div style = "color:teal;font-size:18px;line-height: 30px;" class="font-weight-normal">{{ course.teacher_name }}</div>
-        </div>
+<div class="page-content ">
+    <div id="my-div-shell">
+        <div id="my-div-center">
+            <div class="col-md-12">
+                <div class="card form" id="form1">
+                	 <div class="card-header">
+                        <h3>{{ course.course_name }} 的助教列表</h3>
+                    </div>
+                </br>
+			        {% if request.session.user_identity == 'teacher' %}
+			            {% for user in course.users.all %}
+			                {% if user.name == request.session.user_name %}
 
-        {% if request.session.user_identity == 'teacher' %}
-            {% for user in course.users.all %}
-                {% if user.name == request.session.user_name %}
+			        <table class="table">
+			          <tbody>
+			            <tr  class="text-black table-info">
+			              <td>学号</td>
+			              <td>姓名</td>
+			              <td>操作</td>
+			            </tr>
+			          {% for user in user_list.all %}
+			          <tr>
+			            
+			            {% if user.identity == 'assistant' %}
+			            <td>{{user.number}}</td>
+			            <td>{{user.name}}</td>
+			            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
+			            {% endif %}
+			            
+			             </tr>
+			          {% endfor %}
+			            </tbody>
+			          
+			        </table>
+			                    {% endif %}
+			            {% endfor %}
+			        {% endif %}
 
-        <table class="table">
-          <tbody>
-            <tr  class="text-black table-info">
-              <td>学号</td>
-              <td>姓名</td>
-              <td>操作</td>
-            </tr>
-          {% for user in user_list.all %}
-          <tr>
-            
-            {% if user.identity == 'assistant' %}
-            <td>{{user.number}}</td>
-            <td>{{user.name}}</td>
-            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
-            {% endif %}
-            
-             </tr>
-          {% endfor %}
-            </tbody>
-          
-        </table>
-                    {% endif %}
-            {% endfor %}
-        {% endif %}
-
-		<!--<button type="submit" class="button button-glow button-border button-rounded button-primary"  onclick="location.href='{% url 'homework_list' course.pk %}'">作业列表</button>-->
-        <br>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-3"></div>
-  </div>
-</div>
+					<div class="button-wrapper submit">
+			        <input type="button"   value="返回"  onclick="location.href='{% url 'course' course.pk %}'" />
+			       </div>
+		        <br>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
 <br/>
 {% endblock %}

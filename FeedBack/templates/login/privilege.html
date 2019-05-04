@@ -1,15 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <li>{{ request.session.user_name }}老师您好请选择赋予{{ user.name }}助教的权限</li>
-    <td><a href="{% url 'pri_grade' course.pk user.pk %}">评作业</a></td>
-    <td><a href="{% url 'pri_update' course.pk user.pk %}">编辑课程信息</a></td>
-    <td><a href="{% url 'pri_assign' course.pk user.pk %}">发布作业</a></td>
-    <td><a href="{% url 'pri_delete' course.pk user.pk %}">删除作业</a></td>
-    <td><a href="{% url 'pri_resource' course.pk user.pk %}">上传课件</a></td>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}助教名单{% endblock %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/login.css' %}"/>
+{% endblock %}
+{% block content %}
+<div class="overlay"></div>
+<div class="page-content ">
+    <div id="my-div-shell">
+        <div id="my-div-center">
+            <div class="col-md-12">
+                <div class="card form" id="form1">
+                	 <div class="card-header">
+                        <h3>赋予{{ user.name }}助教权限</h3>
+                    </div>
+                </br>
+			        <table class="table">
+			          <tbody>
+			            <tr  class="text-black table-info">
+			              <td>权限</td>
+			              <td>&nbsp;&nbsp;</td>
+			              <td>操作</td>
+			              <td>&nbsp;&nbsp;</td>
+			            </tr>
+			          <tr>
+			            <td>评作业</td>
+			            <td>&nbsp;&nbsp;</td>
+			            <td><a href="{% url 'pri_grade' course.pk user.pk %}">赋予</a></td>
+			            <td>&nbsp;&nbsp;</td>
+			          </tr>
+			          <tr>
+			            <td>编辑课程信息</td>
+			            <td>&nbsp;&nbsp;</td>
+			            <td><a href="{% url 'pri_update' course.pk user.pk %}">赋予</a></td>
+			            <td>&nbsp;&nbsp;</td>
+			          </tr>
+			          <tr>
+			            <td>发布作业</td>
+			            <td>&nbsp;&nbsp;</td>
+			            <td><a href="{% url 'pri_assign' course.pk user.pk %}">赋予</a></td>
+			            <td>&nbsp;&nbsp;</td>
+			          </tr>
+			          <tr>
+			            <td>删除作业</td>
+			            <td>&nbsp;&nbsp;</td>
+			            <td><a href="{% url 'pri_delete' course.pk user.pk %}">赋予</a></td>
+			            <td>&nbsp;&nbsp;</td>
+			          </tr>
+			          <tr>
+			            <td>上传课件</td>
+			            <td>&nbsp;&nbsp;</td>
+			            <td><a href="{% url 'pri_resource' course.pk user.pk %}">赋予</a></td>
+			            <td>&nbsp;&nbsp;</td>
+			          </tr>
+			            </tbody>
+			          
+			        </table>
+			        <div class="button-wrapper submit">
+			        	<input type="button"  value="返回"  onclick="location.href='{% url 'assistant' course.pk %}'" />
+			        </div>
+			        <br>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+<br/>
+{% endblock %}
