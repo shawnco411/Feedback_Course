@@ -19,9 +19,9 @@
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <div class="button-wrapper submit" >
-      <input type="submit"  value="回复"/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="button"  value="返回"  onclick="location.href='{% url 'topic_posts' topic.board.pk topic.pk %}'" />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit"  value="回复"/>
     </div>
   </form>
 </div>
