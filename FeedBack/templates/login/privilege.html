@@ -26,31 +26,51 @@
 			          <tr>
 			            <td>评作业</td>
 			            <td>&nbsp;&nbsp;</td>
+			            {% if user.privilege_1 == '0' %}
 			            <td><a href="{% url 'pri_grade' course.pk user.pk %}">赋予</a></td>
+			            {% else %}
+			            <td>已赋予</td>
+			            {% endif %}
 			            <td>&nbsp;&nbsp;</td>
 			          </tr>
 			          <tr>
 			            <td>编辑课程信息</td>
 			            <td>&nbsp;&nbsp;</td>
+			            {% if user.privilege_2 == '0' %}
 			            <td><a href="{% url 'pri_update' course.pk user.pk %}">赋予</a></td>
+			            {% else %}
+			            <td>已赋予</td>
+			            {% endif %}
 			            <td>&nbsp;&nbsp;</td>
 			          </tr>
 			          <tr>
 			            <td>发布作业</td>
 			            <td>&nbsp;&nbsp;</td>
+			            {% if user.privilege_3 == '0' %}
 			            <td><a href="{% url 'pri_assign' course.pk user.pk %}">赋予</a></td>
+			            {% else %}
+			            <td>已赋予</td>
+			            {% endif %}
 			            <td>&nbsp;&nbsp;</td>
 			          </tr>
 			          <tr>
 			            <td>删除作业</td>
 			            <td>&nbsp;&nbsp;</td>
+			            {% if user.privilege_4 == '0' %}
 			            <td><a href="{% url 'pri_delete' course.pk user.pk %}">赋予</a></td>
+			            {% else %}
+			            <td>已赋予</td>
+			            {% endif %}
 			            <td>&nbsp;&nbsp;</td>
 			          </tr>
 			          <tr>
 			            <td>上传课件</td>
 			            <td>&nbsp;&nbsp;</td>
+			            {% if user.privilege_5 == '0' %}
 			            <td><a href="{% url 'pri_resource' course.pk user.pk %}">赋予</a></td>
+			            {% else %}
+			            <td>已赋予</td>
+			            {% endif %}
 			            <td>&nbsp;&nbsp;</td>
 			          </tr>
 			            </tbody>
