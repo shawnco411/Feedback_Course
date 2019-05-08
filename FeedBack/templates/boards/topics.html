@@ -26,7 +26,9 @@
           <td>{{ topic.views }}</td>
           <td>{{ topic.last_updated }}</td>
           {% if topic.starter.name == request.session.user_name %}
-          <td><a href="{% url 'delete_topic' board.pk topic.pk %}">删除</a></td>
+          <!--<td><a href="{% url 'delete_topic' board.pk topic.pk %}">删除</a></td>-->
+			<!--transform into button-->
+			<td><button class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'delete_topic' board.pk topic.pk %}'"><i class="fa fa-trash"></i></button></td>
           {% else %}
           <td>非主题创建者，无操作权限</td>
           {% endif %}

@@ -174,7 +174,9 @@
               <td></td>
               <td></td>
               <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
-              <td><a href="{% url 'resource_list' course.pk %}">查看</a></td>
+			  <!--transform into button-->
+              <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
+				<td><button title="查看资源" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
               <td></td>
               <td></td>
               <td></td>

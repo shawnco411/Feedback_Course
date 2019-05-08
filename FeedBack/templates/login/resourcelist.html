@@ -29,7 +29,9 @@
                               <td>{{resource.name}}</td>
                               <td><a href="{% url 'download' resource.myfile %}">{{resource.myfile }}</a></td>
                              {% if  request.session.user_identity == 'teacher'%}
-                              <td><a href="{% url 'resource_delete' r_course.pk resource.pk %}">删除</a></td>
+								<!--transform into button-->
+                              <!--<td><a href="{% url 'resource_delete' r_course.pk resource.pk %}">删除</a></td>-->
+								<td><button title="删除" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'resource_delete' r_course.pk resource.pk %}'"><i class="fa fa-trash"></i></button></td>
                               {% endif %}
                             </tr>
                             {% endfor %}
