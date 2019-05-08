@@ -108,6 +108,7 @@ def logout(request):
 def Download(request,path):
     return redirect("/media/"+path)
 def CreateCourse(request):
+    legal=1
     if request.method=="POST":
         CreateCourse_form = CreateCourseForm(request.POST)
         if CreateCourse_form.is_valid():
@@ -118,26 +119,32 @@ def CreateCourse(request):
             course_credit = CreateCourse_form.cleaned_data['course_credit']
             course_introduction = CreateCourse_form.cleaned_data['course_introduction']
             course_deadline = CreateCourse_form.cleaned_data['course_deadline']
+            try:
+                course_before= course.objects.get(course_locus=course_locus, course_time=course_time)
+                legal=0
+            except course.DoesNotExist:
+                print('error')
+            if legal==0:
+                message = "已存在另一课程设在此时间与地点！"
+            else:
+                new_course = models.course.objects.create()
+                new_course.course_name = course_name
+                new_course.teacher_name = teacher_name
+                new_course.course_time = course_time
+                new_course.course_locus = course_locus
+                new_course.course_credit = course_credit
+                new_course.course_introduction = course_introduction
+                new_course.course_deadline = course_deadline
+                new_course.save()
+                board = Board.objects.create(
+                    name=course_name,
+                    description=course_introduction,
+                    course=new_course
+                )
 
-            new_course = models.course.objects.create()
-            new_course.course_name = course_name
-            new_course.teacher_name = teacher_name
-            new_course.course_time = course_time
-            new_course.course_locus = course_locus
-            new_course.course_credit = course_credit
-            new_course.course_introduction = course_introduction
-            new_course.course_deadline = course_deadline
-            new_course.save()
-
-            board = Board.objects.create(
-                name=course_name,
-                description=course_introduction,
-                course=new_course
-            )
-
-            user = User.objects.get(name=request.session.get('user_name'))
-            user.courses.add(new_course)
-            return redirect('/index/')
+                user = User.objects.get(name=request.session.get('user_name'))
+                user.courses.add(new_course)
+                return redirect('/index/')
 
     CreateCourse_form = CreateCourseForm()
     return render(request, 'login/create_course.html', locals())
@@ -320,8 +327,8 @@ def Assign(request,pk):
                                 flag = 1
                         if flag == 0:
                             if (b-a).seconds == 0:
-                                email_title = '作业提醒'
-                                email_body = '请赶快提交作业'
+                                email_title = '请尽快提交作业——作业提醒'
+                                email_body = '点击此处提交作业http://127.0.0.1:8000/course/'+pk+'/homework/'
                                 email = user.email  # 对方的邮箱
                                 send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
                 sched.start()

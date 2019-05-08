@@ -70,8 +70,8 @@ def reply_topic(request, pk, topic_pk):
 			post.topic = topic
 			post.created_by = user
 			post.save()
-			email_title = '讨论区'
-			email_body = '你有新回复啦！'
+			email_title = '你有新回复啦——讨论区'
+			email_body = '点击此处查看回复http://127.0.0.1:8000/boards/'+pk+'/topics/'+topic_pk
 			email = post.topic.starter.email  # 对方的邮箱
 			send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
 			return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
