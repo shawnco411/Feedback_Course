@@ -41,6 +41,8 @@ class Topic(models.Model):
 
 class Post(models.Model):
 	message = models.TextField(max_length=4000)
+	#type of post
+	posttype = models.CharField(max_length=64,null=True,default="")
 	topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(null=True)
