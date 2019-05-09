@@ -140,6 +140,7 @@ def CreateCourse(request):
                 new_course.course_introduction = course_introduction
                 new_course.course_deadline = course_deadline
                 new_course.save()
+                print("99999999",new_course.board)
                 board = Board.objects.create(
                     name=course_name,
                     description=course_introduction,
@@ -399,7 +400,7 @@ def delete_course(request, course_pk,user_pk):
     course_now = get_object_or_404(course, pk=course_pk)
     user_now = get_object_or_404(User, pk=user_pk)
     models.course.objects.get(pk=course_pk).delete()
-    Board.objects.get(pk=course_pk).delete()
+    # Board.objects.get(pk=course_now.board.pk).delete()###
     return render(request, 'login/personal_center.html', {'user': user_now})
 
 def delete_homework(request, pk,homework_pk):

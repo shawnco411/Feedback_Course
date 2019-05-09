@@ -176,7 +176,7 @@
               <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
 			  <!--transform into button-->
               <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
-				<td><button title="查看资源" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+				<td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
               <td></td>
               <td></td>
               <td></td>
@@ -201,7 +201,7 @@
             <tr  class="text-black table-info">
               <td>学号</td>
               <td>姓名</td>
-              <td>身份</td>>
+              <td>身份</td>
               <td>操作</td>
             </tr>
            {% for user in course.users.all %}
@@ -211,8 +211,7 @@
             <td>{{user.number}}</td>
             <td>{{user.name}}</td>
             <td>专职助教</td>
-            <td><a href="{% url 'delete_assistant' course.pk user.pk %}">移除该助教</a></td>
-            <td><a href="{% url 'assistant_select' course.pk user.pk %}">查看权限</a></td>
+            <td><a href="{% url 'delete_assistant' course.pk user.pk %}">移除该助教</a>&nbsp;&nbsp;<a href="{% url 'assistant_select' course.pk user.pk %}">查看权限</a></td>
             {% endif %}
 
           </tr>
@@ -224,8 +223,7 @@
             <td>{{user.name}}</td>
 
             <td>学生助教</td>
-            <td><a href="{% url 'delete_stu_assistant' course.pk user.pk %}">移除该助教</a></td>
-            <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">查看权限</a></td>
+            <td><a href="{% url 'delete_stu_assistant' course.pk user.pk %}">移除该助教</a>&nbsp;&nbsp;<a href="{% url 'stu_assistant_select' course.pk user.pk %}">查看权限</a></td>
            </tr>
           {% endfor %}
 
@@ -235,7 +233,7 @@
             {% if user.identity == 'student' %}
             <td>{{user.number}}</td>
             <td>{{user.name}}</td>
-            <td>学生</td>>
+            <td>学生</td>
             <td><a href="{% url 'delete_student' course.pk user.pk %}">移除</a></td>
             {% endif %}
             
@@ -252,14 +250,16 @@
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
           {% if  request.session.user_identity == 'teacher'%}
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="助教"  onclick="location.href='{% url 'assistant' course.pk %}'" />
           {% endif %}
           {% if  request.session.user_identity == 'assistant'%}
               {% for pri in user.user_pri.all %}
                 {% if pri.course == course %}
                     {% if pri.privilege_2 == '1' %}
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
                     {% endif %}
                   {% endif %}
@@ -277,6 +277,7 @@
               {% for pri in user.user_pri.all %}
                 {% if pri.course == course %}
                     {% if pri.privilege_2 == '1' %}
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
                     {% endif %}
                 {% endif %}
