@@ -43,7 +43,7 @@
                   <strong><h3>{{ post.message }}</h3></strong>
                   <p class="description pull-left">{{ post.created_at }}</p>
                   {% if post.created_by.name == request.session.user_name %}
-                    <a class="button button-primary button-tiny pull-right" href="{% url 'delete_post' topic.board.pk topic.pk post.pk%}">删除</a>
+                    <button class="button button-small button-plain button-borderless button-square pull-right" onClick="location.href='{% url 'delete_post' topic.board.pk topic.pk post.pk%}'"><i class="fa fa-trash"></i></button>
                   {% endif %}
               </div>
               
