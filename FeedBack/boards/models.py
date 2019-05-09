@@ -25,6 +25,7 @@ class Board(models.Model):
 class Topic(models.Model):
 	subject = models.CharField(max_length=255)
 	kind = models.CharField(max_length=128,default='讨论&提问')
+	topictype = models.CharField(max_length=64,null=True,default="")
 	# time is confrimed when created
 	last_updated = models.DateTimeField(auto_now_add=True)
 	#use Board.topics to visit Topic

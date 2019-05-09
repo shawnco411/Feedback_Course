@@ -136,6 +136,17 @@ def new_topic(request, pk):
             topic.board = board
             topic.starter = user
             topic.message = form.cleaned_data.get('message')
+            #lstm
+            lstm_predict(topic.message)
+            if(string_type==1):
+                topic.topictype = "positive"
+            elif(string_type==2):
+                topic.topictype = "neural"
+            else:
+                topic.topictype = "negative"
+            print("66666")
+            print(topic.topictype)
+            #endlstm
             topic.save()
             #post = Post.objects.create(
             #   message=form.cleaned_data.get('message'),
