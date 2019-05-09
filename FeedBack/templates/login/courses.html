@@ -250,14 +250,16 @@
         <div class="button-wrapper submit">
           <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
           {% if  request.session.user_identity == 'teacher'%}
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <input type="button"  value="助教"  onclick="location.href='{% url 'assistant' course.pk %}'" />
           {% endif %}
           {% if  request.session.user_identity == 'assistant'%}
               {% for pri in user.user_pri.all %}
                 {% if pri.course == course %}
                     {% if pri.privilege_2 == '1' %}
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
                     {% endif %}
                   {% endif %}
@@ -275,6 +277,7 @@
               {% for pri in user.user_pri.all %}
                 {% if pri.course == course %}
                     {% if pri.privilege_2 == '1' %}
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
                     {% endif %}
                 {% endif %}
