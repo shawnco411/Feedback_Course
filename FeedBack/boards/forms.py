@@ -10,20 +10,37 @@ class NewBoardForm(forms.ModelForm):
         fields = ['name', 'description']
 
 class NewTopicForm(forms.ModelForm):
+    kinds = (
+        ('讨论&提问','讨论&提问'),
+        ('评价','评价'),
+        )
     message = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'What do you want to post?'}
+            attrs={'rows': 5, 'placeholder': 'What do you want to post?\nThe max length of the text is 4000.'}
         ),
         max_length=4000,
-        help_text='The max length of the text is 4000.'
+        # help_text='The max length of the text is 4000.'
     )
+    kind = forms.ChoiceField(label="类型",choices=kinds)
 
     class Meta:
         model = Topic
-        fields = ['subject', 'message']
+        fields = ['subject', 'message','kind']
 
 
 class PostForm(forms.ModelForm):
+    kinds = (
+        ('回复','回复'),
+        ('评价','评价'),
+        )
+    kind = forms.ChoiceField(label="类型",choices=kinds)
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 5, 'placeholder': 'What do you want to post?\nThe max length of the text is 4000.'}
+        ),
+        max_length=4000,
+        # help_text='The max length of the text is 4000.'
+    )
     class Meta:
         model = Post
-        fields = ['message', ]
+        fields = ['message', 'kind']

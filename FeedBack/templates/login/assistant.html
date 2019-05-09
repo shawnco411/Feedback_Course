@@ -38,8 +38,13 @@
 			            {% if user.identity == 'assistant' %}
 			            <td>{{user.number}}</td>
 			            <td>{{user.name}}</td>
+
                         <td>专职助教</td>
+
+						  <!--transform into button 不美观，放弃-->
+
 			            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
+						  <!--<td><button title="选择" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'assistant_select' course.pk user.pk %}'"><i class="fa fa-key"></i></button></td>-->
 			            {% endif %}
                       {% endfor %}
                        {% for user in user_list.all %}

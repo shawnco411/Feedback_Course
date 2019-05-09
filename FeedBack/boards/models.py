@@ -24,6 +24,8 @@ class Board(models.Model):
 
 class Topic(models.Model):
 	subject = models.CharField(max_length=255)
+	kind = models.CharField(max_length=128,default='讨论&提问')
+	topictype = models.CharField(max_length=64,null=True,default="")
 	# time is confrimed when created
 	last_updated = models.DateTimeField(auto_now_add=True)
 	#use Board.topics to visit Topic
@@ -41,6 +43,9 @@ class Topic(models.Model):
 
 class Post(models.Model):
 	message = models.TextField(max_length=4000)
+	kind = models.CharField(max_length=128,default='讨论&提问')
+	#type of post
+	posttype = models.CharField(max_length=64,null=True,default="")
 	topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(null=True)
