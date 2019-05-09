@@ -85,7 +85,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysql',
         'USER': 'root',
+<<<<<<< HEAD
         'PASSWORD': 'zz990429',#your local mysql password
+=======
+        'PASSWORD': 'zhouhaici0304',#your local mysql password
+>>>>>>> e0a5cd955e538b8c53c5da227caaca5cb23122c5
         'HOST': '127.0.0.1',
         "POST": '3306',
         # use for unix-like system,annote it when using windows
