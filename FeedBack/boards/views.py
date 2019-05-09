@@ -25,7 +25,7 @@ sys.setrecursionlimit(1000000)
 maxlen = 100
 
 
-string_type = 1
+string_type = 0
 #lstm
 def create_dictionaries(model=None,
                         combined=None):
@@ -74,6 +74,7 @@ def input_transform(string):
 
 
 def lstm_predict(string):
+    global string_type
     keras.backend.clear_session()
     print ('loading model......')
     with open('boards/model/lstm.yml', 'r') as f:
@@ -171,6 +172,7 @@ def topic_posts(request, pk, topic_pk):
 
 
 def reply_topic(request, pk, topic_pk):
+    global string_type
     topic = get_object_or_404(Topic, pk=topic_pk)
     user = User.objects.get(name=request.session.get('user_name'))
     if request.method == 'POST':
