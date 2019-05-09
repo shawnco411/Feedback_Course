@@ -109,15 +109,13 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     identity = models.CharField(max_length=32,choices = idens,default='学生')
     c_time = models.DateTimeField(auto_now_add = True)
+    #courses为专职学生所选的课程，教师开设的课程，专职助教负责的课程，既是学生又是助教的用户所选的课程
     courses = models.ManyToManyField(course,related_name='users')
+    #courses_1为既是学生又是助教的用户担任助教的课程
+    courses_1 = models.ManyToManyField(course,related_name='users_1')
     tel = models.CharField(max_length=128)
     addr = models.CharField(max_length=128)
     number = models.CharField(max_length=128)
-    privilege_1 = models.CharField(max_length=128,default='0')
-    privilege_2 = models.CharField(max_length=128, default='0')
-    privilege_3 = models.CharField(max_length=128, default='0')
-    privilege_4 = models.CharField(max_length=128, default='0')
-    privilege_5 = models.CharField(max_length=128, default='0')
 
     def _str_(self):
         return self.name
@@ -127,6 +125,14 @@ class User(models.Model):
         verbose_name = '用户'
         verbose_name_plural = '用户'
 
+class Privilege(models.Model):
+    privilege_1 = models.CharField(max_length=128, default='0')
+    privilege_2 = models.CharField(max_length=128, default='0')
+    privilege_3 = models.CharField(max_length=128, default='0')
+    privilege_4 = models.CharField(max_length=128, default='0')
+    privilege_5 = models.CharField(max_length=128, default='0')
+    course = models.ForeignKey(course,related_name = 'course_pri', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user_pri', on_delete=models.CASCADE)
 
 class Homework(models.Model):
     name = models.CharField(max_length=64)

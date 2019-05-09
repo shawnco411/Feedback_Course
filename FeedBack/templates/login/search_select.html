@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+</head>
+<body>
+    <li>您的搜索结果如下</li>
+    <table class="table">
+        <tbody>
+        <tr  class="text-black table-info">
+            <td>学号</td>
+            <td>姓名</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>{{user.number}}</td>
+            <td>{{user.name}}</td>
+            {% if user.identity == 'student' %}
+            <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">选择</a></td>
+            {% endif %}
+            {% if user.identity == 'assistant' %}
+            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

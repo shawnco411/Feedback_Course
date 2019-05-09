@@ -44,10 +44,24 @@
                       <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
                       {% endif %}
                        {% if  request.session.user_identity == 'assistant'%}
-                           {% if request.session.user_privilege_5 == '1' %}
+                           {% for pri in user.user_pri.all %}
+                                {% if pri.course == r_course %}
+                                    {% if pri.privilege_5 == '1' %}
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
-                            {% endif %}
+                                        <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
+                                    {% endif %}
+                                {% endif %}
+                           {% endfor %}
+                      {% endif %}
+                      {% if  request.session.user_identity == 'student'%}
+                           {% for pri in user.user_pri.all %}
+                                {% if pri.course == r_course %}
+                                    {% if pri.privilege_5 == '1' %}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button"   value="上传资源"  onclick="location.href='{% url 'new_resource' r_course.pk %}'" />
+                                     {% endif %}
+                                {% endif %}
+                           {% endfor %}
                       {% endif %}
                   </div>
                   <br/>

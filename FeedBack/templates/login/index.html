@@ -73,10 +73,17 @@
             <div class="box-4-content">
               <h3 class="title">{{line.teacher_name}}</h3>
               <ul class="icon">
+                {% if line not in u.courses_1.all %}
                   {% if time < line.course_deadline %}
                   <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
                   {% endif %}
+                 {% endif %}
                   {% for user in line.users.all%}
+                    {% if user.name == request.session.user_name %}
+                        <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
+                     {% endif %}
+                   {% endfor %}
+                  {% for user in line.users_1.all%}
                     {% if user.name == request.session.user_name %}
                         <li title="课程讨论区"><a href="{% url 'board_topics' line.pk %}"><i class="fa fa-twitch"></i></a></li>
                      {% endif %}

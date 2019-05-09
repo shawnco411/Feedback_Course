@@ -52,7 +52,9 @@
                                         </form>
                                         {% endif %}
                                     {% if request.session.user_identity == 'assistant' %}
-                                        {% if request.session.user_privilege_1 == '1' %}
+                                        {% for pri in user.user_pri.all %}
+                                        {% if pri.course == course %}
+                                            {% if pri.privilege_1 == '1' %}
                                         <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
                                         {% if message %}
                                         <div class="alert alert-warning">{{ message }}</div>
@@ -62,6 +64,25 @@
                                             <input type="submit" value="打分">
                                         </form>
                                         {% endif %}
+                                        {% endif %}
+
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if request.session.user_identity == 'student' %}
+                                         {% for pri in user.user_pri.all %}
+                                        {% if pri.course == course %}
+                                            {% if pri.privilege_1 == '1' %}
+                                        <form class='form-grade' action="{% url 'give_grade' sub.homework.course.pk sub.homework.pk sub.pk %}" method="post">
+                                        {% if message %}
+                                        <div class="alert alert-warning">{{ message }}</div>
+                                        {% endif %}
+                                            {% csrf_token %}
+                                            <input type="text pull-left" name="grade">
+                                            <input type="submit" value="打分">
+                                        </form>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
                                     {% endif %}
 
  						<div class="button-wrapper submit">

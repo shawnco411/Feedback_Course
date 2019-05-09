@@ -24,8 +24,9 @@ def index(request):
     #user = request.se
     #print(request.session['identity'])
     time = datetime.datetime.now()
-
-    return render(request,'login/index.html',{"course_list":course_list,"time":time})
+    name = request.session['user_name']
+    user = get_object_or_404(User, name=name)
+    return render(request,'login/index.html',{"course_list":course_list,"time":time,"u":user})
 
 def assistant(request,pk):
     user_list=User.objects.all()
@@ -101,12 +102,15 @@ def register(request):
 def logout(request):
     if not request.session.get('is_login', None):
         # 如果本来就未登录，也就没有登出一说
-        return redirect("/index/")
+        return render(request, 'login/logout.html', locals())
     request.session.flush()
-    return redirect("/index/")
+    return render(request, 'login/logout.html', locals())
 
 def Download(request,path):
     return redirect("/media/"+path)
+
+
+
 def CreateCourse(request):
     if request.method=="POST":
         CreateCourse_form = CreateCourseForm(request.POST)
@@ -146,8 +150,8 @@ def Course(request,pk):
     course_pk = get_object_or_404(course, pk=pk)
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
-    request.session['user_privilege_2'] = user.privilege_2
-    return render(request, 'login/courses.html', {'course': course_pk})
+
+    return render(request, 'login/courses.html', {'course': course_pk,'user':user})
 
 
 #def PersonalCenter(request):
@@ -213,52 +217,170 @@ def delete_student(request,course_pk,user_pk):
     course_now= get_object_or_404(course, pk=course_pk)
     user_now=get_object_or_404(User, pk=user_pk)
     user_now.courses.remove(course_now)
-
     return render(request, 'login/courses.html',{'course':course_now})
 
+#删除专职助教
+def delete_assistant(request,course_pk,user_pk):
+    course_now= get_object_or_404(course, pk=course_pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses.remove(course_now)
+    models.Privilege.objects.get(course=course_now,user=user_now).delete()
+    return render(request, 'login/courses.html',{'course':course_now})
+
+#删除学生助教
+def delete_stu_assistant(request,course_pk,user_pk):
+    course_now= get_object_or_404(course, pk=course_pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses_1.remove(course_now)
+    models.Privilege.objects.get(course=course_now, user=user_now).delete()
+    return render(request, 'login/courses.html',{'course':course_now})
+
+#老师为某个课程选择专职助教
 def assistant_select(request,pk,user_pk):
+    flag = 1
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
     user_now.courses.add(course_now)
+    for i in models.Privilege.objects.all():
+        if i.course == course_now:
+            if i.user == user_now:
+                flag = 0
+    if flag == 1:
+        models.Privilege.objects.create(privilege_1='0',privilege_2='0',privilege_3='0',privilege_4='0',privilege_5='0',course=course_now,user=user_now)
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+#老师为某个课程选择学生助教
+def stu_assistant_select(request,pk,user_pk):
+    flag = 1
+    course_now= get_object_or_404(course, pk=pk)
+    user_now=get_object_or_404(User, pk=user_pk)
+    user_now.courses_1.add(course_now)
+    for i in models.Privilege.objects.all():
+        if i.course == course_now:
+            if i.user == user_now:
+                flag = 0
+    if flag == 1:
+        models.Privilege.objects.create(privilege_1='0', privilege_2='0', privilege_3='0', privilege_4='0', privilege_5='0',course=course_now, user=user_now)
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
+def search(request,pk):
+    course_now = get_object_or_404(course, pk=pk)
+    q=request.GET.get('q')
+    user = User.objects.get(name=q)
+    print(user.name)
+    return render(request,'login/search_select.html',{'course':course_now,'user':user})
+
+def search_select(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    return render(request, 'login/search_select.html', {'course': course_now, 'user': user_now})
+
+#赋予特权1
 def pri_grade(request,pk,user_pk):
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
-    user_now.privilege_1=1
-    user_now.save()
-    print(user_now.name)
-    print(user_now.privilege_1)
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_1 = 1
+            i.save()
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
+#取消特权1
+def cancel_pri1(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_1 = 0
+            i.save()
+    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+
+#取消特权2
+def cancel_pri2(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_2 = 0
+            i.save()
+    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+
+#取消特权3
+def cancel_pri3(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_3 = 0
+            i.save()
+    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+
+#取消特权4
+def cancel_pri4(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_4 = 0
+            i.save()
+    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+
+#取消特权5
+def cancel_pri5(request,pk,user_pk):
+    course_now = get_object_or_404(course, pk=pk)
+    user_now = get_object_or_404(User, pk=user_pk)
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_5 = 0
+            i.save()
+    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+
+#赋予特权2
 def pri_update(request,pk,user_pk):
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
-    user_now.privilege_2=1
-    user_now.save()
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_2 = 1
+            i.save()
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request,'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
+#赋予特权3
 def pri_assign(request,pk,user_pk):
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
-    user_now.privilege_3=1
-    user_now.save()
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_3 = 1
+            i.save()
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
+#赋予特权4
 def pri_delete(request,pk,user_pk):
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
-    user_now.privilege_4=1
-    user_now.save()
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_4 = 1
+            i.save()
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
+#赋予特权5
 def pri_resource(request,pk,user_pk):
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
-    user_now.privilege_5=1
-    user_now.save()
-    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now})
+    for i in user_now.user_pri.all():
+        if i.course == course_now:
+            i.privilege_5 = 1
+            i.save()
+    Pri = models.Privilege.objects.get(course=course_now, user=user_now)
+    return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
 def drop_course(request,course_pk,user_pk):
     course_now = get_object_or_404(course, pk=course_pk)
@@ -342,8 +464,8 @@ def HomeworkList(request, pk):
     # print(dir(homework))
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
-    request.session['user_privilege_3'] = user.privilege_3
-    return render(request, 'login/homeworklist.html',{'h_course':h_course})
+
+    return render(request, 'login/homeworklist.html',{'h_course':h_course,'user':user})
 
 def HomeworkContent(request, pk, homework_pk):
     homework = get_object_or_404(Homework, pk=homework_pk)
@@ -353,8 +475,8 @@ def HomeworkContent(request, pk, homework_pk):
     time = datetime.datetime.now()
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
-    request.session['user_privilege_4'] = user.privilege_4
-    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list,'time':time})
+    course = homework.course
+    return render(request, 'login/homeworkcon.html', {'homework':homework,'submit_list':submit_list,'time':time,'user':user,'course':course})
 
 
 
@@ -398,14 +520,15 @@ def HomeworkSubmit(request, pk, homework_pk):
     return render(request, 'login/submit.html',locals())
 
 def SubmitCon(request,pk,homework_pk,sub_pk):
+    course_now = get_object_or_404(course,pk = pk)
     sub =  get_object_or_404(SubmitWork,pk = sub_pk)
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
     print("111111111110")
-    request.session['user_privilege_1'] = user.privilege_1
+    request.session['user_privilege_1'] = user.user_pri.privilege_1
     print("111111111111")
     print(user.privilege_1)
-    return render(request,'login/subcon.html',{'sub':sub})
+    return render(request,'login/subcon.html',{'sub':sub,'user':user,'course':course_now})
 
 #课程资源列表
 def ResourceList(request, pk):
@@ -414,8 +537,8 @@ def ResourceList(request, pk):
     # print(dir(homework))
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
-    request.session['user_privilege_5'] = user.privilege_5
-    return render(request, 'login/resourcelist.html',{'r_course':r_course})
+
+    return render(request, 'login/resourcelist.html',{'r_course':r_course,'user':user})
 
 #上传课程资源
 def NewResource(request,pk):

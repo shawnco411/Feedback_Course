@@ -199,29 +199,45 @@
             <tr  class="text-black table-info">
               <td>学号</td>
               <td>姓名</td>
+              <td>身份</td>>
               <td>操作</td>
             </tr>
            {% for user in course.users.all %}
-          <tr> {% if request.session.user_identity == 'teacher' %}
+          <tr>
 
             {% if user.identity == 'assistant' %}
             <td>{{user.number}}</td>
             <td>{{user.name}}</td>
-            <td><a href="{% url 'delete_student' course.pk user.pk %}">移除该助教</a></td>
+            <td>专职助教</td>
+            <td><a href="{% url 'delete_assistant' course.pk user.pk %}">移除该助教</a></td>
+            <td><a href="{% url 'assistant_select' course.pk user.pk %}">查看权限</a></td>
             {% endif %}
 
-            {% endif %} </tr>
+          </tr>
           {% endfor %}
+
+          {% for user in course.users_1.all %}
+          <tr>
+            <td>{{user.number}}</td>
+            <td>{{user.name}}</td>
+
+            <td>学生助教</td>
+            <td><a href="{% url 'delete_stu_assistant' course.pk user.pk %}">移除该助教</a></td>
+            <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">查看权限</a></td>
+           </tr>
+          {% endfor %}
+
           {% for user in course.users.all %}
-          <tr> {% if request.session.user_identity == 'teacher' %}
+          <tr>
             
             {% if user.identity == 'student' %}
             <td>{{user.number}}</td>
             <td>{{user.name}}</td>
+            <td>学生</td>>
             <td><a href="{% url 'delete_student' course.pk user.pk %}">移除</a></td>
             {% endif %}
             
-            {% endif %} </tr>
+          </tr>
           {% endfor %}
             </tbody>
           
@@ -239,10 +255,31 @@
           <input type="button"  value="助教"  onclick="location.href='{% url 'assistant' course.pk %}'" />
           {% endif %}
           {% if  request.session.user_identity == 'assistant'%}
-              {% if request.session.user_privilege_2 == '1' %}
-              <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
-               {% endif %}
+              {% for pri in user.user_pri.all %}
+                {% if pri.course == course %}
+                    {% if pri.privilege_2 == '1' %}
+                        <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+                    {% endif %}
+                  {% endif %}
+              {% endfor %}
           {% endif %}
+        </div>
+        {% endif %}
+       {% endfor %}
+
+       {% for user in course.users_1.all %}
+        {% if user.name == request.session.user_name %}
+        <div class="button-wrapper submit">
+          <input type="button"  value="作业列表"  onclick="location.href='{% url 'homework_list' course.pk %}'" />
+
+              {% for pri in user.user_pri.all %}
+                {% if pri.course == course %}
+                    {% if pri.privilege_2 == '1' %}
+                        <input type="button"  value="编辑"  onclick="location.href='{% url 'course_update' course.pk %}'" />
+                    {% endif %}
+                {% endif %}
+              {% endfor %}
+
         </div>
         {% endif %}
        {% endfor %}
