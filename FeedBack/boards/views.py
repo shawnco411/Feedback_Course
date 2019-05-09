@@ -68,7 +68,7 @@ def input_transform(string):
     # keras.backend.clear_session()
     words = jieba.lcut(string)
     words = np.array(words).reshape(1, -1)
-    model = Word2Vec.load('/Users/vectord/Development/feedback_course/FeedBack/boards/model/Word2vec_model.pkl')
+    model = Word2Vec.load('boards/model/Word2vec_model.pkl')
     _, _, combined = create_dictionaries(model, words)
     return combined
 
@@ -76,12 +76,12 @@ def input_transform(string):
 def lstm_predict(string):
     keras.backend.clear_session()
     print ('loading model......')
-    with open('/Users/vectord/Development/feedback_course/FeedBack/boards/model/lstm.yml', 'r') as f:
+    with open('boards/model/lstm.yml', 'r') as f:
         yaml_string = yaml.load(f)
     model = model_from_yaml(yaml_string)
     # string_type = ""
     print ('loading weights......')
-    model.load_weights('/Users/vectord/Development/feedback_course/FeedBack/boards/model/lstm.h5')
+    model.load_weights('boards/model/lstm.h5')
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
     data = input_transform(string)
