@@ -38,6 +38,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
      background-repeat: repeat;
  }
 
+ .bg-logout {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     background-size: cover;
+     background:url(../../img/snow_mountain_tree.jpg);
+     background-repeat: repeat;
+ }
+
 .hero-area {
     background-image: url("../../img/pexels-photo-442574.jpg");
     background-repeat: repeat;
