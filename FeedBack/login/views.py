@@ -274,11 +274,23 @@ def stu_assistant_select(request,pk,user_pk):
     return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
 def search(request,pk):
+    flag = 0
     course_now = get_object_or_404(course, pk=pk)
     q=request.GET.get('q')
-    user = User.objects.get(name=q)
-    print(user.name)
-    return render(request,'login/search_select.html',{'course':course_now,'user':user})
+    for u in User.objects.all():
+        if u.name == q:
+            flag = 1
+    if flag == 1:
+        user = User.objects.get(name=q)
+        if user.identity == "student":
+            if user in course_now.users.all():
+                flag = 2
+    if flag == 1:
+        user = User.objects.get(name=q)
+    else:
+        user = get_object_or_404(User, pk=1)
+    return render(request,'login/search_select.html',{'course':course_now,'user':user,'flag':flag})
+
 
 def search_select(request,pk,user_pk):
     course_now = get_object_or_404(course, pk=pk)
@@ -444,17 +456,22 @@ def Assign(request,pk):
                 def timed_job():
                     a=datetime.datetime.now()
                     b=datetime.datetime.strptime(deadline,"%Y-%m-%d %H:%M:%S")
+
                     for user in homework.course.users.all():
-                        flag = 0
-                        for submit in homework.submit.all():
-                            if submit.author.name == user.name:
-                                flag = 1
-                        if flag == 0:
-                            if (b-a).seconds == 0:
-                                email_title = '请尽快提交作业——作业提醒'
-                                email_body = '点击此处提交作业http://127.0.0.1:8000/course/'+pk+'/homework/'
-                                email = user.email  # 对方的邮箱
-                                send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+                        if user.identity == "student":
+                            flag = 0
+                            for submit in homework.submit.all():
+                                if submit.author.name == user.name:
+                                    flag = 1
+
+                            if flag == 0:
+                                if b>a :
+                                    if (b-a).seconds == 86399  :
+
+                                            email_title = '请尽快提交作业——作业提醒'
+                                            email_body = '点击此处提交作业http://127.0.0.1:8000/course/'+pk+'/homework/'
+                                            email = user.email  # 对方的邮箱
+                                            send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
                 sched.start()
             except Exception as e:
                 print(e)
