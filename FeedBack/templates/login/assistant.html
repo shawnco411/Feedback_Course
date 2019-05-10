@@ -14,12 +14,19 @@
                 	 <div class="card-header">
                         <h3>{{ course.course_name }} 的助教列表</h3>
                     </div>
+                     </br>
                     <form method="get" action="{% url 'search' course.pk %}">
                          {% csrf_token %}
-                        <input type="search" name="q" placeholder="搜索" required>
-                        <button type="submit">搜索</button>
+                         <table>
+	                         <tr class="table-light">
+	                         	<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		                        <td><input type="search" name="q" placeholder="搜索" required></td>
+		                        <td><button title="搜索" type="submit" class="button button-plain button-borderless button-square"><i class="fa fa-search"></i></button></td>
+		                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	                    	</tr>
+                    	</table>
                     </form>
-                </br>
+
 			        {% if request.session.user_identity == 'teacher' %}
 			            {% for user in course.users.all %}
 			                {% if user.name == request.session.user_name %}
@@ -29,7 +36,7 @@
 			            <tr  class="text-black table-info">
 			              <td>学号</td>
 			              <td>姓名</td>
-                          <td>身份</td>>
+                          <td>身份</td>
 			              <td>操作</td>
 			            </tr>
 			          {% for user in user_list.all %}

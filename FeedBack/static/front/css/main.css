@@ -383,7 +383,7 @@ textarea {
   appearance: none;
   border-radius: 4px;
   border: none;
-  border: solid 1px;
+  border: none;
   color: inherit;
   display: block;
   outline: 0;
