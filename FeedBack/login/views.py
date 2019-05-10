@@ -282,7 +282,11 @@ def search(request,pk):
             flag = 1
     if flag == 1:
         user = User.objects.get(name=q)
-        print(user.name)
+        if user.identity == "student":
+            if user in course_now.users.all():
+                flag = 2
+    if flag == 1:
+        user = User.objects.get(name=q)
     else:
         user = get_object_or_404(User, pk=1)
     return render(request,'login/search_select.html',{'course':course_now,'user':user,'flag':flag})

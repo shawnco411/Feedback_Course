@@ -38,6 +38,9 @@
                         {% if flag == 0 %}
                             <li>您搜索的用户不存在</li>
                         {% endif %}
+                        {% if flag == 2 %}
+                            <li>您搜索的用户已经选修了该门课程，不能作为该门课程的助教</li>
+                        {% endif %}
                         <div class="button-wrapper submit">
                              <input type="button"   value="返回"  onclick="location.href='{% url 'assistant' course.pk %}'" />
                              <br/>
