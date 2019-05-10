@@ -55,12 +55,14 @@
 			            {% endif %}
                       {% endfor %}
                        {% for user in user_list.all %}
-                        {% if user.identity == 'student' %}
-			            <td>{{user.number}}</td>
-			            <td>{{user.name}}</td>
-                        <td>学生</td>
-			            <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">选择</a></td>
-			            {% endif %}
+                            {% if user.identity == 'student' %}
+                                {% if course not in user.courses.all %}
+                                    <td>{{user.number}}</td>
+			                        <td>{{user.name}}</td>
+                                    <td>学生</td>
+			                        <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">选择</a></td>
+                                {% endif %}
+			                {% endif %}
 			            
 			             </tr>
 			          {% endfor %}
