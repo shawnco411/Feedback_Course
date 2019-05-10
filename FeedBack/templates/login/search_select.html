@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>搜索结果</title>
-</head>
-<body>
-    <li>您的搜索结果如下</li>
-    <table class="table">
-        <tbody>
-        <tr  class="text-black table-info">
-            <td>学号</td>
-            <td>姓名</td>
-            <td>操作</td>
-        </tr>
-        <tr>
-            <td>{{user.number}}</td>
-            <td>{{user.name}}</td>
-            {% if user.identity == 'student' %}
-            <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">选择</a></td>
-            {% endif %}
-            {% if user.identity == 'assistant' %}
-            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
-            {% endif %}
-        </tr>
-        </tbody>
-    </table>
-</body>
-</html>
+
+{% extends 'base.html' %}
+{% block title %}搜索结果{% endblock %}
+{% block content %}
+<div class="overlay"></div>
+<div class="page-content ">
+    <div id="my-div-shell">
+        <div id="my-div-center">
+            <div class="col-md-12">
+
+                <!--***** BASIC FORM *****-->
+                <div class="card form" id="form1">
+                    <div class="card-header">
+                        <h3>搜索结果</h3>
+                    </div>
+                    <br>
+                        <table class="table">
+                            <tbody>
+                            <tr  class="text-black table-info">
+                                <td>学号</td>
+                                <td>姓名</td>
+                                <td>操作</td>
+                            </tr>
+                            <tr>
+                                <td>{{user.number}}</td>
+                                <td>{{user.name}}</td>
+                                {% if user.identity == 'student' %}
+                                <td><a href="{% url 'stu_assistant_select' course.pk user.pk %}">选择</a></td>
+                                {% endif %}
+                                {% if user.identity == 'assistant' %}
+                                <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
+                                {% endif %}
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="button-wrapper submit">
+                             <input type="button"   value="返回"  onclick="location.href='{% url 'assistant' course.pk %}'" />
+                             <br/>
+                       </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
