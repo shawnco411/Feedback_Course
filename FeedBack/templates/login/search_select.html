@@ -14,6 +14,7 @@
                         <h3>搜索结果</h3>
                     </div>
                     <br>
+                        {% if flag == 1 %}
                         <table class="table">
                             <tbody>
                             <tr  class="text-black table-info">
@@ -33,6 +34,10 @@
                             </tr>
                             </tbody>
                         </table>
+                        {% endif %}
+                        {% if flag == 0 %}
+                            <li>您搜索的用户不存在</li>
+                        {% endif %}
                         <div class="button-wrapper submit">
                              <input type="button"   value="返回"  onclick="location.href='{% url 'assistant' course.pk %}'" />
                              <br/>

@@ -274,11 +274,19 @@ def stu_assistant_select(request,pk,user_pk):
     return render(request, 'login/privilege.html',{'course':course_now,'user':user_now,'pri':Pri})
 
 def search(request,pk):
+    flag = 0
     course_now = get_object_or_404(course, pk=pk)
     q=request.GET.get('q')
-    user = User.objects.get(name=q)
-    print(user.name)
-    return render(request,'login/search_select.html',{'course':course_now,'user':user})
+    for u in User.objects.all():
+        if u.name == q:
+            flag = 1
+    if flag == 1:
+        user = User.objects.get(name=q)
+        print(user.name)
+    else:
+        user = get_object_or_404(User, pk=1)
+    return render(request,'login/search_select.html',{'course':course_now,'user':user,'flag':flag})
+
 
 def search_select(request,pk,user_pk):
     course_now = get_object_or_404(course, pk=pk)
