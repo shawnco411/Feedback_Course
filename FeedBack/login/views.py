@@ -456,17 +456,22 @@ def Assign(request,pk):
                 def timed_job():
                     a=datetime.datetime.now()
                     b=datetime.datetime.strptime(deadline,"%Y-%m-%d %H:%M:%S")
+
                     for user in homework.course.users.all():
-                        flag = 0
-                        for submit in homework.submit.all():
-                            if submit.author.name == user.name:
-                                flag = 1
-                        if flag == 0:
-                            if (b-a).seconds == 0:
-                                email_title = '请尽快提交作业——作业提醒'
-                                email_body = '点击此处提交作业http://127.0.0.1:8000/course/'+pk+'/homework/'
-                                email = user.email  # 对方的邮箱
-                                send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+                        if user.identity == "student":
+                            flag = 0
+                            for submit in homework.submit.all():
+                                if submit.author.name == user.name:
+                                    flag = 1
+
+                            if flag == 0:
+                                if b>a :
+                                    if (b-a).seconds == 86399  :
+
+                                            email_title = '请尽快提交作业——作业提醒'
+                                            email_body = '点击此处提交作业http://127.0.0.1:8000/course/'+pk+'/homework/'
+                                            email = user.email  # 对方的邮箱
+                                            send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
                 sched.start()
             except Exception as e:
                 print(e)
