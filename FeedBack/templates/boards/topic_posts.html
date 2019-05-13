@@ -31,7 +31,7 @@
           <div class="timeline">
               <div class="timeline-content">
                   <span class="year">发布者：{{topic.starter.name}}</span>
-                  <!--{% if topic.kind == '评价' %}
+                  {% if topic.kind == '评价' %}
                       {% if topic.topictype == 'positive' %}
                        <span class="post">积极评价</span>
                       {% elif  topic.topictype == 'negative' %}
@@ -39,9 +39,9 @@
                       {% elif  topic.topictype == 'neural' %}
                        <span class="post">中立评价</span>
                       {% endif %}
-                  {% else %}-->
+                  {% else %}
                   <span class="post"></span>
-                  <!--{% endif %}-->
+                  {% endif %}
                   <strong><h3>{{ topic.message }}</h3></strong>
               </div>
           </div>
@@ -49,17 +49,17 @@
           <div class="timeline">
               <div class="timeline-content">
                   <span class="year">用户：{{ post.created_by.name }}</span>
-                  <!--{% if post.kind == '评价' %}
+                  {% if post.kind == '评价' %}
                       {% if post.posttype == 'positive' %}
                        <span class="post">积极评价</span>
                       {% elif post.posttype == 'negative' %}
                        <span class="post">消极评价</span>
-                      {% elif post.posttype == 'neural' %}-->
+                      {% elif post.posttype == 'neural' %}
                        <span class="post">中立评价</span>
                       {% endif %}
-                  {% else %}-->
+                  {% else %}
                   <span class="post"></span>
-                  <!--{% endif %}-->
+                  {% endif %}
                   <strong><h3>{{ post.message }}</h3></strong>
                   <p class="description pull-left">{{ post.created_at }}</p>
                   {% if post.created_by.name == request.session.user_name %}
