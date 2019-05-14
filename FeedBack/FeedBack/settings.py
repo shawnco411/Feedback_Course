@@ -94,7 +94,7 @@ DATABASES = {
 
 
        #'OPTIONS': {
-       #    "unix_socket": "/tmp/mysql.sock",
+       #   "unix_socket": "/tmp/mysql.sock",
        #},
 
        # 'OPTIONS': {

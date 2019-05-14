@@ -186,16 +186,20 @@ def reply_topic(request, pk, topic_pk):
             lstm_predict(post.message)
             if(string_type==1):
                 post.posttype = "positive"
+                email_title = '你收到一条积极评价～～～——讨论区'
             elif(string_type==2):
                 post.posttype = "neural"
+                email_title = '你有新回复啦——讨论区'
             else:
                 post.posttype = "negative"
+                email_title = '你收到一条吐槽～～～——讨论区'
+            if(post.kind!="评价"):
+                email_title = '你有新回复啦——讨论区'
             print(string_type)
             print(post.posttype)
             print("4444")
             #end_lstm
             post.save()
-            email_title = '你有新回复啦——讨论区'
             email_body = '点击此处查看回复http://127.0.0.1:8000/boards/'+pk+'/topics/'+topic_pk
             email = post.topic.starter.email  # 对方的邮箱
             send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
