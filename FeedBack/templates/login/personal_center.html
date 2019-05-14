@@ -144,7 +144,7 @@
           </tbody>
         </table>
         {% if request.session.user_identity == 'student' %}
-        <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><i class="fa fa-stack-overflow"> 已选课程: </i></h3>
+        <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><i class="fa fa-stack-overflow"> 已选课程 & 担任助教课程: </i></h3>
         {% endif %}
         {% if request.session.user_identity == 'teacher' %}
         <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><i class="fa fa-stack-overflow"> 教授课程: </i></h3>
@@ -168,7 +168,7 @@
             {% if request.session.user_identity == 'assistant' %}
 
               <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
-              <td>助教无权限对课程进行操作</td>
+              <td>专职助教无操作权限</td>
             {% endif %}
             <td></td>
           </tr>
@@ -176,6 +176,7 @@
           {% for course in user.courses_1.all %}
           <tr  class="text-black table-light"> {% if request.session.user_identity == 'student' %}
             <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
+             <td>学生助教无操作权限</td>
             {% endif %}
 
             <td></td>
