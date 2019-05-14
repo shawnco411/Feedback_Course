@@ -163,11 +163,12 @@
             {% endif %}
             {% if request.session.user_identity == 'teacher' %}
              <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
-            <td><button class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'delete_course' course.pk user.pk%}'"><i class="fa fa-trash"></i></button></td>
+            <td><button title="删除课程" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'delete_course' course.pk user.pk%}'"><i class="fa fa-trash"></i></button></td>
             {% endif %}
             {% if request.session.user_identity == 'assistant' %}
 
               <td><a href="{% url 'course' course.pk %}">{{ course.course_name }}</a></td>
+              <td>助教无权限对课程进行操作</td>
             {% endif %}
             <td></td>
           </tr>
