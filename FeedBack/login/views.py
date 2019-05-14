@@ -248,6 +248,7 @@ def assistant_select(request,pk,user_pk):
     flag = 1
     course_now= get_object_or_404(course, pk=pk)
     user_now=get_object_or_404(User, pk=user_pk)
+    print("0000000000000000000")
     user_now.courses.add(course_now)
     for i in models.Privilege.objects.all():
         if i.course == course_now:
@@ -316,7 +317,10 @@ def cancel_pri1(request,pk,user_pk):
         if i.course == course_now:
             i.privilege_1 = 0
             i.save()
-    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'assistant':
+        return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'student':
+        return redirect( 'stu_assistant_select',pk=pk,user_pk=user_pk)
 
 #取消特权2
 def cancel_pri2(request,pk,user_pk):
@@ -326,7 +330,10 @@ def cancel_pri2(request,pk,user_pk):
         if i.course == course_now:
             i.privilege_2 = 0
             i.save()
-    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'assistant':
+        return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'student':
+        return redirect( 'stu_assistant_select',pk=pk,user_pk=user_pk)
 
 #取消特权3
 def cancel_pri3(request,pk,user_pk):
@@ -336,7 +343,10 @@ def cancel_pri3(request,pk,user_pk):
         if i.course == course_now:
             i.privilege_3 = 0
             i.save()
-    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'assistant':
+        return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'student':
+        return redirect( 'stu_assistant_select',pk=pk,user_pk=user_pk)
 
 #取消特权4
 def cancel_pri4(request,pk,user_pk):
@@ -346,7 +356,10 @@ def cancel_pri4(request,pk,user_pk):
         if i.course == course_now:
             i.privilege_4 = 0
             i.save()
-    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'assistant':
+        return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'student':
+        return redirect( 'stu_assistant_select',pk=pk,user_pk=user_pk)
 
 #取消特权5
 def cancel_pri5(request,pk,user_pk):
@@ -356,7 +369,10 @@ def cancel_pri5(request,pk,user_pk):
         if i.course == course_now:
             i.privilege_5 = 0
             i.save()
-    return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'assistant':
+        return redirect( 'assistant_select',pk=pk,user_pk=user_pk)
+    if user_now.identity == 'student':
+        return redirect( 'stu_assistant_select',pk=pk,user_pk=user_pk)
 
 #赋予特权2
 def pri_update(request,pk,user_pk):
