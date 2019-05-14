@@ -195,7 +195,7 @@
         {% if request.session.user_identity == 'teacher' %}
             {% for user in course.users.all %}
                 {% if user.name == request.session.user_name %}
-		 <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">选课学生列表</h3>
+		 <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">助教和选课学生列表</h3>
         <table class="table">
           <tbody>
             <tr  class="text-black table-info">
