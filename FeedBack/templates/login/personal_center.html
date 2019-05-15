@@ -35,7 +35,11 @@
               <td></td>
               <td></td>
               <td></td>
+              {% if request.session.user_identity == 'student' %}
               <td><strong class="mr-5" ><i class="fa fa-user-o"> 学号: </i></strong></td>
+              {% else %}
+              <td><strong class="mr-5" ><i class="fa fa-user-o"> 工号: </i></strong></td>
+              {% endif %}
               <td> {{ user.number }} </td>
               <td></td>
               <td></td>
