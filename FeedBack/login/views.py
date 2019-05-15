@@ -172,11 +172,11 @@ def PersonalCenter(request):
     return render(request, 'login/personal_center.html', {'user': user})
 
 def Update(request):
+
     user = User.objects.get(name=request.session.get('user_name'))
     if request.method == "POST":
         form = UpdateForm(request.POST)
         if form.is_valid():
-            user.name = form.cleaned_data['name']
             user.number = form.cleaned_data['number']
             user.tel = form.cleaned_data['tel']
             user.email = form.cleaned_data['email']
@@ -186,6 +186,7 @@ def Update(request):
     else:
         default_data = {'name': user.name, 'number': user.number,'tel': user.tel, 'email': user.email,'addr':user.addr,}
         form = UpdateForm(default_data)
+    user = User.objects.get(name=user.name)
     return render(request, 'login/update.html', {'form':form, 'user': user})
 
 

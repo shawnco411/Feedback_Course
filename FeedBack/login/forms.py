@@ -99,8 +99,8 @@ class CreateCourseForm(forms.Form):
     course_deadline = forms.CharField(label="选课截止日期", widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': '作业截止日期 格式如：2019-04-12 15:15:15'}))
 
 class UpdateForm(forms.Form):
-    name = forms.CharField(label='姓名', max_length=50, required=False)
-    number = forms.CharField(label='学号', max_length=50, required=False)
+
+    number = forms.CharField(label='学号/工号', max_length=50, required=False)
     tel = forms.CharField(label='电话', max_length=50, required=False)
     email = forms.CharField(label='邮箱', max_length=50, required=False)
     addr = forms.CharField(label='地址', max_length=50, required=False)
