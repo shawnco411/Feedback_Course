@@ -566,10 +566,7 @@ def SubmitCon(request,pk,homework_pk,sub_pk):
     sub =  get_object_or_404(SubmitWork,pk = sub_pk)
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
-    print("111111111110")
-    request.session['user_privilege_1'] = user.user_pri.privilege_1
-    print("111111111111")
-    print(user.privilege_1)
+    #request.session['user_privilege_1'] = user.user_pri.privilege_1
     return render(request,'login/subcon.html',{'sub':sub,'user':user,'course':course_now})
 
 #课程资源列表
