@@ -16,17 +16,17 @@
         <div class="card hovercard ">
           <div class="cardheader"></div>
           <div class="info">
-            <div class="title">{{ homework.name }} 作业详情</div>
+             <div style = "color:lightslategray;font-size:30px;line-height:50px" class="title font-weight-bold">{{ homework.name }} 作业详情</div>
             <hr>
           </div>
           <form>
                 <p>{{ homework.content }}</p>      
           </form>
           <hr>
-          <h2>作业提交记录</h2>
+          <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">作业提交记录</h3>
             <table class="table">
                 <tbody>
-                  <tr class="text-white table-info">
+                  <tr class="text-black table-info">
                     {% if request.session.user_identity == 'teacher' %}
                         <td>学生学号</td>
                         <td>学生姓名</td>
