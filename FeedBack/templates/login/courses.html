@@ -173,10 +173,36 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
+              {% if request.session.user_identity == 'student' %}
+                {% for user in course.users.all %}
+                    {% if user.name == request.session.user_name %}
+                        <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
 			  <!--transform into button-->
               <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
-				<td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+                        <td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+                    {% endif %}
+                {% endfor %}
+                {% for user in course.users_1.all %}
+                    {% if user.name == request.session.user_name %}
+                        <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
+			  <!--transform into button-->
+              <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
+				        <td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+                    {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if request.session.user_identity == 'teacher' %}
+                    <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
+			  <!--transform into button-->
+              <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
+				        <td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+              {% endif %}
+              {% if request.session.user_identity == 'assistant' %}
+                    <td><strong class="mr-5"><i class="fa fa-paperclip"> 课程资源: </i></strong></td>
+			  <!--transform into button-->
+              <!--<td><a href="{% url 'resource_list' course.pk %}">查看</a></td>-->
+				        <td><button title="查看资源" class="button button-small button-plain button-borderless button-square" onClick="location.href='{% url 'resource_list' course.pk %}'"><i class="fa fa-search"></i></button></td>
+              {% endif %}
               <td></td>
               <td></td>
               <td></td>
