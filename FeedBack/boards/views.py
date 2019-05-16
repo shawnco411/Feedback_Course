@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.db.models import Count
 from .models import Board, Topic, Post
-from login.models import User
+from login.models import User,course
 from .forms import NewTopicForm,PostForm
 from django.core.mail import send_mail
 from FeedBack.settings import EMAIL_FROM
@@ -175,6 +175,9 @@ def reply_topic(request, pk, topic_pk):
     global string_type
     topic = get_object_or_404(Topic, pk=topic_pk)
     user = User.objects.get(name=request.session.get('user_name'))
+    topic_course = course.objects.get(pk = topic.board.pk)
+    print(topic_course.course_name)
+    print("xxx")
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -202,7 +205,9 @@ def reply_topic(request, pk, topic_pk):
             post.save()
             email_body = '点击此处查看回复http://127.0.0.1:8000/boards/'+pk+'/topics/'+topic_pk
             email = post.topic.starter.email  # 对方的邮箱
-            send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+            if(topic_course in post.topic.starter.courses.all()):
+                send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+                print("yyyyyyy")
             return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
     else:
         form = PostForm()
