@@ -540,6 +540,7 @@ def HomeworkSubmit(request, pk, homework_pk):
         if form.is_valid():
             sub = form.save(commit=False)
             sub.homework = homework
+            print("nnnnnnnn",homework.pk)
             sub.author = user
             sub.grade='未评阅'
             #submit_before.submit_time=sub.submit_time

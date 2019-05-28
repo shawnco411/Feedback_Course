@@ -23,7 +23,7 @@
                 <p>{{ homework.content }}</p>      
           </form>
           <hr>
-          <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">作业提交记录</h3>
+          <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">上次提交时间</h3>
             <table class="table">
                 <tbody>
                   <tr class="text-black table-info">
@@ -48,7 +48,7 @@
                   </tr>
                    {% for submit in submit_list %}
                     <tr>
-                        {% if submit.homework.name == homework.name %}
+                        {% if submit.homework.pk == homework.pk %}
                             {% if request.session.user_identity == 'student' %}
                                 {% for c in user.courses.all %}
                                     {% if c == course %}
