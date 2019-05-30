@@ -181,6 +181,7 @@ def PersonalCenter(request):
 def Update(request):
 
     user = User.objects.get(name=request.session.get('user_name'))
+    message = "请检查输入内容"
     if request.method == "POST":
         form = UpdateForm(request.POST)
         if form.is_valid():
@@ -188,6 +189,12 @@ def Update(request):
             user.tel = form.cleaned_data['tel']
             user.email = form.cleaned_data['email']
             user.addr = form.cleaned_data['addr']
+            if(len(user.number)>11):
+                message = "电话号码不超过11字符"
+                return render(request,'login/update.html',locals())
+            if(len(user.addr)>64):
+                message = "地址不超过64字符"
+                return render(request,'login/update.html',locals())
             user.save()
             return HttpResponseRedirect(reverse('personal_center'))
     else:
