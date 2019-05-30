@@ -193,7 +193,10 @@ def Update(request):
                 message = "电话号码不超过11字符"
                 return render(request,'login/update.html',locals())
             if(len(user.addr)>16):
-                message = "地址不超过32字符"
+                message = "地址不超过16字符"
+                return render(request,'login/update.html',locals())
+            if(len(user.tel)>16):
+                message = "地址不超过16字符"
                 return render(request,'login/update.html',locals())
             user.save()
             return HttpResponseRedirect(reverse('personal_center'))
