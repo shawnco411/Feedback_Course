@@ -192,7 +192,7 @@ def Update(request):
             if(len(user.number)>11):
                 message = "电话号码不超过11字符"
                 return render(request,'login/update.html',locals())
-            if(len(user.addr)>64):
+            if(len(user.addr)>32):
                 message = "地址不超过64字符"
                 return render(request,'login/update.html',locals())
             user.save()
