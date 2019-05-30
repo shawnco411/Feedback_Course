@@ -11,7 +11,7 @@ class RegisterForm(forms.Form):
         ('teacher', '教师'),
         ('assistant', '助教'),
     )
-    username = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '例如: user123'}))
+    username = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '例如: user123，不超过16个字符'}))
     password1 = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder': '建议6-16位包含字母数字'}))
     password2 = forms.CharField(label="确认密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder': '请和上一次输入相同'}))
     email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control','placeholder': '例如: 123@qq.com'}))

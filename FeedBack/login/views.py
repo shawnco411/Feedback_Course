@@ -77,6 +77,9 @@ def register(request):
             if password1 != password2:  # 判断两次密码是否相同
                 message = "两次输入的密码不同！"
                 return render(request, 'login/register.html', locals())
+            if len(username) > 16:
+                message = "用户名长度过长，超过16字符，请重新输入！"
+                return render(request, 'login/register.html', locals())
             else:
                 same_name_user = models.User.objects.filter(name=username)
                 if same_name_user:  # 用户名唯一
