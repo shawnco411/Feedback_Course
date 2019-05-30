@@ -128,8 +128,12 @@ def CreateCourse(request):
                 legal=0
             except course.DoesNotExist:
                 print('error')
+            c = datetime.datetime.now()
+            d = datetime.datetime.strptime(course_deadline, "%Y-%m-%d %H:%M:%S")
             if legal==0:
                 message = "已存在另一课程设在此时间与地点！"
+            if d<c:
+                message = "ddl不能设置为过去的时间！"
             else:
                 new_course = models.course.objects.create()
                 new_course.course_name = course_name
@@ -540,6 +544,7 @@ def HomeworkSubmit(request, pk, homework_pk):
         if form.is_valid():
             sub = form.save(commit=False)
             sub.homework = homework
+            print("nnnnnnnn",homework.pk)
             sub.author = user
             sub.grade='未评阅'
             #submit_before.submit_time=sub.submit_time

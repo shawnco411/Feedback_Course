@@ -104,34 +104,6 @@
               <td></td>
               <td></td>
             </tr>
-            <tr  class="text-black table-light table-unborded">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><strong class="mr-5"><i class="fa fa-archive"> 课程介绍: </i></strong></td>
-              <td> {{ course.course_introduction }} </td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              </tr>
               <tr  class="text-black table-light table-unborded">
               <td></td>
               <td></td>
@@ -218,6 +190,21 @@
             </tr>
           </tbody>
         </table>
+
+      <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center"><strong> 课程介绍: </strong></h3>
+      <table class="table">
+          <tr  class="text-black table-light table-unborded">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td align="left">&nbsp; &nbsp; &nbsp; &nbsp;{{ course.course_introduction }} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+      </table>
+              
+
         {% if request.session.user_identity == 'teacher' %}
             {% for user in course.users.all %}
                 {% if user.name == request.session.user_name %}

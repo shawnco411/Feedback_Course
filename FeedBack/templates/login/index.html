@@ -75,7 +75,9 @@
               <ul class="icon">
                 {% if line not in u.courses_1.all %}
                   {% if time < line.course_deadline %}
-                  <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
+                      {% if line not in u.courses.all %}
+                            <li title="选课"><a href="{% url 'choose_course' line.pk %}"><i class="fa fa-star"></i></a></li>
+                      {% endif %}
                   {% endif %}
                  {% endif %}
                   {% for user in line.users.all%}
