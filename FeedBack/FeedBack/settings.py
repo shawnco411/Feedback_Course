@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'mysql',
         'USER': 'root',
 
-        'PASSWORD': '123456',#your local mysql password
+        'PASSWORD': 'zhouhaici0304',#your local mysql password
 
         'HOST': '127.0.0.1',
         "POST": '3306',

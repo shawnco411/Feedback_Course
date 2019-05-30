@@ -636,7 +636,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     display: inline-block;
     font-size: 12px;
     color: #64d8c1;
-    text-transform: uppercase;
+    text-transform: none;
     padding: 5px 15px;
     border: 2px solid #64d8c1;
     position: relative;

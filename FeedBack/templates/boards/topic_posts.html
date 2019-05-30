@@ -17,7 +17,7 @@
 <div class = "bg-mountain"></div>
 <div class="container">
   <br/>
-  <center><h2>主题：{{ topic.subject }}</h2></center>
+  <center><h2 style="text-transform: none">主题：{{ topic.subject }}</h2></center>
   
 
   <div class="row">
@@ -42,7 +42,7 @@
                   {% else %}
                   <span class="post"></span>
                   {% endif %}
-                  <strong><h3>{{ topic.message }}</h3></strong>
+                  <strong><h3 style="text-transform: none;word-wrap:break-word">{{ topic.message }}</h3></strong>
               </div>
           </div>
           {% for post in topic.posts.all %}
