@@ -91,7 +91,7 @@ class CreateCourseForm(forms.Form):
         ('周五11,12节', '周五11,12节'),
     )
     course_name = forms.CharField(label="课程名称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '课程名称...'}))
-    teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课教师...'}))
+    #teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课教师...'}))
     course_time = forms.ChoiceField(label="开课时间",choices=time)
     course_locus = forms.ChoiceField(label="开课地点",choices=locus)
     course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '学分...'}))

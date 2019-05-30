@@ -106,7 +106,7 @@ class User(models.Model):
 
     name = models.CharField(max_length=128,unique=True)
     password = models.CharField(max_length=256)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     identity = models.CharField(max_length=32,choices = idens,default='学生')
     c_time = models.DateTimeField(auto_now_add = True)
     #courses为专职学生所选的课程，教师开设的课程，专职助教负责的课程，既是学生又是助教的用户所选的课程

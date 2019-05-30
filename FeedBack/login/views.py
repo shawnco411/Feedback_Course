@@ -117,7 +117,7 @@ def CreateCourse(request):
         CreateCourse_form = CreateCourseForm(request.POST)
         if CreateCourse_form.is_valid():
             course_name = CreateCourse_form.cleaned_data['course_name']
-            teacher_name = CreateCourse_form.cleaned_data['teacher_name']
+            #teacher_name = CreateCourse_form.cleaned_data['teacher_name']
             course_time = CreateCourse_form.cleaned_data['course_time']
             course_locus = CreateCourse_form.cleaned_data['course_locus']
             course_credit = CreateCourse_form.cleaned_data['course_credit']
@@ -133,7 +133,7 @@ def CreateCourse(request):
             else:
                 new_course = models.course.objects.create()
                 new_course.course_name = course_name
-                new_course.teacher_name = teacher_name
+                new_course.teacher_name = request.session['user_name']
                 new_course.course_time = course_time
                 new_course.course_locus = course_locus
                 new_course.course_credit = course_credit
