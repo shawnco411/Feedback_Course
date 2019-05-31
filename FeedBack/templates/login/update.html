@@ -15,6 +15,9 @@
         <div class="contact-h-cont">
 			   <center><h2>修改个人资料</h2></center>
 			   <form  method="post" action="" enctype="multipart/form-data">
+		   		{% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
 			      {% csrf_token %}
 			      {% for field in form %}
 			           <div class="form-group text-left">

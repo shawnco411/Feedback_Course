@@ -100,10 +100,10 @@ class CreateCourseForm(forms.Form):
 
 class UpdateForm(forms.Form):
 
-    number = forms.CharField(label='学号/工号', max_length=50, required=False)
-    tel = forms.CharField(label='电话', max_length=50, required=False)
-    email = forms.CharField(label='邮箱', max_length=50, required=False)
-    addr = forms.CharField(label='地址', max_length=50, required=False)
+    number = forms.CharField(label='学号/工号', max_length=50, required=False,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '不超过11个字符'}))
+    tel = forms.CharField(label='电话', max_length=50, required=False,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '不超过16个字符'}))
+    email = forms.CharField(label='邮箱', max_length=50, required=False,widget=forms.EmailInput(attrs={'class': 'form-control','placeholder': '请输入真实存在的邮箱，不超过21个字符'}))
+    addr = forms.CharField(label='地址', max_length=50, required=False,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '不超过34个字符'}))
 
 
 
