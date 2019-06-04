@@ -469,7 +469,7 @@ def Assign(request,pk):
         print("343434")
         form = AssignForm(request.POST)
         if form.is_valid():
-
+            print("ccccc")
             deadline = form.cleaned_data['deadline']
             name = form.cleaned_data['name']
             #new_homework = models.Homework.objects.create()
@@ -484,6 +484,7 @@ def Assign(request,pk):
                 message = "deadline不能设置过去的时间"
                 return redirect('new_homework', pk=pk)
             else:
+                print("dddd")
                 homework=form.save(commit=False)
                 homework.course = homework_course
                 homework.save()
@@ -515,10 +516,12 @@ def Assign(request,pk):
                 sched.shutdown()
 
             return redirect('homework_list',pk=pk)
+        print("Nononono")
+        print(form.errors)
     else:
-        # print("ttt")
+        print("ttt")
         assign_form = AssignForm()
-    print(models.Homework.objects.all())
+    # print(models.Homework.objects.all())
     return render(request,'login/assign.html',locals())
 
 def HomeworkList(request, pk):

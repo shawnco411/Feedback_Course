@@ -139,6 +139,7 @@ class Homework(models.Model):
     content = models.CharField(max_length = 512)
     course = models.ForeignKey(course,related_name='homework',on_delete=models.CASCADE)
     deadline = models.DateTimeField()
+    myfile = models.FileField(upload_to="%Y/%m/%d/",null = True)
     # submit = models.CharField(max_length = 1000,null=True)
     # submit_time = models.DateTimeField(auto_now = True,null=True)
     # student = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE,null=True)

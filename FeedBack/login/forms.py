@@ -205,10 +205,16 @@ class AssignForm(forms.ModelForm):
             attrs={'class': 'form-control','placeholder': '作业截止日期 格式如：2019-04-12 15:15:15'}
             ),
      )
+    myfile = forms.FileField(
+        label="上传文件",
+        widget=forms.FileInput(
+            #attrs={'class': 'form-control', 'placeholder': '上传文件'}
+        )
+    )
 
     class Meta:
         model = Homework
-        fields = ['name', 'content','deadline' ]
+        fields = ['name', 'content','deadline','myfile']
 
 class SubmitForm(forms.ModelForm):
     submit = forms.CharField(

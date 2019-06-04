@@ -13,6 +13,7 @@
 <!--edited by Zhou Haici-->
 <section class="hero-area">
   <div class="overlay"></div>
+    <div class="container">
 
               <div class="col-sm-5 form-box">
                 <div class="form-top">
@@ -22,7 +23,7 @@
                   <div class="form-top-right"> <i class="fa fa-book"></i> </div>
                 </div>
                 <div class="form-bottom" style="background-color: white">
-                  <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}" method="post">
+                  <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}"  method="post" enctype="multipart/form-data">
                     {% if message %}
                     <div class="alert alert-warning">{{ message }}</div>
                     {% endif %}
@@ -32,12 +33,17 @@
                       <div class="form-group"> {{ assign_form.name}} </div>
                       <div class="form-group"> {{ assign_form.deadline}} </div>
                       <div class="form-group"> {{ assign_form.content}} </div>
+                      <!-- <div class="form-group"> {{ assign_form.myfile}} </div> -->
+                      <div class="form-group" align="left">
+                         {{ assign_form.myfile.label_tag }}
+                         {{ assign_form.myfile}}
+                      </div>
                       <button type="submit" class="button pull-right">布置</button>
                       <button class="button pull-left"  onclick="location.href='{% url 'homework_list'  homework_course.pk %}'">返回</button>
                       <br/>
                   </form>
                 </div>
               </div>
-
+    </div>         
 </section>
 {% endblock %}
