@@ -467,7 +467,7 @@ def Assign(request,pk):
     #send_status = send_mail(email_title, email_body, email_from, [email])
     if request.method == "POST":
         print("343434")
-        form = AssignForm(request.POST)
+        form = AssignForm(request.POST,request.FILES)
         if form.is_valid():
             print("ccccc")
             deadline = form.cleaned_data['deadline']

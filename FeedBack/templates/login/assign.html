@@ -23,7 +23,7 @@
                   <div class="form-top-right"> <i class="fa fa-book"></i> </div>
                 </div>
                 <div class="form-bottom" style="background-color: white">
-                  <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}"  method="post" enctype="multipart/form-data">
+                  <form class="form-assign" action="{% url 'new_homework' homework_course.pk %}"  method="Post" enctype="multipart/form-data">
                     {% if message %}
                     <div class="alert alert-warning">{{ message }}</div>
                     {% endif %}
