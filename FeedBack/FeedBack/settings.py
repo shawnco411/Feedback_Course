@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'mysql',
         'USER': 'root',
 
-        'PASSWORD': 'zhouhaici0304',#your local mysql password
+        'PASSWORD': '123456',#your local mysql password
 
         'HOST': '127.0.0.1',
         "POST": '3306',
@@ -94,7 +94,7 @@ DATABASES = {
 
 
       'OPTIONS': {
-       "unix_socket": "/tmp/mysql.sock",
+      # "unix_socket": "/tmp/mysql.sock",
        },
 
        # 'OPTIONS': {

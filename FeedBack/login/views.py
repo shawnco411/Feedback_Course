@@ -190,14 +190,17 @@ def Update(request):
             user.email = form.cleaned_data['email']
             user.addr = form.cleaned_data['addr']
             if(len(user.number)>11):
-                message = "电话号码不超过11字符"
+                message = "学号/工号不超过11字符"
                 return render(request,'login/update.html',locals())
-            if(len(user.addr)>16):
-                message = "地址不超过16字符"
+            if(len(user.addr)>34):
+                message = "地址不超过34字符"
                 return render(request,'login/update.html',locals())
             if(len(user.tel)>16):
-                message = "地址不超过16字符"
+                message = "电话号码不超过16字符"
                 return render(request,'login/update.html',locals())
+            if (len(user.email) > 21):
+                message = "邮箱地址不超过21字符"
+                return render(request, 'login/update.html', locals())
             user.save()
             return HttpResponseRedirect(reverse('personal_center'))
     else:
