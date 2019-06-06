@@ -90,11 +90,18 @@ class CreateCourseForm(forms.Form):
         ('周五9,10节', '周五9,10节'),
         ('周五11,12节', '周五11,12节'),
     )
+    credit = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+    )
     course_name = forms.CharField(label="课程名称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '课程名称...'}))
     #teacher_name = forms.CharField(label="开课教师",max_length=128,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '开课教师...'}))
     course_time = forms.ChoiceField(label="开课时间",choices=time)
     course_locus = forms.ChoiceField(label="开课地点",choices=locus)
-    course_credit = forms.CharField(label="学分",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '学分...'}))
+    course_credit = forms.ChoiceField(label="学分",choices=credit)
     course_introduction = forms.CharField(label="简介",max_length=128,widget=forms.Textarea(attrs={'class': 'form-control','placeholder': '简介...'}))
     course_deadline = forms.CharField(label="选课截止日期", widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': '作业截止日期 格式如：2019-04-12 15:15:15'}))
 
@@ -178,11 +185,18 @@ class CourseUpdateForm(forms.Form):
         ('周五9,10节', '周五9,10节'),
         ('周五11,12节', '周五11,12节'),
     )
+    credit = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+    )
     course_name = forms.CharField(label='课程名称', max_length=50, required=False)
     teacher_name = forms.CharField(label='开课教师', max_length=50, required=False)
     course_time = forms.ChoiceField(label='开课时间', choices=time, required=False)
     course_locus = forms.ChoiceField(label='开课地点', choices=locus, required=False)
-    course_credit = forms.CharField(label='学分', max_length=50, required=False)
+    course_credit = forms.ChoiceField(label='学分', choices=credit, required=False)
     course_introduction = forms.CharField(label='简介', max_length=128, required=False)
     course_deadline = forms.CharField(label='选课截止日期', widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': '作业截止日期 格式如：2019-04-12 15:15:15'}), required=False)
 
@@ -252,9 +266,10 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ['name' ,'myfile']
 
-class GradeForm(forms.ModelForm):
+class GradeForm(forms.Form):
+
     grade = forms.CharField(label='请打分', max_length=50)
 
     class Meta:
-        model = SubmitWork
-        fields = ['grade' ]
+       model = SubmitWork
+       fields = ['grade' ]

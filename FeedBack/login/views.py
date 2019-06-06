@@ -633,13 +633,19 @@ def GiveGrade(request,pk,homework_pk,sub_pk):
     if request.method == 'POST':
         form = GradeForm(request.POST)
         if form.is_valid():
-            temp_sub = form.save(commit=False)
-            sub.grade=temp_sub.grade
+            #temp_sub = form.save(commit=False)
+            grade = form.cleaned_data['grade']
+            if (grade != "A" and grade != "B" and grade != "C" and grade != "D" and grade != "E" ):
+                message = "您的输入不符合格式！"
+                return render(request, 'login/subcon.html', locals())
+
+            sub.grade=grade
             sub.save()
-            return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
-    else:
-        form = GradeForm(default_data)
-    return render(request, 'login/subcon.html', {'sub': sub},{'form':form})
+
+            return render(request, 'login/subcon.html', locals())
+
+    form = GradeForm()
+    return render(request, 'login/subcon.html', locals())
 
 def ResourceCon(request, pk, resource_pk):
     resource = get_object_or_404(Resource, pk=resource_pk)

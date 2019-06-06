@@ -72,11 +72,18 @@ class course(models.Model):
         ('周五9,10节', '周五9,10节'),
         ('周五11,12节', '周五11,12节'),
     )
+    credit = (
+        ('1','1'),
+        ('2','2'),
+        ('3','3'),
+        ('4','4'),
+        ('5','5'),
+    )
     course_name = models.CharField(max_length=128)
     teacher_name = models.CharField(max_length=128)
     course_time = models.CharField(max_length=128,choices = time,default='周一1,2节')
     course_locus = models.CharField(max_length=128,choices = locus,default='(一)101')
-    course_credit = models.CharField(max_length=128)
+    course_credit = models.CharField(max_length=128,choices = credit,default='5')
     course_introduction = models.CharField(max_length=128)
     course_deadline = models.DateTimeField(default='2019-04-30 12:00:00')
     # roster = models.ManyToManyField(User)
@@ -147,12 +154,16 @@ class Homework(models.Model):
         return self.name
 
 class SubmitWork(models.Model):
+
     submit = models.CharField(max_length = 1000)
     grade = models.CharField(max_length=64,default='未评阅')
     myfile = models.FileField(upload_to="%Y/%m/%d/")
     submit_time = models.DateTimeField(auto_now = True,null=True)
     homework = models.ForeignKey(Homework,related_name = 'submit',on_delete=models.CASCADE)
     author = models.ForeignKey(User,related_name = 'homework_sub',on_delete=models.CASCADE)
+
+    def _str_(self):
+        return self.submit
 
 class Resource(models.Model):
     name = models.CharField(max_length = 100)
