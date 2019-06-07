@@ -201,6 +201,8 @@ def reply_topic(request, pk, topic_pk):
             print(string_type)
             print(post.posttype)
             print("4444")
+            print(post.message)
+            
             #end_lstm
             post.save()
             email_body = '点击此处查看回复http://127.0.0.1:8000/boards/'+pk+'/topics/'+topic_pk

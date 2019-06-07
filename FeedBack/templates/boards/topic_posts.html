@@ -42,7 +42,7 @@
                   {% else %}
                   <span class="post"></span>
                   {% endif %}
-                  <strong><h3 style="text-transform: none;word-wrap:break-word">{{ topic.message }}</h3></strong>
+                  <PRE><strong><h3 style="text-transform: none;word-wrap:break-word">{{ topic.message }}</h3></strong><PRE>
               </div>
           </div>
           {% for post in topic.posts.all %}
@@ -60,7 +60,7 @@
                   {% else %}
                   <span class="post"></span>
                   {% endif %}
-                  <strong><h3>{{ post.message }}</h3></strong>
+                  <PRE><strong><h3 style="text-transform: none;word-wrap:break-word">{{ post.message }}</h3></strong><PRE>
                   <p class="description pull-left">{{ post.created_at }}</p>
                   {% if post.created_by.name == request.session.user_name %}
                     <button class="button button-small button-plain button-borderless button-square pull-right" onClick="location.href='{% url 'delete_post' topic.board.pk topic.pk post.pk%}'"><i class="fa fa-trash"></i></button>
