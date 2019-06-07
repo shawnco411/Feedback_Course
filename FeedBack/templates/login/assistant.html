@@ -53,8 +53,10 @@
 			            <td><a href="{% url 'assistant_select' course.pk user.pk %}">选择</a></td>
 						  <!--<td><button title="选择" class="button button-tiny button-plain button-borderless button-square" onClick="location.href='{% url 'assistant_select' course.pk user.pk %}'"><i class="fa fa-key"></i></button></td>-->
 			            {% endif %}
+			        </tr>
                       {% endfor %}
                        {% for user in user_list.all %}
+                       <tr>
                             {% if user.identity == 'student' %}
                                 {% if course not in user.courses.all %}
                                     <td>{{user.number}}</td>

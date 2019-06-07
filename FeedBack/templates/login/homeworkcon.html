@@ -21,7 +21,7 @@
           </div>
           <form>
                 <p>{{ homework.content }}</p>  
-                <td><a href="{% url 'download' homework.myfile %}">{{ homework.myfile }}</a></td>    
+                <td><i class="fa fa-link"></i>作业附件：<a href="{% url 'download' homework.myfile %}">{{ homework.myfile }}</a></td>    
           </form>
           
           <hr>
