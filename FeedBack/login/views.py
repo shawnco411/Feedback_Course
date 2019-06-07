@@ -531,7 +531,7 @@ def HomeworkList(request, pk):
     name = request.session['user_name']
     user = get_object_or_404(User, name=name)
 
-    return render(request, 'login/homeworklist.html',{'h_course':h_course,'user':user})
+    return render(request, 'login/homeworklist.html',locals())
 
 def HomeworkContent(request, pk, homework_pk):
     homework = get_object_or_404(Homework, pk=homework_pk)

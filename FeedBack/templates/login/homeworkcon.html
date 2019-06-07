@@ -20,8 +20,10 @@
             <hr>
           </div>
           <form>
-                <p>{{ homework.content }}</p>      
+                <p>{{ homework.content }}</p>  
+                <td><a href="{% url 'download' homework.myfile %}">{{ homework.myfile }}</a></td>    
           </form>
+          
           <hr>
           <h3 style = "font-weight:bold;font-family: Microsoft YaHei;color: black;" align="center">上次提交时间</h3>
             <table class="table">
