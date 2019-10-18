@@ -1,5 +1,5 @@
 # feedback_course
-A course-feedback system for soft engineering courses.
+面向课程的个性化学生反馈系统
 
 # Environment
 * Django           2.7.1
