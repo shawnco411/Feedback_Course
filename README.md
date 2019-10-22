@@ -1,7 +1,7 @@
 # feedback_course
 面向课程的个性化学生反馈系统
 
-# 项目简介
+## 项目简介
 
 <img src="https://github.com/shawnco411/feedback_course/blob/master/doc/home.PNG">
 
@@ -17,19 +17,22 @@
 
 <img src="https://github.com/shawnco411/feedback_course/blob/master/doc/feed.png">
 
-# 运行方法
+## 运行方法
 * 第一步：在项目的文件夹下面（含有manage.py）,打开命令行输入：`python manage.py migrate`
 * 第二步：命令行输入输入`python manage.py createsuperuser` 之后控制台会输出地址，点击地址即可运行，注意进入网址后加后缀/login方可登陆，首次使用请点击导航栏上的“注册”字样进行注册。
 
 具体可参看：[Django项目运行方法](https://blog.csdn.net/dg_summer/article/details/77046294 "Django项目运行方法")
 
-# 运行环境
+## 文档说明
+* `/doc`目录下有[设计报告](https://github.com/shawnco411/feedback_course/blob/master/doc/%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A.pdf "设计报告")、[用户使用说明书](https://github.com/shawnco411/feedback_course/blob/master/doc/%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf "用户使用说明书")、[需求规格书](https://github.com/shawnco411/feedback_course/blob/master/doc/%E9%9C%80%E6%B1%82%E8%A7%84%E6%A0%BC%E4%B9%A60.3.1.pdf "需求规格书")以及[阶段成果展示PPT](https://github.com/shawnco411/feedback_course/blob/master/doc/%E8%BD%AF%E5%B7%A5%E5%B1%95%E7%A4%BA_%E5%BF%BD%E9%AA%81.pptx "阶段成果展示PPT")，方便开发者和使用者查阅（若无法在线预览请下载查看）。
+
+## 运行环境
 * Django           2.7.1
 * Python            3.7.2
 * PyMySQL        0.9.3
 * mysql              8.0.15
 
-# 注意事项
+## 注意事项
 * When using in unix, use the code :Feedback/setting.py,line90-93
 * Change the code:Feedback/setting.py,line86 to your own password
 * If your debug info points to ’widget_tweaks’,use
@@ -40,8 +43,8 @@
 *  If your debug info points to ’apscheduler’,use
 `pip install django-apscheduler`
 
-# AI环境要求
-## use `pip install`  to install them
+## AI环境要求
+### use `pip install`  to install them
 * pandas
 * tensorflow
 * keras
