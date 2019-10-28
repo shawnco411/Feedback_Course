@@ -51,3 +51,8 @@
 * jieba
 * gensim
 * sklearn
+
+## 开源协议
+
+[GNU General Public License v3.0](LICENSE)
+
