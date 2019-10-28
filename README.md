@@ -3,19 +3,31 @@
 
 ## 项目简介
 
-<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/home.PNG">
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/home.PNG" title="主页">
 
-本项目是为了提升教育机构对学生的管理水平与效率、为了充分反馈学生需求并制定个性化教育方针而建立的面向课程的个性化学生反馈系统。
+* 本项目是为了提升教育机构对学生的管理水平与效率、为了充分反馈学生需求并制定个性化教育方针而建立的面向课程的个性化学生反馈系统。
 
-<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/course.png">
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/course.png" title="课程详情">
 
-用户可以在本系统注册、登录、登出、编辑个人信息、下载作业、发起讨论、删除讨论、回复消息、删除回复、下载资源等。
+* 用户可以在本系统注册、登录、登出、编辑个人信息、下载作业、发起讨论、删除讨论、回复消息、删除回复、下载资源等。
 
-<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/homework.png">
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/homework.png" title="作业列表">
 
-学生用户还可以提交作业、选课、退课等；教师用户还可以创建课程、选择助教、编辑课程信息、布置作业、删除课程、删除作业、作业评分、赋予助教权限、取消助教权限、移除助教等；助教用户还可以作业批改、编辑课程信息、上传课程资源、布置作业等。
+* 学生用户还可以提交作业、选课、退课等；教师用户还可以创建课程、选择助教、编辑课程信息、布置作业、删除课程、删除作业、作业评分、赋予助教权限、取消助教权限、移除助教等；助教用户还可以作业批改、编辑课程信息、上传课程资源、布置作业等。
 
-<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/feed.png">
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/discuss.gif" title="讨论区">
+
+## 主页交互展示
+
+* 老师用户登陆后会在首页看到自己创建的所有课程，能够**进入课程讨论区**，**查看课程详情**，还可以执行“**添加课程**”操作。
+
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/teacher.gif">
+
+* 学生用户登陆后会在首页看到教务系统中的所有课程，能够执行“**选课**”操作和“**查看课程详情**”操作，选课后还可以**进入相应课程的讨论区**。
+
+<img src="https://github.com/shawnco411/feedback_course/blob/master/doc/student.gif">
+
+* 学生助教和专职助教的交互与学生类似，区别在于专职助教只能看到自己担任助教的课程且不能选课，学生助教可以看到所有课程但是不能选自己担任助教的课。
 
 ## 运行方法
 * 第一步：在项目的文件夹下面（含有manage.py）,打开命令行输入：`python manage.py migrate`
