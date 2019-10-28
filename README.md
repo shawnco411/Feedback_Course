@@ -17,7 +17,7 @@
 
 <img src="https://github.com/shawnco411/feedback_course/blob/master/doc/discuss.gif" title="讨论区">
 
-## 主页交互展示
+## 主页交互
 
 * 老师用户登陆后会在首页看到自己创建的所有课程，能够**进入课程讨论区**，**查看课程详情**，还可以执行“**添加课程**”操作。
 
