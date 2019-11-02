@@ -32,7 +32,7 @@
 ## 运行方法
 * 第一步：在项目的文件夹下面（含有manage.py）,打开命令行输入：`python manage.py migrate`
 
-* 第二步：命令行输入输入`python manage.py createsuperuser` 后控制台会输出地址，用浏览器访问此地址并成功打开网页后请在地址栏加上后缀/login以转到登录页面，首次使用需点击导航栏上的“注册”字样进行注册。
+* 第二步：命令行输入输入`python manage.py runserver` 后控制台会输出地址，用浏览器访问此地址并成功打开网页后请在地址栏加上后缀/login以转到登录页面，首次使用需点击导航栏上的“注册”字样进行注册。
 
 具体可参看：[Django项目运行方法](https://blog.csdn.net/dg_summer/article/details/77046294 "Django项目运行方法")
 
